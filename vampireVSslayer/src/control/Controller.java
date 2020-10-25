@@ -3,6 +3,9 @@ package control;
 import java.util.Scanner;
 
 import logic.Game;
+import logic.Level;
+import logic.VampireList;
+import objetos.Vampiro;
 
 public class Controller {
 
@@ -32,9 +35,33 @@ public class Controller {
    	 System.out.println(game);
    }
     
-    public void run() {
+    public void run(Level level, VampireList vampireList) {
 		// TODO fill your code
-    	printGame();
+    	
+    	GameObjectBoard board = new GameObjectBoard();
+    	//TODO FORMALIZAR si quiere jugar le damos al 1 y si no al 0
+    	int userAnswer = 1;
+    	while(userAnswer!= 0) {
+    		System.out.println("¿Quieres jugar?");
+    		Scanner input = new Scanner (System.in); 
+    		userAnswer = input.nextInt(); 
+	        if (userAnswer == 1) {
+	        	
+	        	//crear array vampiros
+	        	//double numVamp = level.numberOfVampires();
+	        	//vampireList.arrayVampNivel(numVamp);
+	        	
+	        	//intentar añadir vampiro en la partida
+	        	board.addVampire(level, vampireList);
+	        	printGame();
+	        	
+	        }else {
+        	//TODO FORMALIZAR
+        	System.out.println("Juego finalizado");
+        	System.exit(0);
+	        }
+    	
+    	}
     }
 
 }

@@ -19,7 +19,16 @@ public enum Level {
 
 	// TODO fill your code
 
-    public static Level parse(String inputString) {
+	// get numbers of vampires  
+	public double numberOfVampires() {
+			return numberOfVampires;
+		}
+	// get vampire frequency 
+    public double getVampireFrequency() {
+		return vampireFrequency;
+	}
+
+	public static Level parse(String inputString) {
         for (Level level : Level.values())
             if (level.name().equalsIgnoreCase(inputString)) 
             	return level;

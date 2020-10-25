@@ -2,6 +2,7 @@ package objetos;
 
 import java.util.Scanner;
 import logic.Level;
+import logic.VampireList;
 import control.Controller;
 import logic.Game;
 
@@ -23,9 +24,10 @@ public class vampiros {
 				 System.out.println(levelInfoMsg);
 			}
 			else {
+				
 				Long seed;
 				try {
-					if (args.length == 2)						
+					if (args.length == 2)	
 						seed = Long.parseLong(args[1]);
 					else
 						seed = System.currentTimeMillis();
@@ -34,7 +36,8 @@ public class vampiros {
 					System.out.println(seedInfoMsg + seed);
 					
 					Controller controller = new Controller(new Game(seed, level), new Scanner(System.in));
-					controller.run();
+					VampireList vampireList = new VampireList();
+					controller.run(level,vampireList);
 				}
 				catch (NumberFormatException nfe) {
 						System.out.println(usageMsg + ": " + seedIsNumberMsg);

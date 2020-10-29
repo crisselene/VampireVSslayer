@@ -55,13 +55,75 @@ public class Controller {
 	        	board.addVampire(level, vampireList);
 	        	printGame();
 	        	
+	        	
+	        	//Pedimos el comando al usuario
+	        	System.out.print(prompt);
+	        	String cmd = scanner.next();
+	        	
+	        	//Dependiendo de lo que dijo realizamos una accion u otra
+	        	switch(cmd) {
+	        	//Todos los casos de ayuda
+	        	case "h":
+	        	case "help":
+	        	case "H":
+	        	case "Help":
+	        		System.out.println(helpMsg);
+	        	break;
+	        	//Casos de añadir slayer
+	        	case "a":
+	        	case "add":
+	        	case "A":
+	        	case "Add":
+	        		String ayuda= scanner.nextLine();
+	        		//Si no es comando vacio
+	        		if(ayuda != "") {
+	       
+	        			//Si no ha introducido caracteres
+	        			if(Character.isDigit(ayuda.charAt(1)) && Character.isDigit(ayuda.charAt(3))) {
+	        				int posx= Integer.parseInt(Character.toString(ayuda.charAt(1)));//pasa de char a string y a int en la misma linea
+	        				int posy= Integer.parseInt(Character.toString(ayuda.charAt(3)));
+	        				//Si esta dentro del tablero
+	        				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY())
+							{	
+	        					//Si el jugador tiene monedas suficientes
+	        					if(board.getPlayer().getMonedas() >= 50) {
+	        						//Restamos 50
+	        						board.getPlayer().setMonedas(board.getPlayer().getMonedas()-50);
+	        						//Añadimos el vampiro a la lista
+	        						board.crearSlayer(posx,posy);
+	        					}
+	        					else //En caso contrario
+	        					{
+	        						//Mostrar que no tiene monedas suficientes
+	        						System.out.println("No de dispone de suficientes monedas");
+	        					}
+	        					
+							}//If esta dentro de rango
+	        			}//If is,digit
+	        			else
+	        			{
+	        				System.out.println(invalidCommandMsg);
+	        			}
+	        		}//if ayuda != ""
+	        		else 
+	        		{
+	        			System.out.println(invalidCommandMsg);
+	        		}
+	        		
+	        	break; //Casos de añadir slayer
+	        	default:
+	        	break;        	
+	        	}//switch
+	        	//Vemos si el jugador recibe mondeas o no aleatoriamente
+	        	board.getPlayer().ganaMonedas(game.getSeed());
+	        		        	
 	        }else {
         	//TODO FORMALIZAR
         	System.out.println("Juego finalizado");
         	System.exit(0);
 	        }
     	
-    	}
+	  	}//while userAnswer
     }
 
 }

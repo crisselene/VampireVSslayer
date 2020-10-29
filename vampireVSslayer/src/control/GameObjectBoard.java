@@ -5,12 +5,16 @@ package control;
 
 
 import logic.Level;
+import logic.SlayerList;
 import logic.VampireList;
+import objetos.Player;
+import objetos.Slayer;
 import objetos.Vampiro;
-import view.GamePrinter;
 
 public class GameObjectBoard {
 
+	private Player player = new Player();
+	private SlayerList slayerlist;
 	
 	//TODO añadir vampiro
 	public void addVampire(Level level,VampireList vampList) {
@@ -55,6 +59,18 @@ public class GameObjectBoard {
 		Vampiro vampiro = new Vampiro(filaAleatoria,6,5);
 		VampireList.addVampire(vampiro);
 		System.out.println("Se crea un vampiro en la fila " + filaAleatoria);
-		
+			
 	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	public SlayerList getSlayerList() {
+		return slayerlist;
+	}
+	public void crearSlayer(int posx, int posy) {
+		Slayer slayer = new Slayer(posx, posy);
+		SlayerList.addSlayer(slayer);
+	}
+	
 }

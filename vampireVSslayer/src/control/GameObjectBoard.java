@@ -1,9 +1,5 @@
 package control;
 
-
-
-
-
 import logic.Level;
 import logic.SlayerList;
 import logic.VampireList;
@@ -13,9 +9,13 @@ import objetos.Vampiro;
 
 public class GameObjectBoard {
 
-	private Player player = new Player();
+	private Player player;
 	private SlayerList slayerlist;
 	
+	public GameObjectBoard(long seed) {
+		this.player=new Player(seed);
+	}
+
 	//TODO añadir vampiro
 	public void addVampire(Level level,VampireList vampList) {
 		boolean anadido = false; //controlar que solo se cree un vamppiro por ronda
@@ -65,12 +65,34 @@ public class GameObjectBoard {
 	public Player getPlayer() {
 		return player;
 	}
+	
 	public SlayerList getSlayerList() {
 		return slayerlist;
 	}
+	
+	public void addSlayer(int posx, int posy)
+	{
+		//Si el jugador tiene monedas suficientes
+		if(player.getMonedas() >= 50) {
+			//Restamos 50
+			player.setMonedas(player.getMonedas()-50);
+			//Añadimos el vampiro a la lista
+			crearSlayer(posx,posy);
+		}
+		else //En caso contrario
+		{
+			//Mostrar que no tiene monedas suficientes
+			System.out.println("No de dispone de suficientes monedas");
+		}
+	}
+	
 	public void crearSlayer(int posx, int posy) {
 		Slayer slayer = new Slayer(posx, posy);
 		SlayerList.addSlayer(slayer);
+	}
+
+	public void recibeMonedas() {
+		player.ganaMonedas();		
 	}
 	
 }

@@ -38,7 +38,7 @@ public class Controller {
     public void run(Level level, VampireList vampireList) {
 		// TODO fill your code
     	
-    	GameObjectBoard board = new GameObjectBoard();
+    	GameObjectBoard board = new GameObjectBoard(game.getSeed());
     	//TODO FORMALIZAR si quiere jugar le damos al 1 y si no al 0
     	int userAnswer = 1;
     	while(userAnswer!= 0) {
@@ -58,53 +58,42 @@ public class Controller {
 	        	
 	        	//Pedimos el comando al usuario
 	        	System.out.print(prompt);
-	        	String cmd = scanner.next();
-	        	
+	        	String cmd = scanner.nextLine();
+	        	String[] cmdParts = cmd.split(" ");
 	        	//Dependiendo de lo que dijo realizamos una accion u otra
-	        	switch(cmd) {
+	        	switch(cmdParts[0].toLowerCase()) {
 	        	//Todos los casos de ayuda
 	        	case "h":
 	        	case "help":
-	        	case "H":
-	        	case "Help":
 	        		System.out.println(helpMsg);
 	        	break;
+	        	
 	        	//Casos de añadir slayer
 	        	case "a":
 	        	case "add":
-	        	case "A":
-	        	case "Add":
-	        		String ayuda= scanner.nextLine();
-	        		//Si no es comando vacio
-	        		if(ayuda != "") {
+	        		//Si el comando tiene tres partes como debe ser " add <x> <y> "
+	        		if(cmdParts.length == 2) {
 	       
 	        			//Si no ha introducido caracteres
-	        			if(Character.isDigit(ayuda.charAt(1)) && Character.isDigit(ayuda.charAt(3))) {
-	        				int posx= Integer.parseInt(Character.toString(ayuda.charAt(1)));//pasa de char a string y a int en la misma linea
-	        				int posy= Integer.parseInt(Character.toString(ayuda.charAt(3)));
+	        			if(isNumeric(cmdParts[1]) && isNumeric(cmdParts[2])) {
+	        				int posx= Integer.parseInt(cmdParts[1]);//pasa de int a string
+	        				int posy= Integer.parseInt(cmdParts[2]);
 	        				//Si esta dentro del tablero
 	        				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY())
 							{	
-	        					//Si el jugador tiene monedas suficientes
-	        					if(board.getPlayer().getMonedas() >= 50) {
-	        						//Restamos 50
-	        						board.getPlayer().setMonedas(board.getPlayer().getMonedas()-50);
-	        						//Añadimos el vampiro a la lista
-	        						board.crearSlayer(posx,posy);
-	        					}
-	        					else //En caso contrario
-	        					{
-	        						//Mostrar que no tiene monedas suficientes
-	        						System.out.println("No de dispone de suficientes monedas");
-	        					}
-	        					
-							}//If esta dentro de rango
+	        					board.addSlayer(posx, posy);//Añadimos un slayer
+	        				}
+	        				else
+	        				{
+	        					//Como no esta dentro del tablero no es valido el comando
+	        					System.out.println(invalidCommandMsg);
+	        				}
 	        			}//If is,digit
 	        			else
 	        			{
 	        				System.out.println(invalidCommandMsg);
 	        			}
-	        		}//if ayuda != ""
+	        		}//if cmdParts.lenght != 2
 	        		else 
 	        		{
 	        			System.out.println(invalidCommandMsg);
@@ -114,10 +103,12 @@ public class Controller {
 	        	default:
 	        	break;        	
 	        	}//switch
+	        	
 	        	//Vemos si el jugador recibe mondeas o no aleatoriamente
-	        	board.getPlayer().ganaMonedas(game.getSeed());
+	        	board.recibeMonedas();
 	        		        	
-	        }else {
+	        }//if userAnswer
+	        else {
         	//TODO FORMALIZAR
         	System.out.println("Juego finalizado");
         	System.exit(0);
@@ -125,6 +116,20 @@ public class Controller {
     	
 	  	}//while userAnswer
     }
+    //Metodo para ver si un string es numerico
+    public boolean isNumeric(String string)
+    {
+    	boolean resultado;
 
+        try {
+            Integer.parseInt(string);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
+    }
+    
 }
 

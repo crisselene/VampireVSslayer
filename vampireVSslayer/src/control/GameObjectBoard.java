@@ -31,8 +31,9 @@ public class GameObjectBoard {
 			//probabilidad de crear un vampiro
 			double randomN = 0.1; //random de 0 a 1**************************************************************
 			if (randomN <= levelFreq ) {
-				//se puede crear el vampiro, buscar fila aleatoria
-				int filaAleatoria = (int) (Math.random()*7+1);
+				//se puede crear el vampiro, buscar fila aleatoria, dentro de la dimension y
+				int filaAleatoria = (int) (Math.random()*level.getDimy()-1);
+			
 				
 				//si no hay vampiros, se crea uno
 				if(nVampJuego == 0) {
@@ -56,7 +57,7 @@ public class GameObjectBoard {
 		}
 		
 	private void crearVampiro(int filaAleatoria) {
-		Vampiro vampiro = new Vampiro(filaAleatoria,6,5);
+		Vampiro vampiro = new Vampiro(filaAleatoria,7,5);
 		VampireList.addVampire(vampiro);
 		System.out.println("Se crea un vampiro en la fila " + filaAleatoria);
 			

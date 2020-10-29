@@ -1,5 +1,6 @@
 package logic;
 
+import control.GameObjectBoard;
 import view.GamePrinter;
 
 public class Game {
@@ -15,7 +16,12 @@ public class Game {
 		this.seed = seed;
 	}
 	
-	public boolean isFinished() {
+	public boolean isFinished(boolean salir) {
+		if (salir) {
+			System.out.println("La partida ha terminado");
+			System.exit(0);
+			return true;
+		}
 		return false;
 	}
 	
@@ -42,5 +48,13 @@ public class Game {
 	
 	public long getSeed() {
 		return seed;
+	}
+
+	//Acutaliza toda la partida
+	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList) {
+		//Vemos si el jugador recibe mondeas o no aleatoriamente
+    	board.recibeMonedas();
+    	//intentar añadir vampiro en la partida
+    	board.addVampire(level, vampireList);
 	}
 }

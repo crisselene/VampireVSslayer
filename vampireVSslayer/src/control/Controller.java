@@ -39,14 +39,10 @@ public class Controller {
 		// TODO fill your code
     	
     	GameObjectBoard board = new GameObjectBoard(game.getSeed());
-    	//TODO FORMALIZAR si quiere jugar le damos al 1 y si no al 0
-    	int userAnswer = 1;
-    	while(userAnswer!= 0) {
-    		System.out.println("¿Quieres jugar?");
-    		Scanner input = new Scanner (System.in); 
-    		userAnswer = input.nextInt(); 
-	        if (userAnswer == 1) {
-	        	
+    	boolean salir = false;
+    
+    	while(!game.isFinished(salir)) {
+    	     	
 	        	//crear array vampiros
 	        	//double numVamp = level.numberOfVampires();
 	        	//vampireList.arrayVampNivel(numVamp);
@@ -59,7 +55,8 @@ public class Controller {
 	        	//Pedimos el comando al usuario
 	        	System.out.print(prompt);
 	        	String cmd = scanner.nextLine();
-	        	String[] cmdParts = cmd.split(" ");
+	        	String[] cmdParts = cmd.split(" ");//Separa el string
+	        	
 	        	//Dependiendo de lo que dijo realizamos una accion u otra
 	        	switch(cmdParts[0].toLowerCase()) {
 	        	//Todos los casos de ayuda
@@ -72,7 +69,7 @@ public class Controller {
 	        	case "a":
 	        	case "add":
 	        		//Si el comando tiene tres partes como debe ser " add <x> <y> "
-	        		if(cmdParts.length == 2) {
+	        		if(cmdParts.length == 3) {
 	       
 	        			//Si no ha introducido caracteres
 	        			if(isNumeric(cmdParts[1]) && isNumeric(cmdParts[2])) {
@@ -88,7 +85,7 @@ public class Controller {
 	        					//Como no esta dentro del tablero no es valido el comando
 	        					System.out.println(invalidCommandMsg);
 	        				}
-	        			}//If is,digit
+	        			}//If isNumeric
 	        			else
 	        			{
 	        				System.out.println(invalidCommandMsg);
@@ -100,21 +97,23 @@ public class Controller {
 	        		}
 	        		
 	        	break; //Casos de añadir slayer
-	        	default:
+	        	//Casos siguiente turno
+	        	case "n":
+	        	case "none":
+	        	case "":
+	        		//Acutalizaria el juego simplemente
+	        		//Implementar todo lo que pasa automaticamente sin accion del usuario aqui
+	        		game.actualizarPartida(board, vampireList);
+	        	break;
+	        	//Caso exit
+	        	case "e":
+	        	case "exit":
+	        		//Salimos del juego
+	        		salir = true;
 	        	break;        	
 	        	}//switch
-	        	
-	        	//Vemos si el jugador recibe mondeas o no aleatoriamente
-	        	board.recibeMonedas();
-	        		        	
-	        }//if userAnswer
-	        else {
-        	//TODO FORMALIZAR
-        	System.out.println("Juego finalizado");
-        	System.exit(0);
-	        }
-    	
-	  	}//while userAnswer
+	        		        	   	
+	  	}//while game.isFinished
     }
     //Metodo para ver si un string es numerico
     public boolean isNumeric(String string)
@@ -127,7 +126,7 @@ public class Controller {
         } catch (NumberFormatException excepcion) {
             resultado = false;
         }
-
+ 
         return resultado;
     }
     

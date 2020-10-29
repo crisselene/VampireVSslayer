@@ -38,7 +38,7 @@ public class GamePrinter {
 							int posyV = arrayVamp[k].getPosy();
 							int vidaV = arrayVamp[k].getVida();
 							if (posxV == i && posyV == j) {
-								board[posxV][posyV] = "VV";
+								board[posxV][posyV] = arrayVamp[k].toString();
 								contVamp++;
 								//anadido solo será true si se han insertado TODOS los vampiros de la lista
 								//es decir, si el vampiro que se ha anadido es el ultimo en la lista

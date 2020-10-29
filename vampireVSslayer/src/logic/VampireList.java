@@ -30,7 +30,7 @@ public class VampireList {
 	//TODO  si se cambia a ARRAYLIST, sería más fácil añadir objeto (.add() )
 	public static void addVampire(Vampiro vampiro) {
 		//array auxiliar para copiar el que había
-		Vampiro aux[] = new Vampiro[longitud+1]; //longitud en vez de .lengh
+		Vampiro aux[] = new Vampiro[longitud+1]; 
 		for (int i = 0; i < longitud ; i++) {
 			aux[i] = arrayVamp[i];
 		}

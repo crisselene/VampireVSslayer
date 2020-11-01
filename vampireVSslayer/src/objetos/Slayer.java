@@ -36,4 +36,8 @@ public class Slayer {
 	public String toString() {
 		return "S ["+ vida +"]";
 	}
+	
+	public void atack() {
+		
+	}
 }

@@ -1,6 +1,7 @@
 package logic;
 
 import control.GameObjectBoard;
+
 import view.GamePrinter;
 
 public class Game {
@@ -56,5 +57,22 @@ public class Game {
     	board.recibeMonedas();
     	//intentar añadir vampiro en la partida
     	board.addVampire(level, vampireList);
+    	//Ataque de los slayer
+    	board.slayerAtack();
+	}
+	//Muestra toda la informacion de la partida
+	
+	public void infoPartida(GameObjectBoard board, int numCiclos) {
+		//Mostramos todda la info necesaria
+		System.out.println("Number of cycles: " + numCiclos +"\n"
+						+ "Coins: " + board.getMonedas() + "\n"
+						+ "Remaning vampires: " + "\n"
+						+ "Vampires on board: ");
+	}
+	
+	//resetea la partida
+	public void reset(GameObjectBoard board) {
+		board.reset(getSeed());
+		//Con eso resetea los slayer y el player, pero faltan los vampiros
 	}
 }

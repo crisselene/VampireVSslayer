@@ -40,81 +40,96 @@ public class Controller {
     	
     	GameObjectBoard board = new GameObjectBoard(game.getSeed());
     	boolean salir = false;
+    	int numCiclos = 0;
     
     	while(!game.isFinished(salir)) {
     	     	
-	        	//crear array vampiros
-	        	//double numVamp = level.numberOfVampires();
-	        	//vampireList.arrayVampNivel(numVamp);
+	        //crear array vampiros
+	        //double numVamp = level.numberOfVampires();
+	        //vampireList.arrayVampNivel(numVamp);
+    			
+    		//mostramos la informacion de la partida
+    		game.infoPartida(board, numCiclos);
+    		
+	        //intentar añadir vampiro en la partida
+	        board.addVampire(level, vampireList);
+	        printGame();
 	        	
-	        	//intentar añadir vampiro en la partida
-	        	board.addVampire(level, vampireList);
-	        	printGame();
 	        	
+	        //Pedimos el comando al usuario
+	        System.out.print(prompt);
+	        String cmd = scanner.nextLine();
+	        String[] cmdParts = cmd.split(" ");//Separa el string
 	        	
-	        	//Pedimos el comando al usuario
-	        	System.out.print(prompt);
-	        	String cmd = scanner.nextLine();
-	        	String[] cmdParts = cmd.split(" ");//Separa el string
+	        //Dependiendo de lo que dijo realizamos una accion u otra
+	        switch(cmdParts[0].toLowerCase()) {
+	        //Casos de resetear partida
+	        case "r":
+	        case "reset":
+	        	game.reset(board);
+	        	numCiclos= -1;//-1 porque al final del while siempre aumenta en 1
+	        break;	
+	        //Todos los casos de ayuda
+	        case "h":
+	        case "help":
+	        	System.out.println(helpMsg);
+	        break;
 	        	
-	        	//Dependiendo de lo que dijo realizamos una accion u otra
-	        	switch(cmdParts[0].toLowerCase()) {
-	        	//Todos los casos de ayuda
-	        	case "h":
-	        	case "help":
-	        		System.out.println(helpMsg);
-	        	break;
-	        	
-	        	//Casos de añadir slayer
-	        	case "a":
-	        	case "add":
-	        		//Si el comando tiene tres partes como debe ser " add <x> <y> "
-	        		if(cmdParts.length == 3) {
-	       
-	        			//Si no ha introducido caracteres
-	        			if(isNumeric(cmdParts[1]) && isNumeric(cmdParts[2])) {
-	        				int posx= Integer.parseInt(cmdParts[1]);//pasa de int a string
-	        				int posy= Integer.parseInt(cmdParts[2]);
-	        				//Si esta dentro del tablero
-	        				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY())
-							{	
-	        					board.addSlayer(posx, posy);//Añadimos un slayer
-	        				}
-	        				else
-	        				{
-	        					//Como no esta dentro del tablero no es valido el comando
-	        					System.out.println(invalidCommandMsg);
-	        				}
-	        			}//If isNumeric
+	        //Casos de añadir slayer
+	        case "a":
+	        case "add":
+	        	//Si el comando tiene tres partes como debe ser " add <x> <y> "
+	       		if(cmdParts.length == 3) {
+	      
+	       			//Si no ha introducido caracteres
+	       			if(isNumeric(cmdParts[1]) && isNumeric(cmdParts[2])) {
+	       				int posx= Integer.parseInt(cmdParts[1]);//pasa de int a string
+	       				int posy= Integer.parseInt(cmdParts[2]);
+	       				//Si esta dentro del tablero
+	       				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY())
+						{	
+	       					board.addSlayer(posx, posy);//Añadimos un slayer
+	        			}
 	        			else
 	        			{
+	        				//Como no esta dentro del tablero no es valido el comando
+	       					System.out.println(invalidCommandMsg);
+	       				}
+	       			}//If isNumeric
+	       			else
+	       			{
 	        				System.out.println(invalidCommandMsg);
-	        			}
-	        		}//if cmdParts.lenght != 2
-	        		else 
-	        		{
-	        			System.out.println(invalidCommandMsg);
 	        		}
-	        		
-	        	break; //Casos de añadir slayer
-	        	//Casos siguiente turno
-	        	case "n":
-	        	case "none":
-	        	case "":
-	        		//Acutalizaria el juego simplemente
-	        		//Implementar todo lo que pasa automaticamente sin accion del usuario aqui
-	        		game.actualizarPartida(board, vampireList);
-	        	break;
-	        	//Caso exit
-	        	case "e":
-	        	case "exit":
-	        		//Salimos del juego
-	        		salir = true;
-	        	break;        	
-	        	}//switch
-	        		        	   	
+	        	}//if cmdParts.lenght != 2
+	        	else 
+	       		{
+	       			System.out.println(invalidCommandMsg);
+	       		}
+	       		//Actualiza la partida
+	       		game.actualizarPartida(board, vampireList);
+	       	break; //Casos de añadir slayer
+	       	//Casos siguiente turno
+	       	case "n":
+	       	case "none":
+        	case "":
+	       		//Acutalizaria el juego simplemente
+	       		//Implementar todo lo que pasa automaticamente sin accion del usuario aqui
+	       		game.actualizarPartida(board, vampireList);
+	       	break;
+	       	//Caso exit
+	       	case "e":
+        	case "exit":
+	       		//Salimos del juego
+	       		salir = true;
+	       	break;        	
+	       	}//switch
+	       		       
+	       	//Numero de ciclos aumenta
+        	numCiclos++;
 	  	}//while game.isFinished
     }
+    
+    
     //Metodo para ver si un string es numerico
     public boolean isNumeric(String string)
     {

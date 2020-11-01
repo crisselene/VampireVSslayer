@@ -22,4 +22,8 @@ public class SlayerList {
 		numSlayers = numSlayers + 1;
 		System.out.println("Añadimos slayer " + numSlayers);
 	}
+	public static void reset() {
+		slayerList = new Slayer[MAX_SLAYERS];
+		numSlayers = 0;
+	}
 }

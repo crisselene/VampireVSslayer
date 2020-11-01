@@ -67,6 +67,10 @@ public class GameObjectBoard {
 		return player;
 	}
 	
+	public int getMonedas() {
+		return player.getMonedas();
+	}
+	
 	public SlayerList getSlayerList() {
 		return slayerlist;
 	}
@@ -94,6 +98,49 @@ public class GameObjectBoard {
 
 	public void recibeMonedas() {
 		player.ganaMonedas();		
+	}
+
+	public void reset(long seed) {
+		player = new Player(seed);
+		SlayerList.reset();
+	}
+
+	//Ataque de los slayers
+	public void slayerAtack() {
+		for (int i = 0; i< SlayerList.getNumSlayers(); i++) {
+			//variables aux
+			Slayer slayerAtacante = SlayerList.getSlayer(i);
+			Vampiro[] vampirelist = VampireList.getArrayVamp();
+			Vampiro vampiroAtacado = null;//Vampiro al que se atacara
+			int posVamp = 0;//Guarda la posicion a la que se ataca
+			//Comprobamos si coincide con algun vampiro
+			int j = 0;
+			while (j < VampireList.getLongitud()) {
+				//Si esta justo delante
+				if(slayerAtacante.getPosx() == vampirelist[j].getPosx() && slayerAtacante.getPosy() < vampirelist[j].getPosy()) {
+					System.out.println("f");
+					//en la primera ejecucion guardamos el vampiro como vampiro atacado
+					if (j == 0) {
+						vampiroAtacado=vampirelist[j];
+						posVamp = j;
+					}
+					else {//En caso contrario atacamos al que este delante
+						if(vampirelist[j].getPosx() <= vampiroAtacado.getPosx()) {
+							vampiroAtacado=vampirelist[j];
+							posVamp = j;
+						}
+					}
+				}				
+				j++;
+			}//while
+			//Si tiene a quien atacar
+			if (vampiroAtacado != null) {
+				//El slayer ataca
+				vampiroAtacado.setVida(vampiroAtacado.getVida() - 1);
+				VampireList.getArrayVamp()[posVamp] = vampiroAtacado;
+			}
+		}//for
+		
 	}
 	
 }

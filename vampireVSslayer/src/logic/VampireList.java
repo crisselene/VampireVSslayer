@@ -42,6 +42,16 @@ public class VampireList {
 		//ahora el array es una posición más largo
 		longitud = longitud + 1;
 	}
+	
+	public static void avanzarVampire(Vampiro vampiro) {
+		//recorro el array y le sumo uno a la pos x
+		for (int i = 0; i < longitud ; i++) {
+			int posx = arrayVamp[i].getPosx();
+			posx++;
+		}
+				
+	}
+	
 
 
 

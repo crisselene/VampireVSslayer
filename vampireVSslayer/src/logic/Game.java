@@ -55,13 +55,10 @@ public class Game {
 	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList) {
 		//Vemos si el jugador recibe mondeas o no aleatoriamente
     	board.recibeMonedas();
-    	//intentar añadir vampiro en la partida
-    	board.addVampire(level, vampireList);
-    	//Ataque de los slayer
-    	board.slayerAtack();
+    	//Añadir cualquier movimiento de los vampiros
 	}
-	//Muestra toda la informacion de la partida
 	
+	//Muestra toda la informacion de la partida	
 	public void infoPartida(GameObjectBoard board, int numCiclos) {
 		//Mostramos todda la info necesaria
 		System.out.println("Number of cycles: " + numCiclos +"\n"
@@ -74,5 +71,10 @@ public class Game {
 	public void reset(GameObjectBoard board) {
 		board.reset(getSeed());
 		//Con eso resetea los slayer y el player, pero faltan los vampiros
+	}
+
+	public void attack(GameObjectBoard board) {
+		board.slayerAttack();
+		//Aqui el de los vampiros
 	}
 }

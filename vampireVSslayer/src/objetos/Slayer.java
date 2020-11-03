@@ -37,7 +37,4 @@ public class Slayer {
 		return "S ["+ vida +"]";
 	}
 	
-	public void atack() {
-		
-	}
 }

@@ -26,4 +26,8 @@ public class SlayerList {
 		slayerList = new Slayer[MAX_SLAYERS];
 		numSlayers = 0;
 	}
+	
+	public static void removeSlayer(int pos) {
+		
+	}
 }

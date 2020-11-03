@@ -106,7 +106,7 @@ public class GameObjectBoard {
 	}
 
 	//Ataque de los slayers
-	public void slayerAtack() {
+	public void slayerAttack() {
 		for (int i = 0; i< SlayerList.getNumSlayers(); i++) {
 			//variables aux
 			Slayer slayerAtacante = SlayerList.getSlayer(i);

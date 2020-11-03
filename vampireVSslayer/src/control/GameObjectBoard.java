@@ -11,6 +11,7 @@ public class GameObjectBoard {
 
 	private Player player;
 	private SlayerList slayerlist;
+	private String noCrearVamp = "NO se crea vampiro esta ronda";
 	
 	public GameObjectBoard(long seed) {
 		this.player=new Player(seed);
@@ -18,7 +19,7 @@ public class GameObjectBoard {
 
 	//TODO añadir vampiro
 	public void addVampire(Level level,VampireList vampList) {
-		boolean anadido = false; //controlar que solo se cree un vamppiro por ronda
+		boolean anadido = false; //controlar que solo se cree un vampiro por ronda
 		//recojo el valor de la frecuencia de los vampiros 
 		double levelFreq = level.getVampireFrequency();
 		//el numero de vampiros que se pueden crear
@@ -32,9 +33,8 @@ public class GameObjectBoard {
 			double randomN = 0.1; //random de 0 a 1**************************************************************
 			if (randomN <= levelFreq ) {
 				//se puede crear el vampiro, buscar fila aleatoria, dentro de la dimension y
-				int filaAleatoria = (int) (Math.random()*level.getDimy()-1);
+				int filaAleatoria =(int) (Math.random()*level.getDimy()); 
 			
-				
 				//si no hay vampiros, se crea uno
 				if(nVampJuego == 0) {
 					crearVampiro(filaAleatoria);
@@ -46,20 +46,22 @@ public class GameObjectBoard {
 							if(filaAleatoria != vampList.getArrayVamp()[i].getPosx() && anadido== false) {
 								crearVampiro(filaAleatoria);
 								anadido = true;
-							}
-						}
-					}else System.out.println("NO se crean vampiros porque se ha intentado meter en la fila " + filaAleatoria );
-							
+							} 
+					    }if (!anadido){
+							System.out.println(noCrearVamp + " porque se ha intentado meter en la fila " + filaAleatoria );
+							anadido = true;
+					    }
+					}		
 				}
-				}
-			}else System.out.println("ya están todos los vampiros en el tablero");
-				
-		}
+			}else System.out.println(noCrearVamp);
+		}else System.out.println("ya están todos los vampiros en el tablero");		
+	}
 		
 	private void crearVampiro(int filaAleatoria) {
 		Vampiro vampiro = new Vampiro(filaAleatoria,7,5);
-		VampireList.addVampire(vampiro);
-		System.out.println("Se crea un vampiro en la fila " + filaAleatoria);
+		boolean creado = VampireList.addVampire(vampiro);
+		if(creado) System.out.println("Se crea un vampiro en la fila " + filaAleatoria);
+		else System.out.println(noCrearVamp);
 			
 	}
 	

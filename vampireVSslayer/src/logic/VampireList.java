@@ -28,26 +28,28 @@ public class VampireList {
 	}
 	
 	//TODO  si se cambia a ARRAYLIST, sería más fácil añadir objeto (.add() )
-	public static void addVampire(Vampiro vampiro) {
+	public static boolean addVampire(Vampiro vampiro) {
 		//array auxiliar para copiar el que había
 		Vampiro aux[] = new Vampiro[longitud+1]; 
 		for (int i = 0; i < longitud ; i++) {
 			aux[i] = arrayVamp[i];
 		}
-		//añadir el ultimo vampio creado
+		//añadir el ultimo vampiro creado
 		aux[longitud] = vampiro;
 		
 		//arrayVamp pasa a ser aux
 		arrayVamp = aux;
 		//ahora el array es una posición más largo
 		longitud = longitud + 1;
+		return true;
 	}
 	
-	public static void avanzarVampire(Vampiro vampiro) {
+	public static void avanzarVampire() {
 		//recorro el array y le sumo uno a la pos x
 		for (int i = 0; i < longitud ; i++) {
-			int posx = arrayVamp[i].getPosx();
-			posx++;
+			int posy = arrayVamp[i].getPosy();
+			posy--;
+			arrayVamp[i].setPosy(posy);
 		}
 				
 	}

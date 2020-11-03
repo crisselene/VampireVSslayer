@@ -23,6 +23,9 @@ public class GamePrinter {
 	
 	
 	private void encodeGame(Game game) {
+		Vampiro[] arrayVamp = VampireList.getArrayVamp();
+		//si hay algún vampiro lo inserto, si no, no pinto ningún vampiro.
+		if(arrayVamp != null) {
 		//variable centinela para ver si hemos añadido todos los vampiros
 		anadido = false;
 		//contador de vampiros que hemos anadido
@@ -32,7 +35,7 @@ public class GamePrinter {
 			for (int j=0; j<numCols; j++) {	
 					board[i][j]= game.getPositionToString(i,j);
 					if(!anadido) {
-						Vampiro[] arrayVamp = VampireList.getArrayVamp();
+						//recorro el array de vampiros y si coincide "x" e "y" de alguno con la casilla que estoy rellenando, lo meto en ella
 						for (int k = 0; k < (arrayVamp.length); k++) {
 							int posxV = arrayVamp[k].getPosx();
 							int posyV = arrayVamp[k].getPosy();
@@ -52,11 +55,24 @@ public class GamePrinter {
 						}
 						
 					}
-					
-				}
-				
+		
+			}
+		}
+		//si no hay que pintar ningún vampiro se pinta el tablero vacio	
+	}else {
+		pintarTableroVacio(game);
 	}
 }
+
+//pinta el tablero vacio
+	private void pintarTableroVacio(Game game) {
+		board = new String[numRows][numCols];
+		for (int i=0; i<numRows; i++) {
+			for (int j=0; j<numCols; j++) {	
+					board[i][j]= game.getPositionToString(i,j);
+			}
+		}
+	}
 	
 	 public String toString() {
 		encodeGame(game);

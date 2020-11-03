@@ -52,6 +52,12 @@ public class Controller {
     		//mostramos la informacion de la partida
     		game.infoPartida(board,vampireList,level, numCiclos);
 	        printGame();
+	        
+	        //se crean vampiros y mostramos los vampiros creados
+	        board.addVampire(level, vampireList);
+	        printGame();
+	        
+	        //se pide al usuario acción
 	        int opcion = opcionUsuario(board, vampireList);
 	        
 	        //Dependiendo de lo que eligiera el usurio ocurrira una accion u otra
@@ -59,7 +65,7 @@ public class Controller {
 	        	//El juego se desarrolla normalmente
 	        	game.actualizarPartida(board, vampireList);
 	        	game.attack(board);
-	        	board.addVampire(level, vampireList);
+	        	
 	        	//Eliminar muertos
 	        }
 	        else if(opcion == 3) {
@@ -73,6 +79,11 @@ public class Controller {
 	       		       
 	       	//Numero de ciclos aumenta
         	numCiclos++;
+        	//los vampiros avanzan
+        	vampireList.avanzarVampire();
+        	System.out.println("\nlos vampiros avanzan\n");
+        	
+        	//SI LOS VAMPIROS posY == 0 GAME IS FINISHED ********************+
 	  	}//while game.isFinished
     }
     

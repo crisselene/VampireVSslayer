@@ -24,6 +24,7 @@ public class Controller {
 	public static final String invalidPositionMsg = String.format("Invalid position");
 
     private Game game;
+    private VampireList vampireList;
     private Scanner scanner;
     
     public Controller(Game game, Scanner scanner) {
@@ -49,7 +50,7 @@ public class Controller {
 	        //vampireList.arrayVampNivel(numVamp);
     			
     		//mostramos la informacion de la partida
-    		game.infoPartida(board, numCiclos);
+    		game.infoPartida(board,vampireList,level, numCiclos);
     		
 	        //intentar añadir vampiro en la partida
 	        board.addVampire(level, vampireList);

@@ -62,12 +62,13 @@ public class Game {
 	}
 	//Muestra toda la informacion de la partida
 	
-	public void infoPartida(GameObjectBoard board, int numCiclos) {
+	public void infoPartida(GameObjectBoard board,VampireList vampire,Level level, int numCiclos) {
 		//Mostramos todda la info necesaria
 		System.out.println("Number of cycles: " + numCiclos +"\n"
 						+ "Coins: " + board.getMonedas() + "\n"
-						+ "Remaning vampires: " + "\n"
-						+ "Vampires on board: ");
+						//números de vampiros restantes, son los que faltan por meter en el array (casteado a int)
+						+ "Remaning vampires: " + (int)(level.numberOfVampires() - vampire.getLongitud())+ "\n"
+						+ "Vampires on board: " + vampire.getLongitud());
 	}
 	
 	//resetea la partida

@@ -55,19 +55,6 @@ public class GamePrinter {
 					
 				}
 				
-			
-			/*if(!anadido) {
-				Vampiro[] arrayVamp = VampireList.getArrayVamp();
-				for (int k = 0; k < (arrayVamp.length); k++) {
-					int posxV = arrayVamp[k].getPosx();
-					int posyV = arrayVamp[k].getPosy();
-					int vidaV = arrayVamp[k].getVida();
-					//TO STRING
-				board[posxV][posyV] = "VV";
-				}
-				anadido = true;
-			}*/
-		
 	}
 }
 	

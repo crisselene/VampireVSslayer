@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import logic.Game;
 import logic.Level;
+import logic.SlayerList;
 import logic.VampireList;
 import objetos.Vampiro;
 
@@ -26,6 +27,7 @@ public class Controller {
     private Game game;
     private VampireList vampireList;
     private Scanner scanner;
+    private SlayerList slayerList;
     
     public Controller(Game game, Scanner scanner) {
 	    this.game = game;
@@ -63,7 +65,7 @@ public class Controller {
 	        //Dependiendo de lo que eligiera el usurio ocurrira una accion u otra
 	        if(opcion == 1) {
 	        	//El juego se desarrolla normalmente
-	        	game.actualizarPartida(board, vampireList);
+	        	game.actualizarPartida(board, vampireList,slayerList);
 	        	game.attack(board);
 	        	
 	        	//Eliminar muertos
@@ -76,12 +78,11 @@ public class Controller {
 	        	//Ha habido exit
 	        	salir = true;
 	        }	        
-	       		       
+	       	
+	        
 	       	//Numero de ciclos aumenta
         	numCiclos++;
-        	//los vampiros avanzan
-        	vampireList.avanzarVampire();
-        	System.out.println("\nlos vampiros avanzan\n");
+        	
         	
         	//SI LOS VAMPIROS posY == 0 GAME IS FINISHED ********************+
 	  	}//while game.isFinished

@@ -52,9 +52,14 @@ public class Game {
 	}
 
 	//Acutaliza toda la partida
-	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList) {
+	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList,SlayerList slayerList) {
 		//Vemos si el jugador recibe mondeas o no aleatoriamente
     	board.recibeMonedas();
+    	//los vampiros commprueban si pueden atacar
+    	board.VampireAttack(vampireList, slayerList);
+    	//los vampiros avanzan
+    	vampireList.avanzarVampire();
+    	System.out.println("\nlos vampiros avanzan\n");
     	//Añadir cualquier movimiento de los vampiros
 	}
 	

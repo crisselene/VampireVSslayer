@@ -9,9 +9,11 @@ import objetos.Vampiro;
 
 public class GameObjectBoard {
 
+	static final String NO_CREAR_VAMP = "NO se crea vampiro esta ronda";
+	
 	private Player player;
 	private SlayerList slayerlist;
-	private String noCrearVamp = "NO se crea vampiro esta ronda";
+	
 	
 	public GameObjectBoard(long seed) {
 		this.player=new Player(seed);
@@ -48,12 +50,12 @@ public class GameObjectBoard {
 								anadido = true;
 							} 
 					    }if (!anadido){
-							System.out.println(noCrearVamp + " porque se ha intentado meter en la fila " + filaAleatoria );
+							System.out.println(NO_CREAR_VAMP + " porque se ha intentado meter en la fila " + filaAleatoria );
 							anadido = true;
 					    }
 					}		
 				}
-			}else System.out.println(noCrearVamp);
+			}else System.out.println(NO_CREAR_VAMP);
 		}else System.out.println("ya están todos los vampiros en el tablero");		
 	}
 		
@@ -61,7 +63,7 @@ public class GameObjectBoard {
 		Vampiro vampiro = new Vampiro(filaAleatoria,7,5);
 		boolean creado = VampireList.addVampire(vampiro);
 		if(creado) System.out.println("Se crea un vampiro en la fila " + filaAleatoria);
-		else System.out.println(noCrearVamp);
+		else System.out.println(NO_CREAR_VAMP);
 			
 	}
 	
@@ -143,6 +145,27 @@ public class GameObjectBoard {
 			}
 		}//for
 		
+	}
+	
+	//si delante de un vampiro hay un slayer, le quita una vida y no avanza
+	public void VampireAttack(VampireList vampireList, SlayerList slayerList) {
+		for (int i = 0; i < vampireList.getLongitud(); i++) {
+			for (int j = 0; j < slayerList.getNumSlayers(); j++) {
+				int posYVamp = vampireList.getArrayVamp()[i].getPosy();
+				//si el slayer está en la fila siguiente al vampiro:
+				if (slayerList.getSlayer(j).getPosy() == (posYVamp-1) ) {
+					//el vampiro no avanza 
+					posYVamp++;
+					vampireList.getArrayVamp()[i].setPosy(posYVamp);
+					
+					//el slayer pierde una vida
+					int vidaS = slayerList.getSlayer(j).getVida();
+					vidaS--;
+					slayerList.getSlayer(j).setVida(vidaS);
+					System.out.println("Un vampiro ha mordido a un slayer");
+				}
+			}
+		}
 	}
 	
 }

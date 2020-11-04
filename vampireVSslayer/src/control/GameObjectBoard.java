@@ -129,7 +129,7 @@ public class GameObjectBoard {
 						posVamp = j;
 					}
 					else {//En caso contrario atacamos al que este delante
-						if(vampirelist[j].getPosx() <= vampiroAtacado.getPosx()) {
+						if(vampirelist[j].getPosy() <= vampiroAtacado.getPosy()) {
 							vampiroAtacado=vampirelist[j];
 							posVamp = j;
 						}
@@ -144,6 +144,18 @@ public class GameObjectBoard {
 				VampireList.getArrayVamp()[posVamp] = vampiroAtacado;
 			}
 		}//for
+		
+	}
+	//
+	//Busca los slayer muertos
+	public void buscarSlayers() {
+		
+		for(int i = 0; i<SlayerList.getNumSlayers(); i++) {
+			//si no tiene vida lo eliminamos
+			if(SlayerList.getSlayer(i).getVida()==0) {
+				SlayerList.removeSlayer(i);
+			}
+		}
 		
 	}
 	

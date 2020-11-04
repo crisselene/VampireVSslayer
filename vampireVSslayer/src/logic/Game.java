@@ -74,13 +74,18 @@ public class Game {
 	}
 	
 	//resetea la partida
-	public void reset(GameObjectBoard board) {
+	public void reset(GameObjectBoard board, VampireList vampireList) {
 		board.reset(getSeed());
-		//Con eso resetea los slayer y el player, pero faltan los vampiros
+		vampireList.reset();		
 	}
 
 	public void attack(GameObjectBoard board) {
 		board.slayerAttack();
 		//Aqui el de los vampiros
+	}
+
+	public void buscarMuertos(GameObjectBoard board, VampireList vampireList) {
+		board.buscarSlayers();
+		vampireList.buscarVampiro();
 	}
 }

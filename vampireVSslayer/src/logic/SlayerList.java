@@ -28,6 +28,11 @@ public class SlayerList {
 	}
 	
 	public static void removeSlayer(int pos) {
-		
+		//Mueve los vampiros desde la posicion indicada hacia la izq para eliminar el muerto
+		for(int i = pos; i < numSlayers; i++) {
+			slayerList[i] = slayerList[i+1];
+		}
+		//Eliminamos el slayer
+		numSlayers--;
 	}
 }

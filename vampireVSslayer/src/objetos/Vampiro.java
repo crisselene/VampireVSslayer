@@ -1,12 +1,11 @@
 package objetos;
 
-import logic.Game;
-
 public class Vampiro {
 
 	private int posx;
 	private int posy;
 	private int vida;
+	private int ciclos = 0;
 	//private Game game;
 	
 	
@@ -16,7 +15,7 @@ public class Vampiro {
 	 * @param posy
 	 * @param vida
 	 */
-	public Vampiro(int posx, int posy, int vida) {
+	public Vampiro(int posy, int posx, int vida) {
 		super();
 		this.posx = posx;
 		this.posy = posy;
@@ -60,5 +59,15 @@ public class Vampiro {
 	public boolean morder() {
 		return false;
 		
+	}
+	//Metodo que avanza al vampiro
+	public void avanza() {
+		if(ciclos == 2) {//Si le toca avanzar
+			posx--;
+			ciclos = 0;
+		}
+		else {
+			ciclos++;
+		}
 	}
 }

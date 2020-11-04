@@ -44,43 +44,42 @@ public class Controller {
     	GameObjectBoard board = new GameObjectBoard(game.getSeed());
     	boolean salir = false;
     	int numCiclos = 0;
-    
-    	while(!game.isFinished(salir)) {
-    	     	
-	        //crear array vampiros
-	        //double numVamp = level.numberOfVampires();
-	        //vampireList.arrayVampNivel(numVamp);
-  
+    	int opcion = 1;
+    	
+    	while(!game.isFinished(salir)) {    	     	
+    		
     		//mostramos la informacion de la partida
-    		game.infoPartida(board,vampireList,level, numCiclos);
-	        printGame();	        
+    		if( opcion == 1 || opcion == 3)  {
+    			game.infoPartida(board,vampireList,level, numCiclos);
+    	        printGame();	
+    		}
 	        
 	        //se pide al usuario acción
-	        int opcion = opcionUsuario(board, vampireList);
+	        opcion = opcionUsuario(board, vampireList);
 	        
 	        //Dependiendo de lo que eligiera el usurio ocurrira una accion u otra
 	        if(opcion == 1) {
 	        	//El juego se desarrolla normalmente
-	        	game.actualizarPartida(board, vampireList,slayerList);
-	        	game.attack(board);
+	        	game.actualizarPartida(board, vampireList);
+	        	game.attack(board, vampireList, slayerList);
 	        	//añadir vampiros
 	        	board.addVampire(level, vampireList);
 	        	//Eliminar muertos
-	        	game.buscarMuertos(board, vampireList);
+	        	game.buscarMuertos(board, vampireList);	      
+	        	//Numero de ciclos aumenta
+	        	numCiclos++;
 	        }
 	        else if(opcion == 3) {
 	        	//Ha habido reset
-	        	numCiclos = -1;
+	        	numCiclos = 0;
 	        }
 	        else if(opcion == 2) {
 	        	//Ha habido exit
 	        	salir = true;
-	        }	        
-	       	
-	        
-	       	//Numero de ciclos aumenta
-        	numCiclos++;
-        	
+	        }	 
+	        else {//si la opcion es 0
+	        	System.out.println(helpMsg);
+	        }        	
         	
         	//SI LOS VAMPIROS posY == 0 GAME IS FINISHED ********************+
 	  	}//while game.isFinished
@@ -97,7 +96,6 @@ public class Controller {
         System.out.print(prompt);
         String cmd = scanner.nextLine();
         String[] cmdParts = cmd.split(" ");//Separa el string
-        	
         //Dependiendo de lo que dijo realizamos una accion u otra
         switch(cmdParts[0].toLowerCase()) {
         //Casos de resetear partida
@@ -109,7 +107,7 @@ public class Controller {
         //Todos los casos de ayuda
         case "h":
         case "help":
-        	System.out.println(helpMsg);
+        	opcion = 0;
         break;
         	
         //Casos de añadir slayer
@@ -125,7 +123,7 @@ public class Controller {
        				//Si esta dentro del tablero
        				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY())
 					{	
-       					board.addSlayer(posx, posy);//Añadimos un slayer
+       					board.addSlayer(posx, posy);//Añadimos un slayer       					
        					opcion = 1;
         			}
         			else
@@ -159,9 +157,14 @@ public class Controller {
     	case "exit":
        		//Salimos del juego
        		opcion = 2;
-       	break;        	
-       	}//switch
-    	return opcion;
+       	break;
+       	default://Cualquier caso que no sea valido
+       		System.out.println(unknownCommandMsg);
+       		opcion= 0;
+       	break;
+       	}//switch 
+        //Si no escribio nada cmdPArts es vacio y hay que decir unknown command
+        return opcion;
     }
     
     

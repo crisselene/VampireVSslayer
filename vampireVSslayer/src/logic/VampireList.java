@@ -47,9 +47,12 @@ public class VampireList {
 	public static void avanzarVampire() {
 		//recorro el array y le sumo uno a la pos x
 		for (int i = 0; i < longitud ; i++) {
-			int posy = arrayVamp[i].getPosy();
-			posy--;
-			arrayVamp[i].setPosy(posy);
+			//solo avanza si no hay slayer delante
+			for (int j = 0 ; j < SlayerList.getNumSlayers(); j++) {
+				if(arrayVamp[i].getPosx() > SlayerList.getSlayer(j).getPosx() + 1 && (arrayVamp[i].getPosy() == SlayerList.getSlayer(j).getPosy())) {
+					arrayVamp[i].avanza();
+				}
+			}
 		}
 				
 	}

@@ -1,8 +1,6 @@
 package view;
 
 import logic.Game;
-import logic.VampireList;
-import objetos.Vampiro;
 import utils.MyStringUtils;
 
 public class GamePrinter {
@@ -12,8 +10,6 @@ public class GamePrinter {
 	int numCols;
 	String[][] board;
 	final String space = " ";
-	//variable que mira si se han añadido los vampiros
-	boolean anadido = false;
 	
 	public GamePrinter (Game game, int cols, int rows) {
 		this.game = game;
@@ -21,51 +17,7 @@ public class GamePrinter {
 		this.numCols = cols;
 	}
 	
-	
 	private void encodeGame(Game game) {
-		Vampiro[] arrayVamp = VampireList.getArrayVamp();
-		//si hay algún vampiro lo inserto, si no, no pinto ningún vampiro.
-		if(arrayVamp != null) {
-		//variable centinela para ver si hemos añadido todos los vampiros
-		anadido = false;
-		//contador de vampiros que hemos anadido
-		int contVamp = 0;
-		board = new String[numRows][numCols];
-		for (int i=0; i<numRows; i++) {
-			for (int j=0; j<numCols; j++) {	
-					board[i][j]= game.getPositionToString(i,j);
-					if(!anadido) {
-						//recorro el array de vampiros y si coincide "x" e "y" de alguno con la casilla que estoy rellenando, lo meto en ella
-						for (int k = 0; k < (arrayVamp.length); k++) {
-							int posxV = arrayVamp[k].getPosx();
-							int posyV = arrayVamp[k].getPosy();
-							int vidaV = arrayVamp[k].getVida();
-							if (posxV == i && posyV == j) {
-								board[posxV][posyV] = arrayVamp[k].toString();
-								contVamp++;
-								//anadido solo será true si se han insertado TODOS los vampiros de la lista
-								//es decir, si el vampiro que se ha anadido es el ultimo en la lista
-								if(contVamp == arrayVamp.length)anadido = true;
-							}else {
-								//k = 0;
-								anadido = false;
-							}
-							//TO STRING
-						
-						}
-						
-					}
-		
-			}
-		}
-		//si no hay que pintar ningún vampiro se pinta el tablero vacio	
-	}else {
-		pintarTableroVacio(game);
-	}
-}
-
-//pinta el tablero vacio
-	private void pintarTableroVacio(Game game) {
 		board = new String[numRows][numCols];
 		for (int i=0; i<numRows; i++) {
 			for (int j=0; j<numCols; j++) {	
@@ -107,7 +59,5 @@ public class GamePrinter {
 
 		return str.toString();
 	    }
-
-	
 }
 

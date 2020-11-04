@@ -1,7 +1,7 @@
 package logic;
 
 import control.GameObjectBoard;
-
+import objetos.Vampiro;
 import view.GamePrinter;
 
 public class Game {
@@ -30,12 +30,19 @@ public class Game {
 		return printer.toString();
 	}
 
-	public String getPositionToString(int x, int y) {
+	public String getPositionToString(int y, int x) {
 		//Si queremos un slayer
+		Vampiro arrayVamp[] = VampireList.getArrayVamp();
 		for (int i = 0 ; i < SlayerList.getNumSlayers() ; i++)
 		{
 			if (SlayerList.getSlayer(i).getPosx()== x && SlayerList.getSlayer(i).getPosy()== y) {
 				return SlayerList.getSlayer(i).toString();
+			}
+		}
+		for (int i = 0 ; i < VampireList.getLongitud() ; i++)
+		{
+			if (arrayVamp[i].getPosx() == x && arrayVamp[i].getPosy() == y) {
+				return arrayVamp[i].toString();
 			}
 		}
 		return "-";
@@ -52,13 +59,11 @@ public class Game {
 	}
 
 	//Acutaliza toda la partida
-	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList,SlayerList slayerList) {
+	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList) {
 		//Vemos si el jugador recibe mondeas o no aleatoriamente
     	board.recibeMonedas();
-    	//los vampiros commprueban si pueden atacar
-    	board.VampireAttack(vampireList, slayerList);
     	//los vampiros avanzan
-    	vampireList.avanzarVampire();
+    	VampireList.avanzarVampire();
     	System.out.println("\nlos vampiros avanzan\n");
     	//Añadir cualquier movimiento de los vampiros
 	}
@@ -79,9 +84,11 @@ public class Game {
 		vampireList.reset();		
 	}
 
-	public void attack(GameObjectBoard board) {
+	public void attack(GameObjectBoard board, VampireList vampireList, SlayerList slayerList) {
 		board.slayerAttack();
 		//Aqui el de los vampiros
+		//los vampiros commprueban si pueden atacar
+    	board.VampireAttack(vampireList, slayerList);
 	}
 
 	public void buscarMuertos(GameObjectBoard board, VampireList vampireList) {

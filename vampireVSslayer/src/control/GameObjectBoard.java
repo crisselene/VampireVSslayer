@@ -1,5 +1,6 @@
 package control;
 
+import java.util.Random;
 import logic.Level;
 import logic.SlayerList;
 import logic.VampireList;
@@ -13,10 +14,12 @@ public class GameObjectBoard {
 	
 	private Player player;
 	private SlayerList slayerlist;
+	private Random random;
 	
 	
 	public GameObjectBoard(long seed) {
 		this.player=new Player(seed);
+		random = new Random(seed);
 	}
 
 	//TODO añadir vampiro
@@ -32,10 +35,10 @@ public class GameObjectBoard {
 		//si el numero de vampiros en partida es menor del que se puede, intentamos crear uno
 		if(nVampJuego<numVamp) {
 			//probabilidad de crear un vampiro
-			double randomN = 0.1; //random de 0 a 1**************************************************************
+			double randomN = random.nextDouble(); //random de 0 a 1**************************************************************
 			if (randomN <= levelFreq ) {
 				//se puede crear el vampiro, buscar fila aleatoria, dentro de la dimension y
-				int filaAleatoria =(int) (Math.random()*level.getDimy()); 
+				int filaAleatoria = random.nextInt(level.getDimy()); 
 			
 				//si no hay vampiros, se crea uno
 				if(nVampJuego == 0) {
@@ -121,15 +124,15 @@ public class GameObjectBoard {
 			int j = 0;
 			while (j < VampireList.getLongitud()) {
 				//Si esta justo delante
-				if(slayerAtacante.getPosx() == vampirelist[j].getPosx() && slayerAtacante.getPosy() < vampirelist[j].getPosy()) {
-					System.out.println("f");
+				System.out.println(slayerAtacante.getPosy() + " "+ vampirelist[j].getPosy());
+				if(slayerAtacante.getPosy() == vampirelist[j].getPosy() && slayerAtacante.getPosx() < vampirelist[j].getPosx()) {
 					//en la primera ejecucion guardamos el vampiro como vampiro atacado
-					if (j == 0) {
+					if (vampiroAtacado == null) {
 						vampiroAtacado=vampirelist[j];
 						posVamp = j;
 					}
 					else {//En caso contrario atacamos al que este delante
-						if(vampirelist[j].getPosy() <= vampiroAtacado.getPosy()) {
+						if(vampirelist[j].getPosx() <= vampiroAtacado.getPosx()) {
 							vampiroAtacado=vampirelist[j];
 							posVamp = j;
 						}

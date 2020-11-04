@@ -53,6 +53,39 @@ public class VampireList {
 		}
 				
 	}
+
+	public static void buscarVampiro() {
+		//Buscamos los que han muerto
+		for(int i = 0; i < longitud ; i++) {
+			//Si ha muerto
+			if(arrayVamp[i].getVida() == 0) {
+				eliminarVampiro(i);
+			}
+		}
+		
+	}
+	//
+	private static void eliminarVampiro(int pos) {
+		//Eliminamos el vampiro
+		Vampiro aux[] = new Vampiro[longitud - 1];
+		for(int i = 0; i < longitud - 1; i++)
+		{
+			if(i < pos) {//Si esta antes del eliminado
+				aux[i]=arrayVamp[i];
+			}
+			else {
+				aux[i]=arrayVamp[i+1];
+			}
+		}
+		//Hay un vampiro menos
+		longitud--;
+		arrayVamp=aux;
+	}
+
+	public static void reset() {
+		arrayVamp = null;	
+		longitud = 0;
+	}
 	
 
 

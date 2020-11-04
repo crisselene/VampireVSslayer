@@ -51,11 +51,7 @@ public class Controller {
   
     		//mostramos la informacion de la partida
     		game.infoPartida(board,vampireList,level, numCiclos);
-	        printGame();
-	        
-	        //se crean vampiros y mostramos los vampiros creados
-	        board.addVampire(level, vampireList);
-	        printGame();
+	        printGame();	        
 	        
 	        //se pide al usuario acción
 	        int opcion = opcionUsuario(board, vampireList);
@@ -65,8 +61,10 @@ public class Controller {
 	        	//El juego se desarrolla normalmente
 	        	game.actualizarPartida(board, vampireList);
 	        	game.attack(board);
-	        	
+	        	//añadir vampiros
+	        	board.addVampire(level, vampireList);
 	        	//Eliminar muertos
+	        	game.buscarMuertos(board, vampireList);
 	        }
 	        else if(opcion == 3) {
 	        	//Ha habido reset
@@ -104,7 +102,7 @@ public class Controller {
         //Casos de resetear partida
         case "r":
         case "reset":
-        	game.reset(board);
+        	game.reset(board, vampireList);
         	opcion = 3;
         break;	
         //Todos los casos de ayuda

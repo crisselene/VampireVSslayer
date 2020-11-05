@@ -121,7 +121,7 @@ public class Controller {
        				int posx= Integer.parseInt(cmdParts[1]);//pasa de int a string
        				int posy= Integer.parseInt(cmdParts[2]);
        				//Si esta dentro del tablero
-       				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY())
+       				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY() && !SlayerList.noCoincide(posx, posy))
 					{	
        					board.addSlayer(posx, posy);//Añadimos un slayer       					
        					opcion = 1;
@@ -129,7 +129,7 @@ public class Controller {
         			else
         			{
         				//Como no esta dentro del tablero no es valido el comando
-       					System.out.println(invalidCommandMsg);
+       					System.out.println(invalidPositionMsg);
        				}
        			}//If isNumeric
        			else

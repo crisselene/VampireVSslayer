@@ -20,7 +20,6 @@ public class SlayerList {
 	public static void addSlayer(Slayer slayer) {
 		slayerList[numSlayers] = slayer;
 		numSlayers = numSlayers + 1;
-		System.out.println("Añadimos slayer " + numSlayers);
 	}
 	public static void reset() {
 		slayerList = new Slayer[MAX_SLAYERS];
@@ -34,5 +33,14 @@ public class SlayerList {
 		}
 		//Eliminamos el slayer
 		numSlayers--;
+	}
+	public static boolean noCoincide(int posx, int posy) {
+		boolean coincide = false;
+		for(int i = 0; i < numSlayers; i++) {
+			if(slayerList[i].getPosx() == posx && slayerList[i].getPosy() == posy) {
+				coincide= true;
+			}
+		}
+		return coincide;
 	}
 }

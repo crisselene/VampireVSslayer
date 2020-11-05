@@ -49,7 +49,7 @@ public class VampireList {
 		for (int i = 0; i < longitud ; i++) {
 			//solo avanza si no hay slayer delante
 			for (int j = 0 ; j < SlayerList.getNumSlayers(); j++) {
-				if(arrayVamp[i].getPosx() > SlayerList.getSlayer(j).getPosx() + 1 && (arrayVamp[i].getPosy() == SlayerList.getSlayer(j).getPosy())) {
+				if(arrayVamp[i].getPosx() > SlayerList.getSlayer(j).getPosx() + 1 && (arrayVamp[i].getPosy() == SlayerList.getSlayer(j).getPosy()) || arrayVamp[i].getPosy() != SlayerList.getSlayer(j).getPosy()) {
 					arrayVamp[i].avanza();
 				}
 			}
@@ -88,6 +88,16 @@ public class VampireList {
 	public static void reset() {
 		arrayVamp = null;	
 		longitud = 0;
+	}
+
+	public static boolean llegoAlFinal() {
+		boolean llego = false;
+		for (int i= 0; i< longitud; i++) {
+			if(arrayVamp[i].getPosx()==0) {
+				llego = true;
+			}
+		}
+		return llego;
 	}
 	
 

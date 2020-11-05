@@ -23,6 +23,11 @@ public class Game {
 			System.exit(0);
 			return true;
 		}
+		else if(VampireList.llegoAlFinal()) {
+			System.out.println("GAME OVER");
+			System.exit(1);
+			return true;
+		}
 		return false;
 	}
 	

@@ -89,8 +89,6 @@ public class Vampiro {
 					posXv--; //avanza hacia los negativos en el eje x
 					arrayVamp[i].setPosx(posXv);
 					arrayVamp[i].setCiclosAvance(0); //sus ciclos se reinician 
-					System.out.println("\nel vampiro en la posx: "+arrayVamp[i].posx+
-							" y posy:" +arrayVamp[i].posy+" avanza\n");
 							
 				}
 				//si no avanza, el ciclo del vampiro aumenta
@@ -101,7 +99,7 @@ public class Vampiro {
 					arrayVamp[i].setCiclosAvance(cicloVamp);
 					//si el vampiro ha atacado (ataque a true) entonces le ponemos ataque a false
 					arrayVamp[i].setAtaque(false);
-					System.out.println("No le toca avanzar"); //****************PRUEBAS*******************
+					//****************PRUEBAS*******************
 				}
 			//si no avanza es porque ha atacado ya, volvemos a poner ataque a false
 			//}else arrayVamp[i].setAtaque(false);	

@@ -29,6 +29,11 @@ public class Game {
 			System.exit(1);
 			return true;
 		}
+		else if(level.numberOfVampires() == VampireList.getVampSalidos() && VampireList.getLongitud() == 0) {
+			System.out.println("HAS MATADOA TODOS");
+			System.exit(2);
+			return true;
+		}
 		return false;
 	}
 	
@@ -71,8 +76,7 @@ public class Game {
     	//si hay vampiros, los vampiros avanzan
     	if(vampireList.getLongitud()!=0) {
     	//board.avanzarVampire(vampireList);
-    		Vampiro.avanza(vampireList);
-    	
+    	Vampiro.avanza(vampireList);    	
     	//Añadir cualquier movimiento de los vampiros
     	}
 	}
@@ -83,8 +87,8 @@ public class Game {
 		System.out.println("Number of cycles: " + numCiclos +"\n"
 						+ "Coins: " + board.getMonedas() + "\n"
 						//números de vampiros restantes, son los que faltan por meter en el array (casteado a int)
-						+ "Remaning vampires: " + (int)(level.numberOfVampires() - vampire.getLongitud())+ "\n"
-						+ "Vampires on board: " + vampire.getLongitud());
+						+ "Remaning vampires: " + (int)(level.numberOfVampires() - VampireList.getVampSalidos())+ "\n"
+						+ "Vampires on board: " + VampireList.getLongitud());
 	}
 	
 	//resetea la partida
@@ -102,6 +106,6 @@ public class Game {
 
 	public void buscarMuertos(GameObjectBoard board, VampireList vampireList) {
 		board.buscarSlayers();
-		vampireList.buscarVampiro();
+		VampireList.buscarVampiro();
 	}
 }

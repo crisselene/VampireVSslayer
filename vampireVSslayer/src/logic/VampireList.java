@@ -8,13 +8,20 @@ public class VampireList {
 	static Vampiro arrayVamp[];
 	//longitud del array (cantidad de vampiros en el juego)
 	static int longitud;
+	//Vampiros que han salido en total
+	static int vampSalidos;
 	
 	//crear array dependiendo del nivel del juego
 	public void arrayVampNivel (double numberOfVampires ) {
 			arrayVamp = new Vampiro[(int) numberOfVampires-1];
 			//longitud es el tamaño del array
 			longitud = arrayVamp.length;
+			vampSalidos=0;
 			
+	}
+	
+	public static int getVampSalidos() {
+		return vampSalidos;
 	}
 	
 	//getter del array vampiros
@@ -41,6 +48,8 @@ public class VampireList {
 		arrayVamp = aux;
 		//ahora el array es una posición más largo
 		longitud = longitud + 1;
+		//ha salido un vampiro mas
+		vampSalidos++;
 		return true;
 	}
 	

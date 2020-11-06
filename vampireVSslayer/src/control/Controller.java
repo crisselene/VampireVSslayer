@@ -61,8 +61,9 @@ public class Controller {
 	        if(opcion == 1) {
 	        	
 	        	//El juego se desarrolla normalmente
-	        	game.attack(board, vampireList, slayerList);
 	        	game.actualizarPartida(board, vampireList);
+	        	game.attack(board, vampireList, slayerList);
+	        	
 	        	
 	        	//añadir vampiros
 	        	board.addVampire(level, vampireList);

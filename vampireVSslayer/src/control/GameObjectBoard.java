@@ -30,25 +30,27 @@ public class GameObjectBoard {
 		//el numero de vampiros que se pueden crear
 		double numVamp = level.numberOfVampires();
 		//numero de vampiros en la partida
-		double nVampJuego = vampList.getLongitud(); 
+		double nVampJuego = VampireList.getVampSalidos(); 
 		
 		//si el numero de vampiros en partida es menor del que se puede, intentamos crear uno
 		if(nVampJuego<numVamp) {
 			//probabilidad de crear un vampiro
-			double randomN = 0.1;//random.nextDouble(); //random de 0 a 1**********************
+			//Tiene que ser asi, si pones 0.1 sale uno cada ronda, tiene que salir uno con la probabilidad que dice el nivel
+			//por eso el next double, si sale uno cada ronda es imposible matarlos a todos porque no hay monedas suficientes
+			double randomN = random.nextDouble(); //random de 0 a 1**********************
 			if (randomN <= levelFreq ) {
 				//se puede crear el vampiro, buscar fila aleatoria, dentro de la dimension y
 				int filaAleatoria = random.nextInt(level.getDimy()); 
 			
 				//si no hay vampiros, se crea uno
-				if(nVampJuego == 0) {
+				if(VampireList.getLongitud() == 0) {
 					crearVampiro(filaAleatoria);
 					anadido = true;
 				}else {
 					//si el vampiro se intenta poner sobre una casilla donde hay un vampiro, no se crea
 					if (!anadido) {
-						for (int i = 0; i < nVampJuego ; i++) {
-							if(filaAleatoria != vampList.getArrayVamp()[i].getPosy() && anadido== false) {//**********
+						for (int i = 0; i < VampireList.getLongitud() ; i++) {
+							if(filaAleatoria != VampireList.getArrayVamp()[i].getPosy() && anadido== false) {//**********
 								crearVampiro(filaAleatoria);
 								anadido = true;
 							} 
@@ -58,8 +60,8 @@ public class GameObjectBoard {
 					    }
 					}		
 				}
-			}else System.out.println(NO_CREAR_VAMP);
-		}else System.out.println("ya están todos los vampiros en el tablero");		
+			}
+		}
 	}
 		
 	private void crearVampiro(int filaAleatoria) {
@@ -125,7 +127,6 @@ public class GameObjectBoard {
 			int j = 0;
 			while (j < VampireList.getLongitud()) {
 				//Si esta justo delante
-				System.out.println(slayerAtacante.getPosy() + " "+ vampirelist[j].getPosy());
 				if(slayerAtacante.getPosy() == vampirelist[j].getPosy() && slayerAtacante.getPosx() < vampirelist[j].getPosx()) {
 					//en la primera ejecucion guardamos el vampiro como vampiro atacado
 					if (vampiroAtacado == null) {

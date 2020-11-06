@@ -59,9 +59,11 @@ public class Controller {
 	        
 	        //Dependiendo de lo que eligiera el usurio ocurrira una accion u otra
 	        if(opcion == 1) {
+	        	
 	        	//El juego se desarrolla normalmente
-	        	game.actualizarPartida(board, vampireList);
 	        	game.attack(board, vampireList, slayerList);
+	        	game.actualizarPartida(board, vampireList);
+	        	
 	        	//añadir vampiros
 	        	board.addVampire(level, vampireList);
 	        	//Eliminar muertos
@@ -182,6 +184,7 @@ public class Controller {
  
         return resultado;
     }
+
     
 }
 

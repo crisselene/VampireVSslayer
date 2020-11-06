@@ -1,5 +1,6 @@
 package logic;
 
+import control.Controller;
 import control.GameObjectBoard;
 import objetos.Vampiro;
 import view.GamePrinter;
@@ -67,10 +68,13 @@ public class Game {
 	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList) {
 		//Vemos si el jugador recibe mondeas o no aleatoriamente
     	board.recibeMonedas();
-    	//los vampiros avanzan
-    	VampireList.avanzarVampire();
-    	System.out.println("\nlos vampiros avanzan\n");
+    	//si hay vampiros, los vampiros avanzan
+    	if(vampireList.getLongitud()!=0) {
+    	//board.avanzarVampire(vampireList);
+    		Vampiro.avanza(vampireList);
+    	
     	//Añadir cualquier movimiento de los vampiros
+    	}
 	}
 	
 

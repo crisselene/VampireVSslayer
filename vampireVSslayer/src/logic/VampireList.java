@@ -44,18 +44,26 @@ public class VampireList {
 		return true;
 	}
 	
-	public static void avanzarVampire() {
+
+	 /* public static void avanzarVampire(VampireList vampireList) {
 		//recorro el array y le sumo uno a la pos x
-		for (int i = 0; i < longitud ; i++) {
+		//for (int i = 0; i < longitud ; i++) {
 			//solo avanza si no hay slayer delante
-			for (int j = 0 ; j < SlayerList.getNumSlayers(); j++) {
-				if(arrayVamp[i].getPosx() > SlayerList.getSlayer(j).getPosx() + 1 && (arrayVamp[i].getPosy() == SlayerList.getSlayer(j).getPosy()) || arrayVamp[i].getPosy() != SlayerList.getSlayer(j).getPosy()) {
-					arrayVamp[i].avanza();
-				}
-			}
-		}
+			//for (int j = 0 ; j < SlayerList.getNumSlayers(); j++) {
+				//if(arrayVamp[i].getPosx() > SlayerList.getSlayer(j).getPosx() + 1 && (arrayVamp[i].getPosy() == SlayerList.getSlayer(j).getPosy()) || arrayVamp[i].getPosy() != SlayerList.getSlayer(j).getPosy()) {
+					
+				//}
+			//}
+		
+			//si delante tiene algo, no avanza
+			//¿Hay slayer?
+			for (int i = 0; i < vampireList.getLongitud(); i++) {
 				
-	}
+			}
+			Vampiro.avanza(vampireList);
+		//}
+			
+	}*/
 
 	public static void buscarVampiro() {
 		//Buscamos los que han muerto

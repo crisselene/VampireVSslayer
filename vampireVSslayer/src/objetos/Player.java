@@ -22,7 +22,7 @@ public class Player {
 	
 	public void ganaMonedas() {
 		
-		double ganaMonedas = random.nextDouble();
+		double ganaMonedas = random.nextFloat();
 		if (ganaMonedas <= 0.5) {
 			monedas += 10;
 		}

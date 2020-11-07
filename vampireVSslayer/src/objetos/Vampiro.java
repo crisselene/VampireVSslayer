@@ -7,7 +7,7 @@ public class Vampiro {
 	private int posx;
 	private int posy;
 	private int vida;
-	private int ciclosAvance;
+	private int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	private boolean ataque; //variable que guarda si le toca atacar a un vampiro
 	//private Game game;
 	
@@ -17,6 +17,8 @@ public class Vampiro {
 	 * @param posx
 	 * @param posy
 	 * @param vida
+	 * @param ciclosAvance
+	 * @param ataque
 	 */
 	public Vampiro(int posy, int posx, int vida, int ciclosAvance,boolean ataque) {
 		super();
@@ -27,7 +29,7 @@ public class Vampiro {
 		this.ataque = ataque;
 	}
 	
-	//pos x
+	//getter y setter pos x
 	public int getPosx() {
 		return posx;
 	}
@@ -35,12 +37,12 @@ public class Vampiro {
 		this.posx = posx;
 	}
 
-	//cambiar el vampiro a atacar(true) o no atacar (false)
+	//set para cambiar el vampiro a atacar(true) o no atacar (false)
 	public void setAtaque(boolean ataque) {
 		this.ataque = ataque;
 	}
 
-	//pos y
+	//getter y setter pos y
 	public int getPosy() {
 		return posy;
 	}
@@ -56,7 +58,7 @@ public class Vampiro {
 		this.ciclosAvance = ciclosAvance;
 	}
 
-	//vida
+	//getter y setter de vida
 	public int getVida() {
 		return vida;
 	}
@@ -70,12 +72,6 @@ public class Vampiro {
 		return "V [" + vida + "]";
 	}
 
-
-	//TODO: metodo que comprueba si tiene un slayer delante y muerde
-	public boolean morder() {
-		return false;
-		
-	}
 	//Metodo que avanza al vampiro
 	public static void avanza(VampireList vampireList) {
 	//recorro el array de vampiros y compruebo si alguno tiene los ciclos a 2, 
@@ -83,7 +79,6 @@ public class Vampiro {
 		Vampiro[] arrayVamp = vampireList.getArrayVamp();
 		for (int i = 0; i < arrayVamp.length; i++) {
 			//compruebo que no ha atacado, porque si ataca, no avanza
-			//if(arrayVamp[i].ataque == false) {
 				if(arrayVamp[i].ciclosAvance == 2 && arrayVamp[i].ataque == false) {//Si le toca avanzar...
 					int posXv = arrayVamp[i].getPosx();
 					posXv--; //avanza hacia los negativos en el eje x
@@ -99,10 +94,8 @@ public class Vampiro {
 					arrayVamp[i].setCiclosAvance(cicloVamp);
 					//si el vampiro ha atacado (ataque a true) entonces le ponemos ataque a false
 					arrayVamp[i].setAtaque(false);
-					//****************PRUEBAS*******************
+					
 				}
-			//si no avanza es porque ha atacado ya, volvemos a poner ataque a false
-			//}else arrayVamp[i].setAtaque(false);	
 		}
 		
 	}

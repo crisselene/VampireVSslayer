@@ -34,7 +34,7 @@ public class VampireList {
 		return longitud;//return longitud;
 	}
 	
-	//TODO  si se cambia a ARRAYLIST, sería más fácil añadir objeto (.add() )
+	
 	public static boolean addVampire(Vampiro vampiro) {
 		//array auxiliar para copiar el que había
 		Vampiro aux[] = new Vampiro[longitud+1]; 
@@ -54,27 +54,7 @@ public class VampireList {
 	}
 	
 
-	 /* public static void avanzarVampire(VampireList vampireList) {
-		//recorro el array y le sumo uno a la pos x
-		//for (int i = 0; i < longitud ; i++) {
-			//solo avanza si no hay slayer delante
-			//for (int j = 0 ; j < SlayerList.getNumSlayers(); j++) {
-				//if(arrayVamp[i].getPosx() > SlayerList.getSlayer(j).getPosx() + 1 && (arrayVamp[i].getPosy() == SlayerList.getSlayer(j).getPosy()) || arrayVamp[i].getPosy() != SlayerList.getSlayer(j).getPosy()) {
-					
-				//}
-			//}
-		
-			//si delante tiene algo, no avanza
-			//¿Hay slayer?
-			for (int i = 0; i < vampireList.getLongitud(); i++) {
-				
-			}
-			Vampiro.avanza(vampireList);
-		//}
-			
-	}*/
-
-	public static void buscarVampiro() {
+	 public static void buscarVampiro() {
 		//Buscamos los que han muerto
 		for(int i = 0; i < longitud ; i++) {
 			//Si ha muerto
@@ -84,7 +64,7 @@ public class VampireList {
 		}
 		
 	}
-	//
+	
 	private static void eliminarVampiro(int pos) {
 		//Eliminamos el vampiro
 		Vampiro aux[] = new Vampiro[longitud - 1];

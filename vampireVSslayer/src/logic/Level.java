@@ -17,7 +17,7 @@ public enum Level {
 		this.dim_y = dim_y;
 	}
 
-	// TODO fill your code
+	
 
 	// get numbers of vampires  
 	public double numberOfVampires() {

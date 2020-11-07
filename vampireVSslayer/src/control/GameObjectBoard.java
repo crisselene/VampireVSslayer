@@ -22,7 +22,6 @@ public class GameObjectBoard {
 		random = new Random(seed);
 	}
 
-	//TODO añadir vampiro
 	public void addVampire(Level level,VampireList vampList) {
 		boolean anadido = false; //controlar que solo se cree un vampiro por ronda
 		//recojo el valor de la frecuencia de los vampiros 
@@ -35,9 +34,7 @@ public class GameObjectBoard {
 		//si el numero de vampiros en partida es menor del que se puede, intentamos crear uno
 		if(nVampJuego<numVamp) {
 			//probabilidad de crear un vampiro
-			//Tiene que ser asi, si pones 0.1 sale uno cada ronda, tiene que salir uno con la probabilidad que dice el nivel
-			//por eso el next double, si sale uno cada ronda es imposible matarlos a todos porque no hay monedas suficientes
-			double randomN = random.nextDouble(); //random de 0 a 1**********************
+			double randomN = random.nextDouble();
 			if (randomN <= levelFreq ) {
 				//se puede crear el vampiro, buscar fila aleatoria, dentro de la dimension y
 				int filaAleatoria = random.nextInt(level.getDimy()); 
@@ -50,7 +47,7 @@ public class GameObjectBoard {
 					//si el vampiro se intenta poner sobre una casilla donde hay un vampiro, no se crea
 					if (!anadido) {
 						for (int i = 0; i < VampireList.getLongitud() ; i++) {
-							if(filaAleatoria != VampireList.getArrayVamp()[i].getPosy() && anadido== false) {//**********
+							if(filaAleatoria != VampireList.getArrayVamp()[i].getPosy() && anadido== false) {
 								crearVampiro(filaAleatoria);
 								anadido = true;
 							} 
@@ -141,17 +138,17 @@ public class GameObjectBoard {
 					}
 				}				
 				j++;
-			}//while
+			}
 			//Si tiene a quien atacar
 			if (vampiroAtacado != null) {
 				//El slayer ataca
 				vampiroAtacado.setVida(vampiroAtacado.getVida() - 1);
 				VampireList.getArrayVamp()[posVamp] = vampiroAtacado;
 			}
-		}//for
+		}
 		
 	}
-	//
+	
 	//Busca los slayer muertos
 	public void buscarSlayers() {
 		
@@ -180,9 +177,7 @@ public class GameObjectBoard {
 				if (PosXSlay == (posXVamp-1) && PosYSlay== posYVamp) {
 					//el vampiro no avanza, ataca
 					vampireList.getArrayVamp()[i].setAtaque(true);
-					//posXVamp++;
-					//vampireList.getArrayVamp()[i].setPosx(posXVamp);
-					
+								
 					//el vampiro ataca
 					//el slayer pierde una vida
 					int vidaS = slayerList.getSlayer(j).getVida();
@@ -193,19 +188,5 @@ public class GameObjectBoard {
 			}
 		}
 	}
-	
-	public void avanzarVampireOAtacar(VampireList vampireList, SlayerList slayerList) {
-		//si delante hay un slayer, no avanza,ataca
-		for (int i = 0; i < vampireList.getLongitud(); i++) {
-			for (int j = 0; j < slayerList.getNumSlayers(); j++) {
-				int posYVamp = vampireList.getArrayVamp()[i].getPosy();
-				//si el slayer está en la fila siguiente al vampiro:
-				if (slayerList.getSlayer(j).getPosy() == (posYVamp-1) ) {
-					
-				}
-			}
-		}
-	}
-
 	
 }

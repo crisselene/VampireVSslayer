@@ -30,7 +30,7 @@ public class Game {
 			return true;
 		}
 		else if(level.numberOfVampires() == VampireList.getVampSalidos() && VampireList.getLongitud() == 0) {
-			System.out.println("HAS MATADOA TODOS");
+			System.out.println("ENHORABUENA, HAS MATADO A TODOS LOS VAMPIROS");
 			System.exit(2);
 			return true;
 		}
@@ -75,9 +75,8 @@ public class Game {
     	board.recibeMonedas();
     	//si hay vampiros, los vampiros avanzan
     	if(vampireList.getLongitud()!=0) {
-    	//board.avanzarVampire(vampireList);
     	Vampiro.avanza(vampireList);    	
-    	//Añadir cualquier movimiento de los vampiros
+    	
     	}
 	}
 	
@@ -87,8 +86,8 @@ public class Game {
 		System.out.println("Number of cycles: " + numCiclos +"\n"
 						+ "Coins: " + board.getMonedas() + "\n"
 						//números de vampiros restantes, son los que faltan por meter en el array (casteado a int)
-						+ "Remaning vampires: " + (int)(level.numberOfVampires() - VampireList.getVampSalidos())+ "\n"
-						+ "Vampires on board: " + VampireList.getLongitud());
+						+ "Remaining vampires: " + (int)(level.numberOfVampires() - VampireList.getVampSalidos())+ "\n"
+						+ "Vampires on the board: " + VampireList.getLongitud());
 	}
 	
 	//resetea la partida
@@ -99,9 +98,7 @@ public class Game {
 
 	public void attack(GameObjectBoard board, VampireList vampireList, SlayerList slayerList) {
 		board.slayerAttack();
-		//Aqui el de los vampiros
-		//los vampiros commprueban si pueden atacar
-    	board.VampireAttack(vampireList, slayerList);
+		board.VampireAttack(vampireList, slayerList);
 	}
 
 	public void buscarMuertos(GameObjectBoard board, VampireList vampireList) {

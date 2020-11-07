@@ -11,7 +11,7 @@ import objetos.Vampiro;
 public class Controller {
 
 	
-	public final String prompt = "Command > ";
+	public final String prompt = "Command > \n";
 	public static final String helpMsg = String.format(
 			"Available commands:%n" +
 			"[a]dd <x> <y>: add a slayer in position x, y%n" +
@@ -39,8 +39,7 @@ public class Controller {
    }
     
     public void run(Level level, VampireList vampireList) {
-		// TODO fill your code
-    	
+		    	
     	GameObjectBoard board = new GameObjectBoard(game.getSeed());
     	boolean salir = false;
     	int numCiclos = 0;
@@ -84,8 +83,7 @@ public class Controller {
 	        	System.out.println(helpMsg);
 	        }        	
         	
-        	//SI LOS VAMPIROS posY == 0 GAME IS FINISHED ********************+
-	  	}//while game.isFinished
+	  	}
     }
     
     public int opcionUsuario(GameObjectBoard board, VampireList vampireList) {

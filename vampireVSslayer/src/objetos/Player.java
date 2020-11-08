@@ -6,11 +6,9 @@ public class Player {
 	
 	public static final int DEFAULT_MONEDAS = 50;
 	private int monedas;
-	Random random;
 	
-	public Player(long seed) {
+	public Player() {
 		monedas = DEFAULT_MONEDAS;
-		random = new Random(seed);
 	}
 	
 	public int getMonedas() {
@@ -20,10 +18,8 @@ public class Player {
 		this.monedas=monedas;
 	}
 	
-	public void ganaMonedas() {
-		
-		double ganaMonedas = random.nextFloat();
-		if (ganaMonedas <= 0.5) {
+	public void ganaMonedas(float ganaMonedas) {		
+		if (ganaMonedas >= 0.5) {
 			monedas += 10;
 		}
 	}

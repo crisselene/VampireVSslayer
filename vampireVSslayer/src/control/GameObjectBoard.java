@@ -14,15 +14,13 @@ public class GameObjectBoard {
 	
 	private Player player;
 	private SlayerList slayerlist;
-	private Random random;
 	
 	
-	public GameObjectBoard(long seed) {
-		this.player=new Player(seed);
-		random = new Random(seed);
+	public GameObjectBoard() {
+		this.player=new Player();
 	}
 
-	public void addVampire(Level level,VampireList vampList) {
+	public void addVampire(Level level,VampireList vampList, Random random) {
 		boolean anadido = false; //controlar que solo se cree un vampiro por ronda
 		//recojo el valor de la frecuencia de los vampiros 
 		double levelFreq = level.getVampireFrequency();
@@ -41,14 +39,14 @@ public class GameObjectBoard {
 			
 				//si no hay vampiros, se crea uno
 				if(VampireList.getLongitud() == 0) {
-					crearVampiro(filaAleatoria);
+					crearVampiro(filaAleatoria, level.getDimx() - 1);
 					anadido = true;
 				}else {
 					//si el vampiro se intenta poner sobre una casilla donde hay un vampiro, no se crea
 					if (!anadido) {
 						for (int i = 0; i < VampireList.getLongitud() ; i++) {
 							if(filaAleatoria != VampireList.getArrayVamp()[i].getPosy() && anadido== false) {
-								crearVampiro(filaAleatoria);
+								crearVampiro(filaAleatoria, level.getDimx() - 1);
 								anadido = true;
 							} 
 					    }if (!anadido){
@@ -61,13 +59,10 @@ public class GameObjectBoard {
 		}
 	}
 		
-	private void crearVampiro(int filaAleatoria) {
+	private void crearVampiro(int filaAleatoria, int longitudX) {
 		//se crea un vampiro en una fila aleatoria, en la ultima columna, con 5 vidas , los ciclos a 0 y sin atacar
-		Vampiro vampiro = new Vampiro(filaAleatoria,7,5,0,false);
-		boolean creado = VampireList.addVampire(vampiro);
-		if(creado) System.out.println("Se crea un vampiro en la fila " + filaAleatoria);
-		else System.out.println(NO_CREAR_VAMP);
-			
+		Vampiro vampiro = new Vampiro(filaAleatoria, longitudX,5,0,false);
+		VampireList.addVampire(vampiro);			
 	}
 	
 	public Player getPlayer() {
@@ -82,20 +77,23 @@ public class GameObjectBoard {
 		return slayerlist;
 	}
 	
-	public void addSlayer(int posx, int posy)
+	public boolean addSlayer(int posx, int posy)
 	{
+		boolean anadido= false;
 		//Si el jugador tiene monedas suficientes
 		if(player.getMonedas() >= 50) {
 			//Restamos 50
 			player.setMonedas(player.getMonedas()-50);
 			//Añadimos el vampiro a la lista
 			crearSlayer(posx,posy);
+			anadido = true;
 		}
 		else //En caso contrario
 		{
 			//Mostrar que no tiene monedas suficientes
 			System.out.println("No de dispone de suficientes monedas");
 		}
+		return anadido;
 	}
 	
 	public void crearSlayer(int posx, int posy) {
@@ -103,12 +101,12 @@ public class GameObjectBoard {
 		SlayerList.addSlayer(slayer);
 	}
 
-	public void recibeMonedas() {
-		player.ganaMonedas();		
+	public void recibeMonedas(Random random) {
+		player.ganaMonedas(random.nextFloat());		
 	}
 
-	public void reset(long seed) {
-		player = new Player(seed);
+	public void reset() {
+		player = new Player();
 		SlayerList.reset();
 	}
 
@@ -124,13 +122,13 @@ public class GameObjectBoard {
 			int j = 0;
 			while (j < VampireList.getLongitud()) {
 				//Si esta justo delante
-				if(slayerAtacante.getPosy() == vampirelist[j].getPosy() && slayerAtacante.getPosx() < vampirelist[j].getPosx()) {
+				if(slayerAtacante.getPosy() == vampirelist[j].getPosy()) {
 					//en la primera ejecucion guardamos el vampiro como vampiro atacado
 					if (vampiroAtacado == null) {
 						vampiroAtacado=vampirelist[j];
 						posVamp = j;
 					}
-					else {//En caso contrario atacamos al que este delante
+					else {//En caso contrario atacamos al que este a la izq o delante
 						if(vampirelist[j].getPosx() <= vampiroAtacado.getPosx()) {
 							vampiroAtacado=vampirelist[j];
 							posVamp = j;
@@ -183,7 +181,6 @@ public class GameObjectBoard {
 					int vidaS = slayerList.getSlayer(j).getVida();
 					vidaS--;
 					slayerList.getSlayer(j).setVida(vidaS);
-					System.out.println("Un vampiro ha mordido a un slayer");
 				}
 			}
 		}

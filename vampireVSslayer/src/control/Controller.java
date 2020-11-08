@@ -1,12 +1,11 @@
 package control;
 
+import java.util.Random;
 import java.util.Scanner;
-
 import logic.Game;
 import logic.Level;
 import logic.SlayerList;
 import logic.VampireList;
-import objetos.Vampiro;
 
 public class Controller {
 
@@ -28,6 +27,7 @@ public class Controller {
     private VampireList vampireList;
     private Scanner scanner;
     private SlayerList slayerList;
+    private Random random;
     
     public Controller(Game game, Scanner scanner) {
 	    this.game = game;
@@ -39,17 +39,18 @@ public class Controller {
    }
     
     public void run(Level level, VampireList vampireList) {
-		    	
-    	GameObjectBoard board = new GameObjectBoard(game.getSeed());
+		
+    	random = new Random(game.getSeed());
+    	GameObjectBoard board = new GameObjectBoard();
     	boolean salir = false;
     	int numCiclos = 0;
     	int opcion = 1;
     	
-    	while(!game.isFinished(salir)) {    	     	
+    	while(!game.isFinished(salir, board, numCiclos)) {    	     	
     		
     		//mostramos la informacion de la partida
     		if( opcion == 1 || opcion == 3)  {
-    			game.infoPartida(board,vampireList,level, numCiclos);
+    			game.infoPartida(board,level, numCiclos);
     	        printGame();	
     		}
 	        
@@ -60,12 +61,12 @@ public class Controller {
 	        if(opcion == 1) {
 	        	
 	        	//El juego se desarrolla normalmente
-	        	game.actualizarPartida(board, vampireList);
+	        	game.actualizarPartida(board, vampireList, random);
 	        	game.attack(board, vampireList, slayerList);
 	        	
 	        	
 	        	//añadir vampiros
-	        	board.addVampire(level, vampireList);
+	        	board.addVampire(level, vampireList, random);
 	        	//Eliminar muertos
 	        	game.buscarMuertos(board, vampireList);	      
 	        	//Numero de ciclos aumenta
@@ -77,18 +78,16 @@ public class Controller {
 	        }
 	        else if(opcion == 2) {
 	        	//Ha habido exit
+	        	System.out.println("No ha ganado nadie");
 	        	salir = true;
-	        }	 
-	        else {//si la opcion es 0
-	        	System.out.println(helpMsg);
-	        }        	
+	        }	          	
         	
 	  	}
     }
     
     public int opcionUsuario(GameObjectBoard board, VampireList vampireList) {
     	int opcion = 0;
-    	//La variable opcion tendra cuatro valores, 0 y 1 con el 0 
+    	//La variable opcion tendra cuatro valores, con el 0 
     	//quiere decir que no se actualizara el juego, con 1 que si lo hara
     	//con el 2 que ha decidido salir del juego, y el 3 que ha hecho reset
     	
@@ -102,12 +101,14 @@ public class Controller {
         //Casos de resetear partida
         case "r":
         case "reset":
-        	game.reset(board, vampireList);
+        	random = new Random(game.getSeed());
+        	game.reset(board, vampireList, random);
         	opcion = 3;
         break;	
         //Todos los casos de ayuda
         case "h":
         case "help":
+        	System.out.println(helpMsg);
         	opcion = 0;
         break;
         	
@@ -121,26 +122,35 @@ public class Controller {
        			if(isNumeric(cmdParts[1]) && isNumeric(cmdParts[2])) {
        				int posx= Integer.parseInt(cmdParts[1]);//pasa de int a string
        				int posy= Integer.parseInt(cmdParts[2]);
-       				//Si esta dentro del tablero
-       				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY() && !SlayerList.noCoincide(posx, posy))
+       				//Si esta dentro del tablero y no coincide con algun objeto
+       				if(posx >= 0 && posx < game.getLevelDimX() && posy >= 0 && posy < game.getLevelDimY() && !SlayerList.noCoincide(posx, posy)
+       						&& posx != game.getLevelDimX() - 1)
 					{	
-       					board.addSlayer(posx, posy);//Añadimos un slayer       					
-       					opcion = 1;
+       					boolean anadido = board.addSlayer(posx, posy);//Añadimos un slayer       					
+       					if(anadido) {
+       						opcion = 1;
+       					}
+       					else {
+       						opcion = 0;       						
+       					}
         			}
         			else
         			{
         				//Como no esta dentro del tablero no es valido el comando
-       					System.out.println(invalidPositionMsg);
+       					System.out.println(invalidPositionMsg);       					
+       					opcion = 0;
        				}
        			}//If isNumeric
        			else
        			{
         				System.out.println(invalidCommandMsg);
+        				opcion = 0;
         		}
         	}//if cmdParts.lenght != 2
         	else 
        		{
        			System.out.println(invalidCommandMsg);
+       			opcion= 0 ;
        		}
        		//Actualiza la partida
        		

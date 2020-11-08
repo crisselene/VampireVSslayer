@@ -79,7 +79,7 @@ public class Vampiro {
 		Vampiro[] arrayVamp = vampireList.getArrayVamp();
 		for (int i = 0; i < arrayVamp.length; i++) {
 			//compruebo que no ha atacado, porque si ataca, no avanza
-				if(arrayVamp[i].ciclosAvance == 2 && arrayVamp[i].ataque == false) {//Si le toca avanzar...
+				if(arrayVamp[i].ciclosAvance == 1 && arrayVamp[i].ataque == false) {//Si le toca avanzar...
 					int posXv = arrayVamp[i].getPosx();
 					posXv--; //avanza hacia los negativos en el eje x
 					arrayVamp[i].setPosx(posXv);
@@ -90,7 +90,7 @@ public class Vampiro {
 				else {
 					int cicloVamp = arrayVamp[i].getCiclosAvance();
 					//si el ciclo es distinto a 2 (2 es el max)
-					if(cicloVamp!=2)cicloVamp++;
+					if(cicloVamp!=1)cicloVamp++;
 					arrayVamp[i].setCiclosAvance(cicloVamp);
 					//si el vampiro ha atacado (ataque a true) entonces le ponemos ataque a false
 					arrayVamp[i].setAtaque(false);

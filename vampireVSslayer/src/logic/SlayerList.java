@@ -41,6 +41,12 @@ public class SlayerList {
 				coincide= true;
 			}
 		}
+		//Ahora miramos si coincide con los vampiros
+		for(int i = 0; i < VampireList.getLongitud(); i++) {
+			if(VampireList.getArrayVamp()[i].getPosx() == posx && VampireList.getArrayVamp()[i].getPosy() == posy) {
+				coincide= true;
+			}
+		}
 		return coincide;
 	}
 }

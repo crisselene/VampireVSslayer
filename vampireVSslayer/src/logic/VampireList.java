@@ -35,7 +35,7 @@ public class VampireList {
 	}
 	
 	
-	public static boolean addVampire(Vampiro vampiro) {
+	public static void addVampire(Vampiro vampiro) {
 		//array auxiliar para copiar el que había
 		Vampiro aux[] = new Vampiro[longitud+1]; 
 		for (int i = 0; i < longitud ; i++) {
@@ -50,7 +50,6 @@ public class VampireList {
 		longitud = longitud + 1;
 		//ha salido un vampiro mas
 		vampSalidos++;
-		return true;
 	}
 	
 
@@ -85,12 +84,13 @@ public class VampireList {
 	public static void reset() {
 		arrayVamp = null;	
 		longitud = 0;
+		vampSalidos = 0;
 	}
 
 	public static boolean llegoAlFinal() {
 		boolean llego = false;
 		for (int i= 0; i< longitud; i++) {
-			if(arrayVamp[i].getPosx()==0) {
+			if(arrayVamp[i].getPosx()==-1) {
 				llego = true;
 			}
 		}

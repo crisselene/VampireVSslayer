@@ -167,20 +167,29 @@ public class GameObjectBoard {
 		
 		for (int j = 0; j < slayerList.getNumSlayers(); j++) {
 			for (int i = 0; i < vampireList.getLongitud(); i++) {
-			int posXVamp = vampireList.getArrayVamp()[i].getPosx();
-			int posYVamp = vampireList.getArrayVamp()[i].getPosy();
-			int PosXSlay = slayerList.getSlayer(j).getPosx();
-			int PosYSlay = slayerList.getSlayer(j).getPosy();
-				//si el slayer está en la fila siguiente al vampiro:
-				if (PosXSlay == (posXVamp-1) && PosYSlay== posYVamp) {
-					//el vampiro no avanza, ataca
-					vampireList.getArrayVamp()[i].setAtaque(true);
-								
-					//el vampiro ataca
-					//el slayer pierde una vida
-					int vidaS = slayerList.getSlayer(j).getVida();
-					vidaS--;
-					slayerList.getSlayer(j).setVida(vidaS);
+				int posXVamp = vampireList.getArrayVamp()[i].getPosx();
+				int posYVamp = vampireList.getArrayVamp()[i].getPosy();
+				int PosXSlay = slayerList.getSlayer(j).getPosx();
+				int PosYSlay = slayerList.getSlayer(j).getPosy();
+				//solo ataca si no le ha matado ya el slayer
+				if(vampireList.getArrayVamp()[i].getVida() != 0){
+					//si el slayer está en la fila siguiente al vampiro:
+					if (PosXSlay == (posXVamp-1) && PosYSlay== posYVamp) {
+						//el vampiro no avanza, ataca
+						vampireList.getArrayVamp()[i].setAtaque(true);
+									
+						//el vampiro ataca
+						//el slayer pierde una vida
+						int vidaS = slayerList.getSlayer(j).getVida();
+						vidaS--;
+						slayerList.getSlayer(j).setVida(vidaS);
+						//si el vampiro mata al slayer, sigue avanzando
+						if (vidaS == 0) {
+							//para de atacar
+							vampireList.getArrayVamp()[i].setAtaque(false);
+						}
+					
+					}
 				}
 			}
 		}

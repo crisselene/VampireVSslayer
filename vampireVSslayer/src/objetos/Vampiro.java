@@ -83,7 +83,7 @@ public class Vampiro {
 					int posXv = arrayVamp[i].getPosx();
 					posXv--; //avanza hacia los negativos en el eje x
 					arrayVamp[i].setPosx(posXv);
-					arrayVamp[i].setCiclosAvance(0); //sus ciclos se reinician 
+					arrayVamp[i].setCiclosAvance(0); //sus ciclos se retardan 
 							
 				}
 				//si no avanza, el ciclo del vampiro aumenta

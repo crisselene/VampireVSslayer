@@ -20,7 +20,9 @@ public class Controller {
     }
     
     public void  printGame() {
-   	 System.out.println(game);
+    	//Descomentar lo de abajo cuando tengamos bien implementado el board, para no tener que cambiarlo cada dos por tres
+    	//System.out.println(game.infoPartida());
+    	System.out.println(game);
    }
     
     public void run() {
@@ -50,4 +52,3 @@ public class Controller {
     }
 
 }
-

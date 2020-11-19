@@ -1,12 +1,13 @@
-package control.Commands;
+package control.Command;
 
 public class CommandGenerator{
 
 	private static Command[] availableCommands = {
-		//new AddCommand(),
+		
 		new HelpCommand(),
+		new AddCommand(),
 		//new ResetCommand(),
-		//new ExitCommand(),
+		new ExitCommand(),
 		//new UpdateCommand()
 	};
 	

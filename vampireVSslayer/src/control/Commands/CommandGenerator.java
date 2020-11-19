@@ -4,7 +4,7 @@ public class CommandGenerator{
 
 	private static Command[] availableCommands = {
 		//new AddCommand(),
-		//new HelpCommand(),
+		new HelpCommand(),
 		//new ResetCommand(),
 		//new ExitCommand(),
 		//new UpdateCommand()
@@ -19,5 +19,15 @@ public class CommandGenerator{
 		
 		return null; //quiere decir que el comando es invalido
 	}
+	
+	
+	public static void recorrerArrayHelp() {
+		for (Command c: availableCommands) {
+			c.helpText();
+		}
+			
+		
+	}
+	
 	
 }

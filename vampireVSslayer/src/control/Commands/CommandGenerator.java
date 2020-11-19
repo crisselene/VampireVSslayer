@@ -3,10 +3,10 @@ package control.Commands;
 public class CommandGenerator{
 
 	private static Command[] availableCommands = {
-		//new AddCommand(),
+		new AddCommand(),
 		//new HelpCommand(),
 		//new ResetCommand(),
-		//new ExitCommand(),
+		new ExitCommand(),
 		//new UpdateCommand()
 	};
 	

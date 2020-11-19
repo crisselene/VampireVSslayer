@@ -28,6 +28,19 @@ public abstract class Command {
 		        this.name.equalsIgnoreCase(name);
 	  }
 	  
+	  protected Command parseParamsCommand(String[] words) {
+			
+			if (matchCommandName(words[0])) {
+				if (words.length > 3) {
+					System.err.println(incorrectArgsMsg);
+					return null;
+				}
+				return this;
+			}
+			
+			return null;
+	  }
+	  
 	  protected Command parseNoParamsCommand(String[] words) {
 	
 			if (matchCommandName(words[0])) {

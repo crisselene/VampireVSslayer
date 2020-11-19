@@ -11,35 +11,19 @@ public class Game {
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
+	private boolean userExit;
 	
 
 	public Game(Long seed, Level level) {
 		printer= new GamePrinter(this,level.getDimx(),level.getDimy());
 		this.level=level;
 		this.seed = seed;
+		userExit = false;
 	}
 	
-	public boolean isFinished(boolean salir, GameObjectBoard board, int numCiclos) {
-		if (salir) {
-			System.out.println("La partida ha terminado");
-			System.exit(0);
-			return true;
-		}
-		else if(VampireList.llegoAlFinal()) {
-			infoPartida(board, level, numCiclos - 1);
-			System.out.println(this);
-			System.out.println("GAME OVER");
-			System.exit(1);
-			return true;
-		}
-		else if(level.numberOfVampires() == VampireList.getVampSalidos() && VampireList.getLongitud() == 0) {
-			infoPartida(board, level, numCiclos - 1);
-			System.out.println(this);
-			System.out.println("ENHORABUENA, HAS MATADO A TODOS LOS VAMPIROS");
-			System.exit(2);
-			return true;
-		}
-		return false;
+	public boolean isFinished() {
+		//El return debe ser algo como vamp.llego() || vamp.noQuedan() || userExit
+		return userExit;
 	}
 	
 	public String toString() {
@@ -109,4 +93,18 @@ public class Game {
 		board.buscarSlayers();
 		VampireList.buscarVampiro();
 	}
+
+	public String getWinnerMessage() {
+		if(userExit) {
+			return "Bye";
+		}
+		else {
+			return "Los vampiros llegaron al final";
+		}
+	}
+	
+	public void doExit() {
+		userExit = true;
+	}
+
 }

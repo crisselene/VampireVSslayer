@@ -1,4 +1,4 @@
-package control.Command;
+package control.Commands;
 
 public class CommandGenerator{
 
@@ -8,7 +8,7 @@ public class CommandGenerator{
 		new AddCommand(),
 		//new ResetCommand(),
 		new ExitCommand(),
-		//new UpdateCommand()
+		new UpdateCommand()
 	};
 	
 	public static Command parse(String[ ] commandWords) {
@@ -24,7 +24,7 @@ public class CommandGenerator{
 	
 	public static void recorrerArrayHelp() {
 		for (Command c: availableCommands) {
-			c.helpText();
+			System.out.println(c.helpText());
 		}
 			
 		

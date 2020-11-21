@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 	
 	public boolean execute(Game game) {
 		game.doExit();
-		return false;
+		return true;
 	}
 
 	@Override

@@ -107,4 +107,9 @@ public class Game {
 		userExit = true;
 	}
 
+	public void addSlayer(int x, int y) {
+		
+		
+	}
+
 }

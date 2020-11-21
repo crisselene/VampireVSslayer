@@ -7,7 +7,7 @@ public class HelpCommand extends Command {
 	private static String name = "help";
 	private static String shortcut = "h";
 	private static String details = "[h]elp";
-	private static String help = "[h]elp: show this help";
+	private static String help = "show this help";
 	
 	
 	
@@ -23,10 +23,8 @@ public class HelpCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) {
-		if(commandWords[0].equals(name) || commandWords[0].equals(shortcut))
-			return this;
 		
-		return null;
+		return parseNoParamsCommand(commandWords);
 	}
 
 }

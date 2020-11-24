@@ -2,7 +2,7 @@ package logic;
 
 import objetos.Vampiro;
 
-public class VampireList {
+public class VampireList extends GameObject{
 
 	//array vacio
 	static Vampiro arrayVamp[];

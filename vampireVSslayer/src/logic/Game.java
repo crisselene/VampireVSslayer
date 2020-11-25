@@ -12,6 +12,7 @@ public class Game implements IPrintable {
 	private Level level;
 	private GamePrinter printer;
 	private GameObject gameObj;
+	private GameObjectList obList;
 	private boolean userExit;
 	
 
@@ -113,13 +114,19 @@ public class Game implements IPrintable {
 		
 	}
 
-	public void addVampire(Vampiro vampiro) {
-		vampiro.crearObject(vampiro);
+	public void addObject(GameObject objeto) {
+		obList.anadirObjeto(objeto);
+	}
 		
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void doReset() {
+		obList.resetList();
+		
 	}
 
 }

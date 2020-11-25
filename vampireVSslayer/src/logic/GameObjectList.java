@@ -8,4 +8,8 @@ public class GameObjectList {
 	public void anadirObjeto(GameObject ob) {
 		gameobjects.add(ob);
 	}
+	
+	public void resetList() {
+		gameobjects.clear();
+	}
 }

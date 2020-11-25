@@ -29,7 +29,7 @@ public class Vampiro extends GameObject {
 		this.posx = posx;
 		this.posy = posy;
 		//la vida de los vampiros siempre se incializa a 5 (se puede cambiar)
-		this.vida = 5;
+		this.setVida(5);
 		
 		//????? ciclos avance??? ****************
 		this.ciclosAvance = ciclosAvance;
@@ -66,16 +66,17 @@ public class Vampiro extends GameObject {
 	}
 
 	//getter y setter de vida
-	public int getVida() {
+	/*public int getVida() {
 		return vida;
 	}
 	public void setVida(int vida) {
 		this.vida = vida;
 	}
-
+*/
 
 	//Escribir el vampiro
 	public String toString() {
+		int vida = this.getVida();
 		return "V [" + vida + "]";
 	}
 
@@ -110,21 +111,20 @@ public class Vampiro extends GameObject {
 	public void attack() {
 		if (isAlive () ) {
 			//TODO: darle las coordenadas ddel que al que tiene que atacar
-			IAttack other = game.getAttackableInPosition(x-1, y);
+			/*IAttack other = game.getAttackableInPosition(x-1, y);
 			if (other != null )
 				other.receiveVampireAttack(HARM);
-			} 
+			} */
 		}
-
-	private boolean isAlive() {
-		if(vida!=0) return true;
-		else return false;
 	}
 
+	
+
 	//TODO: generar posx y posy para vampiro
-	@Override
+	/*@Override
 	public void crearObject(int posx, int posy) {
 		Vampiro v = new Vampiro(posy, posx, vida, ciclosAvance, ataque);
 		list.anadirObjeto(v);
-	}
+		}*/
+	
 }

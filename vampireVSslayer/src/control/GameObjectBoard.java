@@ -65,7 +65,7 @@ public class GameObjectBoard {
 	private void crearVampiro(int filaAleatoria, int longitudX) {
 		//se crea un vampiro en una fila aleatoria, en la ultima columna, con 5 vidas , los ciclos a 0 y sin atacar
 		Vampiro vampiro = new Vampiro(filaAleatoria, longitudX,5,0,false);
-		game.addVampire(vampiro);			
+		game.addObject(vampiro);			
 	}
 	
 	public Player getPlayer() {
@@ -101,7 +101,7 @@ public class GameObjectBoard {
 	
 	public void crearSlayer(int posx, int posy) {
 		Slayer slayer = new Slayer(posx, posy);
-		SlayerList.addSlayer(slayer);
+		game.addObject(slayer);
 	}
 
 	public void recibeMonedas(Random random) {

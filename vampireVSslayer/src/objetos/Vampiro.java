@@ -1,15 +1,18 @@
 package objetos;
 
+import logic.Game;
+import logic.GameObject;
+import logic.GameObject.IAttack;
 import logic.VampireList;
 
-public class Vampiro {
+public class Vampiro extends GameObject {
 
 	private int posx;
 	private int posy;
 	private int vida;
 	private int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	private boolean ataque; //variable que guarda si le toca atacar a un vampiro
-	//private Game game;
+	private Game game;
 	
 	
 	
@@ -98,5 +101,25 @@ public class Vampiro {
 				}
 		}
 		
+	}
+	
+	public void attack() {
+		if (isAlive () ) {
+			//IAttack other = game.getAttackableInPosition(x-1, y);
+			//if (other != null )
+				//other.receiveVampireAttack(HARM);
+			} 
+		}
+
+	private boolean isAlive() {
+		if(vida!=0) return true;
+		else return false;
+	}
+
+	//TODO: generar posx y posy para vampiro
+	@Override
+	public void crearObject(int posx, int posy) {
+		Vampiro v = new Vampiro(posy, posx, vida, ciclosAvance, ataque);
+		list.anadirObjeto(v);
 	}
 }

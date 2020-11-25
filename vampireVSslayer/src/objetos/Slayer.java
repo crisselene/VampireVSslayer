@@ -1,12 +1,16 @@
 
 package objetos;
 
-public class Slayer {
+import logic.GameObject;
+import logic.GameObjectList;
+
+public class Slayer extends GameObject{
 
 	public final static int DEFAULT_VIDA = 3;
 	private int posx;
 	private int posy;
 	private int vida;
+	//private GameObjectList list;
 	
 
 	public Slayer(int posx, int posy) { //Constructor solo con posx y posy
@@ -35,6 +39,13 @@ public class Slayer {
 	
 	public String toString() {
 		return "S ["+ vida +"]";
+	}
+	
+	//TODO: cuando se cree Slayer pasar  posx y posy a este método 
+	@Override
+	public void crearObject(int posx, int posy) {
+		Slayer s = new Slayer(posx, posy);
+		list.anadirObjeto(s);
 	}
 	
 }

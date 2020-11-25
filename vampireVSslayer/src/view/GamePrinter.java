@@ -5,7 +5,7 @@ import utils.MyStringUtils;
 
 public class GamePrinter {
 	
-	Game game;
+	IPrintable game;
 	int numRows; 
 	int numCols;
 	String[][] board;
@@ -17,7 +17,7 @@ public class GamePrinter {
 		this.numCols = cols;
 	}
 	
-	private void encodeGame(Game game) {
+	private void encodeGame(IPrintable game) {
 		board = new String[numRows][numCols];
 		for (int i=0; i<numRows; i++) {
 			for (int j=0; j<numCols; j++) {	

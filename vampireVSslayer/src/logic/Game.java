@@ -11,6 +11,7 @@ public class Game {
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
+	private GameObject gameObj;
 	private boolean userExit;
 	
 
@@ -109,6 +110,11 @@ public class Game {
 
 	public void addSlayer(int x, int y) {
 		
+		
+	}
+
+	public void addVampire(Vampiro vampiro) {
+		vampiro.crearObject(vampiro);
 		
 	}
 

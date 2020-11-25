@@ -1,6 +1,8 @@
 package control;
 
 import java.util.Random;
+
+import logic.Game;
 import logic.Level;
 import logic.SlayerList;
 import logic.VampireList;
@@ -14,6 +16,7 @@ public class GameObjectBoard {
 	
 	private Player player;
 	private SlayerList slayerlist;
+	private Game game;
 	
 	
 	public GameObjectBoard() {
@@ -62,7 +65,7 @@ public class GameObjectBoard {
 	private void crearVampiro(int filaAleatoria, int longitudX) {
 		//se crea un vampiro en una fila aleatoria, en la ultima columna, con 5 vidas , los ciclos a 0 y sin atacar
 		Vampiro vampiro = new Vampiro(filaAleatoria, longitudX,5,0,false);
-		VampireList.addVampire(vampiro);			
+		game.addVampire(vampiro);			
 	}
 	
 	public Player getPlayer() {

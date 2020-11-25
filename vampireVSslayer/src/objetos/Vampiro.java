@@ -9,7 +9,7 @@ public class Vampiro extends GameObject {
 
 	private int posx;
 	private int posy;
-	private int vida;
+	//private int vida;
 	private int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	private boolean ataque; //variable que guarda si le toca atacar a un vampiro
 	private Game game;
@@ -25,9 +25,13 @@ public class Vampiro extends GameObject {
 	 */
 	public Vampiro(int posy, int posx, int vida, int ciclosAvance,boolean ataque) {
 		super();
+		//vienen de la clase Object
 		this.posx = posx;
 		this.posy = posy;
-		this.vida = vida;
+		//la vida de los vampiros siempre se incializa a 5 (se puede cambiar)
+		this.vida = 5;
+		
+		//????? ciclos avance??? ****************
 		this.ciclosAvance = ciclosAvance;
 		this.ataque = ataque;
 	}
@@ -105,9 +109,10 @@ public class Vampiro extends GameObject {
 	
 	public void attack() {
 		if (isAlive () ) {
-			//IAttack other = game.getAttackableInPosition(x-1, y);
-			//if (other != null )
-				//other.receiveVampireAttack(HARM);
+			//TODO: darle las coordenadas ddel que al que tiene que atacar
+			IAttack other = game.getAttackableInPosition(x-1, y);
+			if (other != null )
+				other.receiveVampireAttack(HARM);
 			} 
 		}
 

@@ -1,12 +1,12 @@
 package logic;
 
 import java.util.Random;
-import control.Controller;
 import control.GameObjectBoard;
 import objetos.Vampiro;
 import view.GamePrinter;
+import view.IPrintable;
 
-public class Game {
+public class Game implements IPrintable {
 	
 	private long seed;
 	private Level level;
@@ -32,7 +32,7 @@ public class Game {
 
 	public String getPositionToString(int y, int x) {
 		//Si queremos un slayer
-		Vampiro arrayVamp[] = VampireList.getArrayVamp();
+		/*Vampiro arrayVamp[] = VampireList.getArrayVamp();
 		for (int i = 0 ; i < SlayerList.getNumSlayers() ; i++)
 		{
 			if (SlayerList.getSlayer(i).getPosx()== x && SlayerList.getSlayer(i).getPosy()== y) {
@@ -44,7 +44,7 @@ public class Game {
 			if (arrayVamp[i].getPosx() == x && arrayVamp[i].getPosy() == y) {
 				return arrayVamp[i].toString();
 			}
-		}
+		}*/
 		return " ";
 	}
 	public int getLevelDimX() {
@@ -110,6 +110,12 @@ public class Game {
 	public void addSlayer(int x, int y) {
 		
 		
+	}
+
+	@Override
+	public String getInfo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

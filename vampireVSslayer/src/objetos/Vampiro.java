@@ -144,7 +144,15 @@ public class Vampiro extends GameObject {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public boolean receiveSlayerAttack(int damage, int posy, int posx) {
+		if(this.posy==posy) {//Si estan en la misma fila
+			int vida = this.getVida();
+			vida--;
+			this.setVida(vida);
+		}
+		return false;
+	}
 
 	
 

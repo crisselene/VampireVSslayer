@@ -6,7 +6,7 @@ public class CommandGenerator{
 		
 		new HelpCommand(),
 		new AddCommand(),
-		//new ResetCommand(),
+		new ResetCommand(),
 		new ExitCommand(),
 		new UpdateCommand()
 	};

@@ -22,6 +22,21 @@ public abstract class GameObject implements IAttack{
 		return vida;
 	}
 
+	protected void setPosX(int posx) {
+		this.posx = posx;
+	}
+	
+	public int getposx() {
+		return posx;
+	}
+	
+	protected void setPosY(int posy) {
+		this.posy = posy;
+	}
+	
+	public int getposy() {
+		return posy;
+	}
 	
 	protected boolean isAlive() {
 		if(this.getVida()!=0) return true;

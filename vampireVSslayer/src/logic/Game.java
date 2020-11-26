@@ -13,8 +13,8 @@ public class Game implements IPrintable {
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
-	private GameObject gameObj;
 	private GameObjectList obList;
+	private GameObjectBoard board;
 	private boolean userExit;
 	private Player player;
 	private int ciclos;
@@ -28,6 +28,7 @@ public class Game implements IPrintable {
 		obList = new GameObjectList();
 		player = new Player();
 		ciclos = 0;
+		board = new GameObjectBoard();
 	}
 	
 	public boolean isFinished() {
@@ -54,7 +55,7 @@ public class Game implements IPrintable {
 	}
 
 	//Acutaliza toda la partida
-	public void actualizarPartida(GameObjectBoard  board, VampireList vampireList, Random random) {
+	/*public void actualizarPartida(GameObjectBoard  board, VampireList vampireList, Random random) {
 		//Vemos si el jugador recibe mondeas o no aleatoriamente
     	board.recibeMonedas(random);
     	//si hay vampiros, los vampiros avanzan
@@ -68,17 +69,17 @@ public class Game implements IPrintable {
 		board.reset();
 		VampireList.reset();		
 	}
-
+	
 	public void attack(GameObjectBoard board, VampireList vampireList, SlayerList slayerList) {
 		board.slayerAttack();
 		board.VampireAttack(vampireList, slayerList);
 	}
-
+	
 	public void buscarMuertos(GameObjectBoard board, VampireList vampireList) {
 		board.buscarSlayers();
 		VampireList.buscarVampiro();
 	}
-
+	*/
 	public String getWinnerMessage() {
 		if(userExit) {
 			return "Bye";
@@ -93,7 +94,7 @@ public class Game implements IPrintable {
 	}
 
 	public boolean addSlayer(int x, int y) {
-		if(player.tieneMonedas() && !obList.buscarObjeto(x, y)) {
+		if(player.tieneMonedas()) {
 			Slayer slayer = new Slayer(x, y);
 			addObject(slayer);
 			player.restarMonedas();
@@ -120,6 +121,7 @@ public class Game implements IPrintable {
 
 	public void update() {
 		ciclos ++;
+		obList.attack();
 	}
 
 }

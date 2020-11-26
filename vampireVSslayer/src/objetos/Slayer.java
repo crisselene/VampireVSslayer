@@ -3,10 +3,12 @@ package objetos;
 
 import logic.GameObject;
 import logic.GameObjectList;
+import logic.IAttack;
 
 public class Slayer extends GameObject{
 
 	public final static int DEFAULT_VIDA = 3;
+	private final static int ATAQUE = 1;
 	private int posx;
 	private int posy;
 	//private int vida;
@@ -40,9 +42,10 @@ public class Slayer extends GameObject{
 		return "S ["+ vida +"]";
 	}
 	@Override
-	public void attack() {
-		
-		
+	public void attack(IAttack other) {
+		//Solo atacamos si el otro esta en su misma fila
+		other.receiveSlayerAttack(ATAQUE, posy, posx);
+		System.out.println("He atacado");
 	}
 	
 }

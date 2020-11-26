@@ -3,6 +3,7 @@ package control;
 import java.util.Random;
 
 import logic.Game;
+import logic.GameObjectList;
 import logic.Level;
 import logic.SlayerList;
 import logic.VampireList;
@@ -17,6 +18,7 @@ public class GameObjectBoard {
 	private Player player;
 	private SlayerList slayerlist;
 	private Game game;
+	private GameObjectList obList;
 	
 	
 	public GameObjectBoard() {
@@ -25,11 +27,10 @@ public class GameObjectBoard {
 
 	public void addVampire(Level level,VampireList vampList, Random random) {
 		boolean anadido = false; //controlar que solo se cree un vampiro por ronda
-		//recojo el valor de la frecuencia de los vampiros 
+		
 		double levelFreq = level.getVampireFrequency();
-		//el numero de vampiros que se pueden crear
 		double numVamp = level.numberOfVampires();
-		//numero de vampiros en la partida
+		//numero de vampiros en la partida******************************
 		double nVampJuego = VampireList.getVampSalidos(); 
 		
 		//si el numero de vampiros en partida es menor del que se puede, intentamos crear uno
@@ -39,25 +40,26 @@ public class GameObjectBoard {
 			if (randomN <= levelFreq ) {
 				//se puede crear el vampiro, buscar fila aleatoria, dentro de la dimension y
 				int filaAleatoria = random.nextInt(level.getDimy()); 
+				int columna = (level.getDimx() - 1);
 			
-				//si no hay vampiros, se crea uno
-				if(VampireList.getLongitud() == 0) {
+				//si no hay vampiros, se crea uno*******************
+				/*if(VampireList.getLongitud() == 0) {
 					crearVampiro(filaAleatoria, level.getDimx() - 1);
 					anadido = true;
-				}else {
-					//si el vampiro se intenta poner sobre una casilla donde hay un vampiro, no se crea
+				}else {*/
+					//si el vampiro se intenta poner sobre una casilla donde hay un objeto, no se crea
 					if (!anadido) {
-						for (int i = 0; i < VampireList.getLongitud() ; i++) {
-							if(filaAleatoria != VampireList.getArrayVamp()[i].getPosy() && anadido== false) {
-								crearVampiro(filaAleatoria, level.getDimx() - 1);
+						boolean ocupado =  obList.buscarObjeto(filaAleatoria,columna);
+					//	for (int i = 0; i < VampireList.getLongitud() ; i++) {
+						//	if(filaAleatoria != VampireList.getArrayVamp()[i].getPosy() && anadido== false) {
+								crearVampiro(filaAleatoria, columna);
 								anadido = true;
 							} 
-					    }if (!anadido){
+					    if (!anadido){
 							System.out.println(NO_CREAR_VAMP + " porque se ha intentado meter en la fila " + filaAleatoria );
 							anadido = true;
 					    }
-					}		
-				}
+					//}		
 			}
 		}
 	}

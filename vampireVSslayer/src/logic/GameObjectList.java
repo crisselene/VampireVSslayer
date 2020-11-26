@@ -12,4 +12,13 @@ public class GameObjectList {
 	public void resetList() {
 		gameobjects.clear();
 	}
+
+	public boolean buscarObjeto(int filaAleatoria, int columna) {
+		boolean ocupado = false;
+		for (GameObject ob : gameobjects) {
+			if(ob.posx == columna && ob.posy == filaAleatoria) ocupado = true;
+		    else ocupado=false;
+		}
+		return ocupado;
+	}
 }

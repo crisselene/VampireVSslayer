@@ -2,7 +2,6 @@ package objetos;
 
 import logic.Game;
 import logic.GameObject;
-import logic.GameObject.IAttack;
 import logic.VampireList;
 
 public class Vampiro extends GameObject {

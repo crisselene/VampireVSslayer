@@ -9,11 +9,11 @@ public abstract class GameObject implements IAttack{
 	protected int posy;
 	
 	
-	protected void setVida(int vida) {
+	public void setVida(int vida) {
 		this.vida = vida;
 	}
 	
-	protected int getVida() {
+	public int getVida() {
 		return vida;
 	}
 

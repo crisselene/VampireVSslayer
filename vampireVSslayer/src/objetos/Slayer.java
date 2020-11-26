@@ -41,6 +41,11 @@ public class Slayer extends GameObject{
 		int vida = this.getVida();
 		return "S ["+ vida +"]";
 	}
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/*//TODO: cuando se cree Slayer pasar  posx y posy a este método 
 	@Override

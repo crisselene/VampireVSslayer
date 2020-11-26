@@ -17,6 +17,7 @@ public class Game implements IPrintable {
 	private GameObjectList obList;
 	private boolean userExit;
 	private Player player;
+	private int ciclos;
 	
 
 	public Game(Long seed, Level level) {
@@ -26,6 +27,7 @@ public class Game implements IPrintable {
 		userExit = false;
 		obList = new GameObjectList();
 		player = new Player();
+		ciclos = 0;
 	}
 	
 	public boolean isFinished() {
@@ -106,13 +108,18 @@ public class Game implements IPrintable {
 		
 	@Override
 	public String getInfo() {
-		String info = ("Monedas = " + player.getMonedas());
+		String info = ("Monedas = " + player.getMonedas() + "\n" +
+						"Ciclo : " + ciclos);
 		return info;
 	}
 
 	public void doReset() {
 		obList.resetList();
 		
+	}
+
+	public void update() {
+		ciclos ++;
 	}
 
 }

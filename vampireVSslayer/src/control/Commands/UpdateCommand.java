@@ -9,13 +9,17 @@ public class UpdateCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {		
+	public boolean execute(Game game) {
+		game.update();
 		return true;
 	}
 
 	@Override
 	public Command parse(String[] commandWords) {
-		
+		if(commandWords[0] == "")
+		{
+			return this;
+		}
 		return parseNoParamsCommand(commandWords);
 	}
 

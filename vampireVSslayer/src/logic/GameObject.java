@@ -54,6 +54,7 @@ public abstract class GameObject implements IAttack{
 		return false;
 	}
 	
+	public abstract void move();
 	
 	
 }

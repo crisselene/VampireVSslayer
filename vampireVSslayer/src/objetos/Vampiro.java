@@ -117,6 +117,18 @@ public class Vampiro extends GameObject {
 		
 	}
 	
+
+	@Override
+	public void move() {
+		
+		if(ciclosAvance!=1) {ciclosAvance++; System.out.println("no me toca moverme");}
+		else {
+			posx--;
+			ciclosAvance=0;
+			System.out.println("me muevo");
+		}
+	}
+	
 	public void attack() {
 		if (isAlive () ) {
 			//TODO: darle las coordenadas ddel que al que tiene que atacar
@@ -132,6 +144,7 @@ public class Vampiro extends GameObject {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	
 

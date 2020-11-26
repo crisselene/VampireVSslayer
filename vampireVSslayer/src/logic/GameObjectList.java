@@ -46,7 +46,12 @@ public class GameObjectList {
 					ob.attack(other);
 				}
 			}
+		}	
+	}
+	
+	public void move() {
+		for (GameObject gameObject : gameobjects) {
+			gameObject.move();
 		}
-		
 	}
 }

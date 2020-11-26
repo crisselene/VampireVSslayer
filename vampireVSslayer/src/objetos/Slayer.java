@@ -47,5 +47,8 @@ public class Slayer extends GameObject{
 		other.receiveSlayerAttack(ATAQUE, posy, posx);
 		System.out.println("He atacado");
 	}
+	@Override
+	public void move() { // los slayers no se mueven
+	}
 	
 }

@@ -18,6 +18,7 @@ public class Game implements IPrintable {
 	private boolean userExit;
 	private Player player;
 	private int ciclos;
+	private Random random;
 	
 
 	public Game(Long seed, Level level) {
@@ -123,11 +124,12 @@ public class Game implements IPrintable {
 		ciclos ++;
 		obList.attack();
 		this.crearVampiro();
+		obList.move();
 	}
 
 	private void crearVampiro() {
-		int filaAleatoria = 2;//TODO RANDOM
-		int columna = 4; //TODO LEVEL DIMX -1
+		int filaAleatoria = 4;//random.nextInt(level.getDimy()); *************************
+		int columna =(level.getDimx() - 1); //TODO LEVEL DIMX -1
 		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
 			Vampiro v = new Vampiro(filaAleatoria, columna);

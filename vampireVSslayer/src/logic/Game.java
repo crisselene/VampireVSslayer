@@ -122,6 +122,17 @@ public class Game implements IPrintable {
 	public void update() {
 		ciclos ++;
 		obList.attack();
+		this.crearVampiro();
+	}
+
+	private void crearVampiro() {
+		int filaAleatoria = 2;//TODO RANDOM
+		int columna = 4; //TODO LEVEL DIMX -1
+		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
+		if(!ocupado) {
+			Vampiro v = new Vampiro(filaAleatoria, columna);
+			this.addObject(v);
+		}
 	}
 
 }

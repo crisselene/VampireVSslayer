@@ -2,16 +2,21 @@ package objetos;
 
 import logic.Game;
 import logic.GameObject;
+import logic.IAttack;
 import logic.VampireList;
 
 public class Vampiro extends GameObject {
 
 	private int posx;
 	private int posy;
+	public final static int DEFAULT_VIDA = 5;
+	public final static int DEFAULT_CICLOS = 0;
+	public final static boolean DEFAULT_ATAQUE = false;
 	//private int vida;
 	private int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	private boolean ataque; //variable que guarda si le toca atacar a un vampiro
 	private Game game;
+	
 	
 	
 	
@@ -22,13 +27,18 @@ public class Vampiro extends GameObject {
 	 * @param ciclosAvance
 	 * @param ataque
 	 */
-	public Vampiro(int posy, int posx, int vida, int ciclosAvance,boolean ataque) {
-		super();
+	
+	public Vampiro(int posx,int posy) {
+		this(posx, posy, DEFAULT_VIDA,DEFAULT_CICLOS,DEFAULT_ATAQUE);
+	}
+	
+	public Vampiro(int posx, int posy, int vida, int ciclosAvance,boolean ataque) {
+		super(posx, posy, DEFAULT_VIDA);
 		//vienen de la clase Object
 		this.posx = posx;
 		this.posy = posy;
 		//la vida de los vampiros siempre se incializa a 5 (se puede cambiar)
-		this.setVida(5);
+		//this.setVida(5);
 		
 		//????? ciclos avance??? ****************
 		this.ciclosAvance = ciclosAvance;
@@ -115,6 +125,12 @@ public class Vampiro extends GameObject {
 				other.receiveVampireAttack(HARM);
 			} */
 		}
+	}
+
+	@Override
+	public void attack(IAttack other) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

@@ -7,8 +7,13 @@ public abstract class GameObject implements IAttack{
 	private int vida;
 	protected int posx;
 	protected int posy;
-	
-	
+		
+	public GameObject(int posx, int posy, int vida) {
+		this.posx = posx;
+		this.posy = posy;
+		this.vida=vida;
+	}
+
 	protected void setVida(int vida) {
 		this.vida = vida;
 	}
@@ -26,6 +31,13 @@ public abstract class GameObject implements IAttack{
 
 	//constante de cuanto daño hace el objeto
 	protected static int HARM;
+
+	public boolean coincidesPosiciones(int x, int y) {
+		if (posx == x && posy == y) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 	

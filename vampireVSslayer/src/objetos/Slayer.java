@@ -17,9 +17,7 @@ public class Slayer extends GameObject{
 		this(posx, posy, DEFAULT_VIDA);
 	}
 	public Slayer(int posx, int posy, int vida) { //Constructor completo
-		this.posx = posx;
-		this.posy = posy;
-		this.setVida(3);
+		super(posx, posy, vida);
 	}
 	
 	public int getPosx() {
@@ -40,6 +38,11 @@ public class Slayer extends GameObject{
 	public String toString() {
 		int vida = this.getVida();
 		return "S ["+ vida +"]";
+	}
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/*//TODO: cuando se cree Slayer pasar  posx y posy a este método 

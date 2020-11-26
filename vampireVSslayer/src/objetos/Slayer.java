@@ -44,8 +44,10 @@ public class Slayer extends GameObject{
 	@Override
 	public void attack(IAttack other) {
 		//Solo atacamos si el otro esta en su misma fila
-		other.receiveSlayerAttack(ATAQUE, posy, posx);
-		System.out.println("He atacado");
+		if(isAlive()) {
+			other.receiveSlayerAttack(ATAQUE, posy, posx);
+			System.out.println("He atacado");
+		}
 	}
 	@Override
 	public void move() { // los slayers no se mueven

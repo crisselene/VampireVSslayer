@@ -16,7 +16,7 @@ public class UpdateCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) {
-		if(commandWords[0] == "")
+		if(commandWords[0] == "" || commandWords.length == 0)
 		{
 			return this;
 		}

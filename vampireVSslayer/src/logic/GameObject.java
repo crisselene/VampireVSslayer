@@ -26,7 +26,7 @@ public abstract class GameObject implements IAttack{
 		this.posx = posx;
 	}
 	
-	public int getposx() {
+	protected int getposx() {
 		return posx;
 	}
 	

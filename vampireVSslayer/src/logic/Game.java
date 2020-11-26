@@ -130,10 +130,10 @@ public class Game implements IPrintable {
 
 	private void crearVampiro() {
 		int filaAleatoria = random.nextInt(level.getDimy());
-		int columna =(level.getDimx() - 1); //TODO LEVEL DIMX -1
+		int columna = (level.getDimx() - 1); //TODO LEVEL DIMX -1
 		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
-			Vampiro v = new Vampiro(filaAleatoria, columna);
+			Vampiro v = new Vampiro(columna, filaAleatoria);
 			this.addObject(v);
 		}
 	}

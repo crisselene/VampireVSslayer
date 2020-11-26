@@ -44,14 +44,7 @@ public class Vampiro extends GameObject {
 		this.ciclosAvance = ciclosAvance;
 		this.ataque = ataque;
 	}
-	
-	//getter y setter pos x
-	public int getPosx() {
-		return posx;
-	}
-	public void setPosx(int posx) {
-		this.posx = posx;
-	}
+
 
 	//set para cambiar el vampiro a atacar(true) o no atacar (false)
 	public void setAtaque(boolean ataque) {
@@ -90,7 +83,7 @@ public class Vampiro extends GameObject {
 	}
 
 	//Metodo que avanza al vampiro
-	public static void avanza(VampireList vampireList) {
+	/*public static void avanza(VampireList vampireList) {
 	//recorro el array de vampiros y compruebo si alguno tiene los ciclos a 2, 
 		//entonces le tocará avanzar
 		Vampiro[] arrayVamp = vampireList.getArrayVamp();
@@ -116,7 +109,7 @@ public class Vampiro extends GameObject {
 		}
 		
 	}
-	
+	*/
 
 	@Override
 	public void move() {
@@ -124,6 +117,7 @@ public class Vampiro extends GameObject {
 		if(ciclosAvance!=1) {ciclosAvance++; System.out.println("no me toca moverme");}
 		else {
 			posx--;
+			this.setPosX(posx); 
 			ciclosAvance=0;
 			System.out.println("me muevo");
 		}

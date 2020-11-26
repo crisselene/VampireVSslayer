@@ -2,6 +2,7 @@ package logic;
 
 import java.util.Random;
 import control.GameObjectBoard;
+import objetos.Slayer;
 import objetos.Vampiro;
 import view.GamePrinter;
 import view.IPrintable;
@@ -21,6 +22,7 @@ public class Game implements IPrintable {
 		this.level=level;
 		this.seed = seed;
 		userExit = false;
+		obList = new GameObjectList();
 	}
 	
 	public boolean isFinished() {
@@ -32,22 +34,8 @@ public class Game implements IPrintable {
 		return printer.toString();
 	}
 
-	public String getPositionToString(int y, int x) {
-		//Si queremos un slayer
-		/*Vampiro arrayVamp[] = VampireList.getArrayVamp();
-		for (int i = 0 ; i < SlayerList.getNumSlayers() ; i++)
-		{
-			if (SlayerList.getSlayer(i).getPosx()== x && SlayerList.getSlayer(i).getPosy()== y) {
-				return SlayerList.getSlayer(i).toString();
-			}
-		}
-		for (int i = 0 ; i < VampireList.getLongitud() ; i++)
-		{
-			if (arrayVamp[i].getPosx() == x && arrayVamp[i].getPosy() == y) {
-				return arrayVamp[i].toString();
-			}
-		}*/
-		return " ";
+	public String getPositionToString(int x, int y) {
+		return obList.toString(x, y);
 	}
 	public int getLevelDimX() {
 		return level.getDimx();
@@ -68,16 +56,6 @@ public class Game implements IPrintable {
     	if(VampireList.getLongitud()!=0) {
     	Vampiro.avanza(vampireList);    	
     	}
-	}
-	
-
-	public void infoPartida(GameObjectBoard board,Level level, int numCiclos) {
-		//Mostramos todda la info necesaria
-		System.out.println("Number of cycles: " + numCiclos +"\n"
-						+ "Coins: " + board.getMonedas() + "\n"
-						//números de vampiros restantes, son los que faltan por meter en el array (casteado a int)
-						+ "Remaining vampires: " + (int)(level.numberOfVampires() - VampireList.getVampSalidos())+ "\n"
-						+ "Vampires on the board: " + VampireList.getLongitud());
 	}
 	
 	//resetea la partida
@@ -110,8 +88,8 @@ public class Game implements IPrintable {
 	}
 
 	public void addSlayer(int x, int y) {
-		
-		
+		Slayer slayer = new Slayer(x, y);
+		addObject(slayer);
 	}
 
 	public void addObject(GameObject objeto) {
@@ -120,7 +98,7 @@ public class Game implements IPrintable {
 		
 	@Override
 	public String getInfo() {
-		// TODO Auto-generated method stub
+		//Mostramos todda la info necesaria, hay que añadir aqui los saltos de linea antes del tablero
 		return null;
 	}
 

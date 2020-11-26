@@ -17,9 +17,7 @@ public class Slayer extends GameObject{
 		this(posx, posy, DEFAULT_VIDA);
 	}
 	public Slayer(int posx, int posy, int vida) { //Constructor completo
-		this.posx = posx;
-		this.posy = posy;
-		this.setVida(3);
+		super(posx, posy, vida);
 	}
 	
 	public int getPosx() {

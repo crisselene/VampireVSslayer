@@ -15,6 +15,7 @@ public class AddCommand extends Command {
 	public boolean execute(Game game) {
 		// Añadiriamos slayer, pero tenemos que crear las nuevas listas
 		System.out.println("Añadimos slayer en la pos : " + x + "  -  " + y);
+		game.update();
 		return game.addSlayer(x, y);
 	}
 

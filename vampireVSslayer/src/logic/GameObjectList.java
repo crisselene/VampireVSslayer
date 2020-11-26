@@ -17,13 +17,15 @@ public class GameObjectList {
 		gameobjects.clear();
 	}
 
-	public boolean buscarObjeto(int filaAleatoria, int columna) {
+	public boolean buscarObjeto(int fila, int columna) {
 		boolean ocupado = false;
 		for (GameObject ob : gameobjects) {
-			if(ob.posx == columna && ob.posy == filaAleatoria) ocupado = true;
+			if(ob.posx == columna && ob.posy == fila) ocupado = true;
 		    else ocupado=false;
 		}
 		return ocupado;
+	}
+	
 	public String toString(int x, int y) {
 		for(GameObject ob: gameobjects) {
 			if(ob.coincidesPosiciones(x,y)) {

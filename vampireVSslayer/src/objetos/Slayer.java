@@ -41,15 +41,8 @@ public class Slayer extends GameObject{
 	}
 	@Override
 	public void attack() {
-		// TODO Auto-generated method stub
+		
 		
 	}
-	
-	/*//TODO: cuando se cree Slayer pasar  posx y posy a este método 
-	@Override
-	public void crearObject(int posx, int posy) {
-		Slayer s = new Slayer(posx, posy);
-		list.anadirObjeto(s);
-	}*/
 	
 }

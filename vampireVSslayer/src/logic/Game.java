@@ -2,6 +2,7 @@ package logic;
 
 import java.util.Random;
 import control.GameObjectBoard;
+import objetos.Player;
 import objetos.Slayer;
 import objetos.Vampiro;
 import view.GamePrinter;
@@ -15,6 +16,7 @@ public class Game implements IPrintable {
 	private GameObject gameObj;
 	private GameObjectList obList;
 	private boolean userExit;
+	private Player player;
 	
 
 	public Game(Long seed, Level level) {
@@ -23,6 +25,7 @@ public class Game implements IPrintable {
 		this.seed = seed;
 		userExit = false;
 		obList = new GameObjectList();
+		player = new Player();
 	}
 	
 	public boolean isFinished() {
@@ -87,9 +90,14 @@ public class Game implements IPrintable {
 		userExit = true;
 	}
 
-	public void addSlayer(int x, int y) {
-		Slayer slayer = new Slayer(x, y);
-		addObject(slayer);
+	public boolean addSlayer(int x, int y) {
+		if(player.tieneMonedas() && !obList.buscarObjeto(x, y)) {
+			Slayer slayer = new Slayer(x, y);
+			addObject(slayer);
+			player.restarMonedas();
+			return true;
+		}
+		return false;
 	}
 
 	public void addObject(GameObject objeto) {
@@ -98,8 +106,8 @@ public class Game implements IPrintable {
 		
 	@Override
 	public String getInfo() {
-		//Mostramos todda la info necesaria, hay que añadir aqui los saltos de linea antes del tablero
-		return null;
+		String info = ("Monedas = " + player.getMonedas());
+		return info;
 	}
 
 	public void doReset() {

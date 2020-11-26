@@ -5,6 +5,7 @@ import java.util.Random;
 public class Player {
 	
 	public static final int DEFAULT_MONEDAS = 50;
+	public static final int COSTE_SLAYER = 50;
 	private int monedas;
 	
 	public Player() {
@@ -22,5 +23,15 @@ public class Player {
 		if (ganaMonedas >= 0.5) {
 			monedas += 10;
 		}
+	}
+
+	public boolean tieneMonedas() {
+		if (monedas >= 50) return true;
+		return false;
+	}
+
+	public void restarMonedas() {
+		monedas = monedas - COSTE_SLAYER;
+		
 	}
 }

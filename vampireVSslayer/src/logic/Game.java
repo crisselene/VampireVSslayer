@@ -30,6 +30,7 @@ public class Game implements IPrintable {
 		player = new Player();
 		ciclos = 0;
 		board = new GameObjectBoard();
+		random = new Random(seed);
 	}
 	
 	public boolean isFinished() {
@@ -128,7 +129,7 @@ public class Game implements IPrintable {
 	}
 
 	private void crearVampiro() {
-		int filaAleatoria = 4;//random.nextInt(level.getDimy()); *************************
+		int filaAleatoria = random.nextInt(level.getDimy());
 		int columna =(level.getDimx() - 1); //TODO LEVEL DIMX -1
 		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {

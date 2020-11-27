@@ -12,7 +12,6 @@ public class Game implements IPrintable {
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
-	private GameObjectList obList;
 	private GameObjectBoard board;
 	private boolean userExit;
 	private Player player;
@@ -25,10 +24,9 @@ public class Game implements IPrintable {
 		this.level=level;
 		this.seed = seed;
 		userExit = false;
-		obList = new GameObjectList();
 		player = new Player();
 		ciclos = 0;
-		board = new GameObjectBoard(level,obList);
+		board = new GameObjectBoard(level);
 		random = new Random(seed);
 	}
 	
@@ -42,7 +40,7 @@ public class Game implements IPrintable {
 	}
 
 	public String getPositionToString(int x, int y) {
-		return obList.toString(x, y);
+		return board.toString(x, y);
 	}
 	public int getLevelDimX() {
 		return level.getDimx();
@@ -97,15 +95,24 @@ public class Game implements IPrintable {
 	public boolean addSlayer(int x, int y) {
 		if(player.tieneMonedas()) {
 			Slayer slayer = new Slayer(x, y);
-			if(board.addSlayer(slayer, y, x)) {
-				return true;
-			}else {//Algun objeto en esa posición
-				System.out.println("Esa fila esta ocupada");
+			
+			if(board.dentroTablero(y, x)) {
+				
+				if(board.addSlayer(slayer, y, x)) {
+					player.restarMonedas();
+					return true;
+				}else {//Algun objeto en esa posición
+					System.out.println("Esa posicion esta ocupada");
+					return false;
+				}
+			}
+			else {//Fuera del tablero
+				System.out.println("Invalid position");
 				return false;
 			}
 			
 		}else {//No tiene monedas
-			System.out.println("Esa fila esta ocupada");
+			System.out.println("No tienes monedas suficientes");
 			return false;
 		}		
 	}
@@ -117,22 +124,24 @@ public class Game implements IPrintable {
 		
 	@Override
 	public String getInfo() {
-		String info = ("Monedas = " + player.getMonedas() + "\n" +
-						"Ciclo : " + ciclos);
+		String info = ("Ciclo : " + ciclos + "\n" +
+						"Coins : " + player.getMonedas() + "\n" );
 		return info;
 	}
 
 	public void doReset() {
-		obList.resetList();
-		
+		board = new GameObjectBoard(level);
+		ciclos = 0;
+		player = new Player();
 	}
 
 	public void update() {
 		ciclos ++;
-		obList.attack();
+		board.attack();
 		this.crearVampiro();
-		obList.move();
-		board.attack();//********************TODO ATTACK
+		
+		//board.attack();//********************TODO ATTACK
+		board.move();
 		player.ganaMonedas(random.nextFloat());
 	}
 

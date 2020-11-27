@@ -8,9 +8,9 @@ public class GameObjectBoard {
 	private Level level;
 	private GameObjectList obList;
 
-	public GameObjectBoard(Level level,GameObjectList obList) {
+	public GameObjectBoard(Level level) {
 		this.level = level; 
-		this.obList = obList;
+		obList = new GameObjectList();
 	}
 	
 	public void addVampire(GameObject obj,int filaAleatoria, int columna, Random random) {
@@ -64,8 +64,23 @@ public class GameObjectBoard {
 		
 	}
 
+	public boolean dentroTablero(int fila, int columna) {
+		if(fila < level.getDimy() && columna < level.getDimx() - 1 &&
+				fila >= 0 && columna >= 0) return true;
+		return false;
+	}
+
 	public void attack() {
-		obList.attack(); //TODO ATTACKKKKK****************************
+		obList.attack();
 		
+	}
+
+	public void move() {
+		obList.move();
+		
+	}
+
+	public String toString(int x, int y) {
+		return obList.toString(x, y);
 	}
 }

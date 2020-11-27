@@ -32,7 +32,7 @@ public class AddCommand extends Command {
 			//Retornamos dependiendo de los argumentos que habia en el parse
 			return parseParamsCommand(commandWords);
 		}
-		else return null;
+		else return parseNoParamsCommand(commandWords);
 		
 	}
 	

@@ -1,7 +1,6 @@
 package logic;
 
 import java.util.Random;
-import control.GameObjectBoard;
 import objetos.Player;
 import objetos.Slayer;
 import objetos.Vampiro;
@@ -29,7 +28,7 @@ public class Game implements IPrintable {
 		obList = new GameObjectList();
 		player = new Player();
 		ciclos = 0;
-		board = new GameObjectBoard(seed,level,obList);
+		board = new GameObjectBoard(level,obList);
 		random = new Random(seed);
 	}
 	
@@ -98,11 +97,17 @@ public class Game implements IPrintable {
 	public boolean addSlayer(int x, int y) {
 		if(player.tieneMonedas()) {
 			Slayer slayer = new Slayer(x, y);
-			board.addObject(slayer);
-			player.restarMonedas();
-			return true;
-		}
-		return false;
+			if(board.addSlayer(slayer, y, x)) {
+				return true;
+			}else {//Algun objeto en esa posición
+				System.out.println("Esa fila esta ocupada");
+				return false;
+			}
+			
+		}else {//No tiene monedas
+			System.out.println("Esa fila esta ocupada");
+			return false;
+		}		
 	}
 
 	//TODO:pasarlo a board
@@ -127,13 +132,14 @@ public class Game implements IPrintable {
 		obList.attack();
 		this.crearVampiro();
 		obList.move();
+		player.ganaMonedas(random.nextFloat());
 	}
 
 	private void crearVampiro() {
 		int filaAleatoria = random.nextInt(level.getDimy());
 		int columna = (level.getDimx() - 1);
 		Vampiro v = new Vampiro(columna, filaAleatoria);
-		board.addVampire(v,filaAleatoria,columna);
+		board.addVampire(v,filaAleatoria,columna, random);
 		/*boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
 			Vampiro v = new Vampiro(columna, filaAleatoria);

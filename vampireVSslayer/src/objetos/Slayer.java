@@ -49,8 +49,17 @@ public class Slayer extends GameObject{
 			System.out.println("He atacado");
 		}
 	}
+	
+	//métodos en los que los slayers no actuan:
 	@Override
 	public void move() { // los slayers no se mueven
 	}
+	@Override
+	public int contarVamp(int contV) {
+		// no se cuenta porque no es vampiro
+		return contV;
+	}
+	@Override
+	public boolean noHayVenLafila(boolean crear,int fila) {return crear;}
 	
 }

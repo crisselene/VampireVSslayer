@@ -29,7 +29,7 @@ public class Game implements IPrintable {
 		obList = new GameObjectList();
 		player = new Player();
 		ciclos = 0;
-		board = new GameObjectBoard();
+		board = new GameObjectBoard(seed,level,obList);
 		random = new Random(seed);
 	}
 	
@@ -98,16 +98,17 @@ public class Game implements IPrintable {
 	public boolean addSlayer(int x, int y) {
 		if(player.tieneMonedas()) {
 			Slayer slayer = new Slayer(x, y);
-			addObject(slayer);
+			board.addObject(slayer);
 			player.restarMonedas();
 			return true;
 		}
 		return false;
 	}
 
-	public void addObject(GameObject objeto) {
+	//TODO:pasarlo a board
+	/*public void addObject(GameObject objeto) {
 		obList.anadirObjeto(objeto);
-	}
+	}*/
 		
 	@Override
 	public String getInfo() {
@@ -130,12 +131,17 @@ public class Game implements IPrintable {
 
 	private void crearVampiro() {
 		int filaAleatoria = random.nextInt(level.getDimy());
-		int columna = (level.getDimx() - 1); //TODO LEVEL DIMX -1
-		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
+		int columna = (level.getDimx() - 1);
+		Vampiro v = new Vampiro(columna, filaAleatoria);
+		board.addVampire(v,filaAleatoria,columna);
+		/*boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
 			Vampiro v = new Vampiro(columna, filaAleatoria);
-			this.addObject(v);
-		}
+			boolean crear = board.frecuenciaLimiteVamps();
+			if(crear) {
+				this.addObject(v);System.out.println("se crea vamp");
+			}else System.out.println("NO se crea Vamp");
+		}*/
 	}
 
 }

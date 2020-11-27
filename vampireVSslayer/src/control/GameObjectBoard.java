@@ -3,6 +3,7 @@ package control;
 import java.util.Random;
 
 import logic.Game;
+import logic.GameObject;
 import logic.GameObjectList;
 import logic.Level;
 import logic.SlayerList;
@@ -19,13 +20,18 @@ public class GameObjectBoard {
 	private SlayerList slayerlist;
 	private Game game;
 	private GameObjectList obList;
+	private Level level;
+	private Random random; 
 	
 	
-	public GameObjectBoard() {
+	public GameObjectBoard(Long seed,Level level,GameObjectList obList) {
 		this.player=new Player();
+		random = new Random(seed);
+		this.level = level; 
+		this.obList = obList;
 	}
 
-	public void addVampire(Level level,VampireList vampList, Random random) {
+	/*public void addVampire(Level level,VampireList vampList, Random random) {
 		boolean anadido = false; //controlar que solo se cree un vampiro por ronda
 		
 		double levelFreq = level.getVampireFrequency();
@@ -43,10 +49,10 @@ public class GameObjectBoard {
 				int columna = (level.getDimx() - 1);
 			
 				//si no hay vampiros, se crea uno*******************
-				/*if(VampireList.getLongitud() == 0) {
+				if(VampireList.getLongitud() == 0) {
 					crearVampiro(filaAleatoria, level.getDimx() - 1);
 					anadido = true;
-				}else {*/
+				}else {
 					//si el vampiro se intenta poner sobre una casilla donde hay un objeto, no se crea
 					if (!anadido) {
 						boolean ocupado =  obList.buscarObjeto(filaAleatoria,columna);
@@ -62,7 +68,7 @@ public class GameObjectBoard {
 					//}		
 			}
 		}
-	}
+	}*/
 		
 	private void crearVampiro(int filaAleatoria, int longitudX) {
 		//se crea un vampiro en una fila aleatoria, en la ultima columna, con 5 vidas , los ciclos a 0 y sin atacar
@@ -164,6 +170,8 @@ public class GameObjectBoard {
 		
 	}
 	
+	
+	
 	//si delante de un vampiro hay un slayer, le quita una vida y no avanza
 	public void VampireAttack(VampireList vampireList, SlayerList slayerList) {
 		//variable que controla si un vampiro ataca o no
@@ -200,4 +208,39 @@ public class GameObjectBoard {
 		}
 	}
 	
+	public void addVampire(GameObject obj,int filaAleatoria, int columna ) {
+		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
+		if(!ocupado) {
+			boolean crear = this.frecuenciaLimiteVamps();
+			boolean filaOcupada = this.noHayVenLafila(filaAleatoria); //FILAAAA****
+			if(crear) {
+				if(!filaOcupada) {
+					this.addObject(obj);System.out.println("se crea vamp");
+				}else System.out.println("NO se crea Vamp");
+			}else System.out.println("NO se crea Vamp");
+		}
+	}
+
+	//comprueba que no haya vampiros en la fila (no puede haber dos vampiros en la misma fila)
+	private boolean noHayVenLafila(int fila) {
+		boolean crear = obList.noHayVenLafila(fila);
+		return crear;
+	}
+
+	public void addObject(GameObject obj) {
+		obList.anadirObjeto(obj);
+		
+	}
+
+	public boolean frecuenciaLimiteVamps() {
+		boolean crear=false;
+		double levelFreq = level.getVampireFrequency();
+		double numVamp = level.numberOfVampires();
+		double randomN = random.nextDouble();
+		int nVampJuego = obList.contarVamp();
+		
+		if(nVampJuego<numVamp) 
+			if (randomN <= levelFreq ) crear= true;
+		return crear;
+	}
 }

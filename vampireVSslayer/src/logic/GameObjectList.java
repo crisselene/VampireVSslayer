@@ -54,4 +54,20 @@ public class GameObjectList {
 			gameObject.move();
 		}
 	}
+
+	public int contarVamp() {
+		int contV=0;
+		for (GameObject gameObject : gameobjects) {
+			gameObject.contarVamp(contV);
+		}
+		return contV;
+	}
+
+	public boolean noHayVenLafila(int fila) {
+		boolean crear = false;
+		for (GameObject gameObject : gameobjects) {
+			 crear = gameObject.noHayVenLafila(crear,fila);
+		}
+		return crear;
+	}
 }

@@ -148,6 +148,19 @@ public class Vampiro extends GameObject {
 		return false;
 	}
 
+	@Override
+	public int contarVamp(int contV) {
+		contV++;
+		return contV;
+	}
+
+	@Override
+	public boolean noHayVenLafila(boolean crear, int fila) {
+		if (this.posy==fila) return false;
+		else return true;
+		
+	}
+
 	
 
 	//TODO: generar posx y posy para vampiro

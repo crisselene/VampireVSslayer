@@ -149,9 +149,8 @@ public class Vampiro extends GameObject {
 	}
 
 	@Override
-	public int contarVamp(int contV) {
-		contV++;
-		return contV;
+	public boolean contarVamp() {
+		return true;
 	}
 
 	@Override

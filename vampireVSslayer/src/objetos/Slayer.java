@@ -55,11 +55,11 @@ public class Slayer extends GameObject{
 	public void move() { // los slayers no se mueven
 	}
 	@Override
-	public int contarVamp(int contV) {
+	public boolean contarVamp() {
 		// no se cuenta porque no es vampiro
-		return contV;
+		return false;
 	}
 	@Override
-	public boolean noHayVenLafila(boolean crear,int fila) {return crear;}
+	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}
 	
 }

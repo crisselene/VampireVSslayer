@@ -57,17 +57,23 @@ public class GameObjectList {
 
 	public int contarVamp() {
 		int contV=0;
+		boolean cont = false;
 		for (GameObject gameObject : gameobjects) {
-			gameObject.contarVamp(contV);
+			cont = gameObject.contarVamp();
+			if(cont) contV++; cont=false;
 		}
 		return contV;
 	}
 
 	public boolean noHayVenLafila(int fila) {
-		boolean crear = false;
+		boolean filaLibre = true;
 		for (GameObject gameObject : gameobjects) {
-			 crear = gameObject.noHayVenLafila(crear,fila);
+			 filaLibre = gameObject.noHayVenLafila(filaLibre,fila);
+			 if(!filaLibre) {
+				 System.out.println("la fila " + fila + " no está libre");
+				 return filaLibre;
+			 }
 		}
-		return crear;
+		return filaLibre;
 	}
 }

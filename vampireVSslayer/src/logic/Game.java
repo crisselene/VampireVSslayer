@@ -132,6 +132,7 @@ public class Game implements IPrintable {
 		obList.attack();
 		this.crearVampiro();
 		obList.move();
+		board.attack();//********************TODO ATTACK
 		player.ganaMonedas(random.nextFloat());
 	}
 
@@ -148,6 +149,12 @@ public class Game implements IPrintable {
 				this.addObject(v);System.out.println("se crea vamp");
 			}else System.out.println("NO se crea Vamp");
 		}*/
+	}
+
+	public IAttack getAttackableInPosition(int posx, int posy) {
+		GameObject obj;
+		obj = board.getAttackableInPosition(posx,  posy);
+		return obj;
 	}
 
 }

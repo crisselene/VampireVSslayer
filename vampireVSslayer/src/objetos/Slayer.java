@@ -5,7 +5,7 @@ import logic.GameObject;
 import logic.GameObjectList;
 import logic.IAttack;
 
-public class Slayer extends GameObject{
+public class Slayer extends GameObject implements IAttack{
 
 	public final static int DEFAULT_VIDA = 3;
 	private final static int ATAQUE = 1;
@@ -50,6 +50,20 @@ public class Slayer extends GameObject{
 		}
 	}
 	
+	//ATACAR NO ES ASI?? 
+	@Override
+	public void attackP() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public boolean receiveVampireAttack(int harm) {
+		int vida= this.getVida();
+		vida = vida - harm;
+		this.setVida(vida);
+		return false;
+	}
+	
 	//métodos en los que los slayers no actuan:
 	@Override
 	public void move() { // los slayers no se mueven
@@ -61,5 +75,6 @@ public class Slayer extends GameObject{
 	}
 	@Override
 	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}
+	
 	
 }

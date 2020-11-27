@@ -17,9 +17,9 @@ public class GameObjectBoard {
 		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
 			boolean crear = this.frecuenciaLimiteVamps(random);
-			boolean filaOcupada = this.noHayVenLafila(filaAleatoria); //FILAAAA****
+			boolean filaLibre = this.noHayVenLafila(filaAleatoria); //FILAAAA****
 			if(crear) {
-				if(!filaOcupada) {
+				if(filaLibre) {
 					this.addObject(obj);System.out.println("se crea vamp");
 				}else System.out.println("NO se crea Vamp");
 			}else System.out.println("NO se crea Vamp");
@@ -28,8 +28,8 @@ public class GameObjectBoard {
 
 	//comprueba que no haya vampiros en la fila (no puede haber dos vampiros en la misma fila)
 	private boolean noHayVenLafila(int fila) {
-		boolean crear = obList.noHayVenLafila(fila);
-		return crear;
+		boolean filaLibre = obList.noHayVenLafila(fila);
+		return filaLibre;
 	}
 
 	public void addObject(GameObject obj) {
@@ -55,5 +55,17 @@ public class GameObjectBoard {
 			return true;
 		}
 		return false;
+	}
+
+	public GameObject getAttackableInPosition(int posx, int posy) {
+		GameObject object;
+		object = obList.getAttackableInPosition(posx,posy);
+		return object;
+		
+	}
+
+	public void attack() {
+		obList.attack(); //TODO ATTACKKKKK****************************
+		
 	}
 }

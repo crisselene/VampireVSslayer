@@ -5,7 +5,7 @@ import logic.GameObject;
 import logic.IAttack;
 import logic.VampireList;
 
-public class Vampiro extends GameObject {
+public class Vampiro extends GameObject implements IAttack{
 
 	private int posx;
 	private int posy;
@@ -123,21 +123,24 @@ public class Vampiro extends GameObject {
 		}
 	}
 	
-	public void attack() {
+
+	@Override
+	public void attackP() {
 		if (isAlive () ) {
-			//TODO: darle las coordenadas ddel que al que tiene que atacar
-			/*IAttack other = game.getAttackableInPosition(x-1, y);
+			IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
 			if (other != null )
 				other.receiveVampireAttack(HARM);
-			} */
-		}
+		} 
 	}
+	
 
 	@Override
 	public void attack(IAttack other) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 	
 	public boolean receiveSlayerAttack(int damage, int posy, int posx) {
 		if(this.posy==posy) {//Si estan en la misma fila
@@ -159,6 +162,8 @@ public class Vampiro extends GameObject {
 		else return true;
 		
 	}
+
+
 
 	
 

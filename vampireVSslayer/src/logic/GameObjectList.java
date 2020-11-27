@@ -76,4 +76,15 @@ public class GameObjectList {
 		}
 		return filaLibre;
 	}
+
+	public GameObject getAttackableInPosition(int posx, int posy) {
+		for (GameObject gameObject : gameobjects) {
+			if(gameObject.getposx()==posx && gameObject.getposy()== posy) {
+				return gameObject;
+			}
+		}
+		return null;
+		
+	}
+		
 }

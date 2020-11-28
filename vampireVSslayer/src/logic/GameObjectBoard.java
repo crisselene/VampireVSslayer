@@ -7,10 +7,19 @@ public class GameObjectBoard {
 
 	private Level level;
 	private GameObjectList obList;
+	private int vampRestantes;
 
 	public GameObjectBoard(Level level) {
 		this.level = level; 
 		obList = new GameObjectList();
+		vampRestantes = level.numberOfVampires();
+	}
+	
+	public int getVampRestantes() {
+		return vampRestantes;
+	}
+	public void setVampRestantes(int restantes) {
+		vampRestantes = restantes;
 	}
 	
 	public void addVampire(GameObject obj,int filaAleatoria, int columna, Random random) {
@@ -20,9 +29,10 @@ public class GameObjectBoard {
 			boolean filaLibre = this.noHayVenLafila(filaAleatoria); //FILAAAA****
 			if(crear) {
 				if(filaLibre) {
-					this.addObject(obj);System.out.println("se crea vamp");
-				}else System.out.println("NO se crea Vamp");
-			}else System.out.println("NO se crea Vamp");
+					this.addObject(obj);
+					vampRestantes--;
+				}
+			}
 		}
 	}
 
@@ -40,11 +50,9 @@ public class GameObjectBoard {
 	public boolean frecuenciaLimiteVamps(Random random) {
 		boolean crear=false;
 		double levelFreq = level.getVampireFrequency();
-		double numVamp = level.numberOfVampires();
 		double randomN = random.nextDouble();
-		int nVampJuego = obList.contarVamp();
 		
-		if(nVampJuego<numVamp) 
+		if(vampRestantes > 0) 
 			if (randomN <= levelFreq ) crear= true;
 		return crear;
 	}
@@ -87,4 +95,24 @@ public class GameObjectBoard {
 	public GameObject getAttackableInLine(int posy) {
 		return obList.getAttackableInLine(posy);
 	}
+
+	public void removeDead() {
+		obList.removeDead();		
+	}
+	
+	public int vampEnTablero() {
+		return obList.contarVamp();
+	}
+
+	public boolean llegoFinal() {
+		return obList.llegoFinal();
+	}
+
+	public boolean userVictory() {
+		if(vampRestantes == 0 && vampEnTablero() == 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

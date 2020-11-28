@@ -20,7 +20,7 @@ public enum Level {
 	
 
 	// get numbers of vampires  
-	public double numberOfVampires() {
+	public int numberOfVampires() {
 			return numberOfVampires;
 		}
 	// get vampire frequency 

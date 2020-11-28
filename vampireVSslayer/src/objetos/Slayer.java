@@ -36,14 +36,6 @@ public class Slayer extends GameObject implements IAttack{
 		return posy;
 	}
 	
-	
-	/*public int getVida() {
-		return vida;
-	}
-	public void setVida(int vida) {
-	this.vida = vida;
-	}*/
-	
 	public String toString() {
 		int vida = this.getVida();
 		return "S ["+ vida +"]";
@@ -75,6 +67,8 @@ public class Slayer extends GameObject implements IAttack{
 	}
 	@Override
 	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}
+	@Override
+	public boolean llegoFinal() {return false;}
 	
 	
 }

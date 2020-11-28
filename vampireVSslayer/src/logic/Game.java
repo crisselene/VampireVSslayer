@@ -32,9 +32,17 @@ public class Game implements IPrintable {
 	
 	public boolean isFinished() {
 		//El return debe ser algo como vamp.llego() || vamp.noQuedan() || userExit
-		return userExit;
+		return userExit || llegoFinal() || userVictory();
 	}
 	
+	private boolean userVictory() {		
+		return board.userVictory();
+	}
+
+	private boolean llegoFinal() {		
+		return board.llegoFinal();
+	}
+
 	public String toString() {
 		return printer.toString();
 	}
@@ -52,40 +60,15 @@ public class Game implements IPrintable {
 	public long getSeed() {
 		return seed;
 	}
-
-	//Acutaliza toda la partida
-	/*public void actualizarPartida(GameObjectBoard  board, VampireList vampireList, Random random) {
-		//Vemos si el jugador recibe mondeas o no aleatoriamente
-    	board.recibeMonedas(random);
-    	//si hay vampiros, los vampiros avanzan
-    	if(VampireList.getLongitud()!=0) {
-    	Vampiro.avanza(vampireList);    	
-    	}
-	}
 	
-	//resetea la partida
-	public void reset(GameObjectBoard board, VampireList vampireList, Random random) {
-		board.reset();
-		VampireList.reset();		
-	}
-	
-	public void attack(GameObjectBoard board, VampireList vampireList, SlayerList slayerList) {
-		board.slayerAttack();
-		board.VampireAttack(vampireList, slayerList);
-	}
-	
-	public void buscarMuertos(GameObjectBoard board, VampireList vampireList) {
-		board.buscarSlayers();
-		VampireList.buscarVampiro();
-	}
-	*/
 	public String getWinnerMessage() {
 		if(userExit) {
 			return "Bye";
 		}
-		else {
+		else if (llegoFinal()) {
 			return "Los vampiros llegaron al final";
 		}
+		else return "Has matado a todos los vampiros!!!";
 	}
 	
 	public void doExit() {
@@ -116,16 +99,13 @@ public class Game implements IPrintable {
 			return false;
 		}		
 	}
-
-	//TODO:pasarlo a board
-	/*public void addObject(GameObject objeto) {
-		obList.anadirObjeto(objeto);
-	}*/
 		
 	@Override
 	public String getInfo() {
-		String info = ("Ciclo : " + ciclos + "\n" +
-						"Coins : " + player.getMonedas() + "\n" );
+		String info = ("Number of cycles: " + ciclos + "\n" +
+						"Coins: " + player.getMonedas() + "\n"+
+						"Remaining vampires: " + board.getVampRestantes() + "\n" +
+						"Vampires on the board: " + board.vampEnTablero());
 		return info;
 	}
 
@@ -137,11 +117,10 @@ public class Game implements IPrintable {
 
 	public void update() {
 		ciclos ++;
+		board.move();
 		board.attack();
 		this.crearVampiro();
-		
-		//board.attack();//********************TODO ATTACK
-		board.move();
+		board.removeDead();
 		player.ganaMonedas(random.nextFloat());
 	}
 
@@ -150,14 +129,6 @@ public class Game implements IPrintable {
 		int columna = (level.getDimx() - 1);
 		Vampiro v = new Vampiro(columna, filaAleatoria, this);
 		board.addVampire(v,filaAleatoria,columna, random);
-		/*boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
-		if(!ocupado) {
-			Vampiro v = new Vampiro(columna, filaAleatoria);
-			boolean crear = board.frecuenciaLimiteVamps();
-			if(crear) {
-				this.addObject(v);System.out.println("se crea vamp");
-			}else System.out.println("NO se crea Vamp");
-		}*/
 	}
 
 	public IAttack getAttackableInPosition(int posx, int posy) {

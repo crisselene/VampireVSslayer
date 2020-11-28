@@ -63,7 +63,6 @@ public class GameObjectList {
 		for (GameObject gameObject : gameobjects) {
 			 filaLibre = gameObject.noHayVenLafila(filaLibre,fila);
 			 if(!filaLibre) {
-				 System.out.println("la fila " + fila + " no está libre");
 				 return filaLibre;
 			 }
 		}
@@ -91,6 +90,26 @@ public class GameObjectList {
 			}
 		}
 		return null;
+	}
+
+	public void removeDead() {
+		for(int i = 0; i < gameobjects.size() ; i++) {//recorrera todos los gameobjects
+			GameObject aux = gameobjects.get(i);
+			if(!aux.isAlive()) {
+				gameobjects.remove(i);
+				i--;
+			}
+		}
+		
+	}
+
+	public boolean llegoFinal() {
+		for(GameObject object: gameobjects) {
+			if(object.llegoFinal()) {
+				return true;
+			}
+		}
+		return false;
 	}
 		
 }

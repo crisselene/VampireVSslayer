@@ -3,7 +3,6 @@ package objetos;
 import logic.Game;
 import logic.GameObject;
 import logic.IAttack;
-import logic.VampireList;
 
 public class Vampiro extends GameObject implements IAttack{
 
@@ -88,14 +87,12 @@ public class Vampiro extends GameObject implements IAttack{
 		
 		if(ciclosAvance!=2) {
 		ciclosAvance++; 
-		System.out.println("no me toca moverme");
 		}
 		else {
 			if(ataque==false) {
 				posx--;
 				this.setPosX(posx); 
 				ciclosAvance=0;
-				System.out.println("me muevo");
 			}else ataque=false;
 		}
 	}
@@ -132,13 +129,13 @@ public class Vampiro extends GameObject implements IAttack{
 		}
 	}
 
+	@Override
+	public boolean llegoFinal() {
+		if(posx == 0 && ciclosAvance == 2) {
+			return true;
+		}
+		return false;
+	}
 
-
-	//TODO: generar posx y posy para vampiro
-	/*@Override
-	public void crearObject(int posx, int posy) {
-		Vampiro v = new Vampiro(posy, posx, vida, ciclosAvance, ataque);
-		list.anadirObjeto(v);
-		}*/
 	
 }

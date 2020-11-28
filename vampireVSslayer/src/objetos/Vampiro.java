@@ -17,7 +17,6 @@ public class Vampiro extends GameObject implements IAttack{
 	private boolean ataque; //variable que guarda si le toca atacar a un vampiro
 	private Game game;
 	//el daño de los vampiros es 1
-	int HARM = 1;
 	
 	
 	/**CONSTRUCTOR

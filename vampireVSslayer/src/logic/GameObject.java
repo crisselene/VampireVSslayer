@@ -45,8 +45,8 @@ public abstract class GameObject implements IAttack{
 	}
 	
 
-	//constante de cuanto daño hace el objeto
-	protected static int HARM;
+	//constante de cuanto daño hace el objeto(hasta ahora es 1 para ambos)
+	protected static int HARM = 1;
 
 	public boolean coincidesPosiciones(int x, int y) {
 		if (posx == x && posy == y) {

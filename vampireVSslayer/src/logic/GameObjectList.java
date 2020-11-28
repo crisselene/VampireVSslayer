@@ -83,7 +83,11 @@ public class GameObjectList {
 	public GameObject getAttackableInLine(int posy) {
 		for (GameObject gameObject : gameobjects) {
 			if(gameObject.getposy() == posy) {
-				return gameObject;
+				//da igual el ataque que haga, es solo para ver si le puede atacar 
+				if(gameObject.receiveSlayerAttack(0)==true) {
+					return gameObject;
+				}
+				
 			}
 		}
 		return null;

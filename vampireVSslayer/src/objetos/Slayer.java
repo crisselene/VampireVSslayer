@@ -17,9 +17,13 @@ public class Slayer extends GameObject implements IAttack{
 
 	public Slayer(int posx, int posy) { //Constructor solo con posx y posy
 		this(posx, posy, DEFAULT_VIDA);
+		this.posx=posx;
+		this.posy= posy;
 	}
 	public Slayer(int posx, int posy, int vida) { //Constructor completo
 		super(posx, posy, vida);
+		this.posx=posx;
+		this.posy= posy;
 	}
 	
 	public int getPosx() {

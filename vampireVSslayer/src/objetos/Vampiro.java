@@ -114,7 +114,7 @@ public class Vampiro extends GameObject implements IAttack{
 	@Override
 	public void move() {
 		
-		if(ciclosAvance!=1) {ciclosAvance++; System.out.println("no me toca moverme");}
+		if(ciclosAvance!=2) {ciclosAvance++; System.out.println("no me toca moverme");}
 		else {
 			posx--;
 			this.setPosX(posx); 

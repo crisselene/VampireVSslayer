@@ -82,35 +82,6 @@ public class Vampiro extends GameObject implements IAttack{
 		return "V [" + vida + "]";
 	}
 
-	//Metodo que avanza al vampiro
-	/*public static void avanza(VampireList vampireList) {
-	//recorro el array de vampiros y compruebo si alguno tiene los ciclos a 2, 
-		//entonces le tocará avanzar
-		Vampiro[] arrayVamp = vampireList.getArrayVamp();
-		for (int i = 0; i < arrayVamp.length; i++) {
-			//compruebo que no ha atacado, porque si ataca, no avanza
-				if(arrayVamp[i].ciclosAvance == 1 && arrayVamp[i].ataque == false) {//Si le toca avanzar...
-					int posXv = arrayVamp[i].getPosx();
-					posXv--; //avanza hacia los negativos en el eje x
-					arrayVamp[i].setPosx(posXv);
-					arrayVamp[i].setCiclosAvance(0); //sus ciclos se retardan 
-							
-				}
-				//si no avanza, el ciclo del vampiro aumenta
-				else {
-					int cicloVamp = arrayVamp[i].getCiclosAvance();
-					//si el ciclo es distinto a 2 (2 es el max)
-					if(cicloVamp!=1)cicloVamp++;
-					arrayVamp[i].setCiclosAvance(cicloVamp);
-					//si el vampiro ha atacado (ataque a true) entonces le ponemos ataque a false
-					arrayVamp[i].setAtaque(false);
-					
-				}
-		}
-		
-	}
-	*/
-
 	@Override
 	public void move() {
 		
@@ -124,28 +95,13 @@ public class Vampiro extends GameObject implements IAttack{
 	}
 	
 
-	@Override
-	public void attackP() {
-		if (isAlive () ) {
-			IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
-			if (other != null )
-				other.receiveVampireAttack(HARM);
-		} 
-	}
-	
-
-	@Override
-	public void attack(IAttack other) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	
 	public boolean receiveSlayerAttack(int damage, int posy, int posx) {
 		if(this.posy==posy) {//Si estan en la misma fila
 			int vida = this.getVida();
-			vida--;
+			vida = vida-damage;
 			this.setVida(vida);
 		}
 		return false;
@@ -163,9 +119,18 @@ public class Vampiro extends GameObject implements IAttack{
 		
 	}
 
+	@Override
+	public void attack() {
+		//ESTE NO, SIN PARÁMETROS
+			if (isAlive () ) {
+				IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
+				if (other != null ) {
+					other.receiveVampireAttack(HARM);
+			} 	
+		}
+	}
 
 
-	
 
 	//TODO: generar posx y posy para vampiro
 	/*@Override

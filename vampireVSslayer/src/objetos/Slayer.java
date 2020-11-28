@@ -46,25 +46,23 @@ public class Slayer extends GameObject implements IAttack{
 		return "S ["+ vida +"]";
 	}
 	@Override
-	public void attack(IAttack other) {
+	public void attack() {
 		//Solo atacamos si el otro esta en su misma fila
 		if(isAlive()) {
+			IAttack other = game.getAttackableInPosition(this.posx, this.posy);
 			other.receiveSlayerAttack(ATAQUE, posy, posx);
 			System.out.println("He atacado");
 		}
 	}
 	
-	//ATACAR NO ES ASI?? 
-	@Override
-	public void attackP() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public boolean receiveVampireAttack(int harm) {
-		int vida= this.getVida();
-		vida = vida - harm;
-		this.setVida(vida);
+	public boolean receiveVampireAttack(int harm,int posy,int posx) {
+		if(this.posy==posy) {//Si estan en la misma fila
+			if(this.posx+1 == posx) {
+				int vida= this.getVida();
+				vida = vida - harm;
+				this.setVida(vida);
+			}
+		}
 		return false;
 	}
 	

@@ -43,7 +43,7 @@ public class GameObjectList {
 		for(IAttack ob: gameobjects) {			
 			for(IAttack other: gameobjects) {
 				if(ob != other) {//Si no son el mismo
-					ob.attack(other);
+					ob.attack();
 				}
 			}
 		}	

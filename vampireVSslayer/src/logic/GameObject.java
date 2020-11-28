@@ -56,7 +56,7 @@ public abstract class GameObject implements IAttack{
 	
 	public abstract void move();
 	public abstract boolean contarVamp();
-
 	public abstract boolean noHayVenLafila(boolean crear, int fila);
+
 	
 }

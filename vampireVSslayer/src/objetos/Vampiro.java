@@ -16,7 +16,8 @@ public class Vampiro extends GameObject implements IAttack{
 	private int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	private boolean ataque; //variable que guarda si le toca atacar a un vampiro
 	private Game game;
-	
+	//el daño de los vampiros es 1
+	int HARM = 1;
 	
 	
 	/**CONSTRUCTOR
@@ -86,12 +87,17 @@ public class Vampiro extends GameObject implements IAttack{
 	@Override
 	public void move() {
 		
-		if(ciclosAvance!=2) {ciclosAvance++; System.out.println("no me toca moverme");}
+		if(ciclosAvance!=2) {
+		ciclosAvance++; 
+		System.out.println("no me toca moverme");
+		}
 		else {
-			posx--;
-			this.setPosX(posx); 
-			ciclosAvance=0;
-			System.out.println("me muevo");
+			if(ataque==false) {
+				posx--;
+				this.setPosX(posx); 
+				ciclosAvance=0;
+				System.out.println("me muevo");
+			}else ataque=false;
 		}
 	}
 		
@@ -121,6 +127,8 @@ public class Vampiro extends GameObject implements IAttack{
 				IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
 				if (other != null ) {
 					other.receiveVampireAttack(HARM);
+					//el vampiro ha atacado
+					this.ataque=true;
 			} 	
 		}
 	}

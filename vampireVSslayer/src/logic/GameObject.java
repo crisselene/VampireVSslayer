@@ -8,10 +8,11 @@ public abstract class GameObject implements IAttack{
 	protected int posx;
 	protected int posy;
 		
-	public GameObject(int posx, int posy, int vida) {
+	public GameObject(int posx, int posy, int vida, Game game) {
 		this.posx = posx;
 		this.posy = posy;
 		this.vida=vida;
+		this.game = game;
 	}
 
 	protected void setVida(int vida) {

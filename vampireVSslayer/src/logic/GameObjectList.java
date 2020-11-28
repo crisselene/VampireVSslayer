@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public class GameObjectList {
 	private ArrayList<GameObject> gameobjects;
-	private int vampirosSalidos;
-	private int vampirosRestantes;
 	
 	public GameObjectList() {
 		gameobjects = new ArrayList<GameObject>();
-		vampirosSalidos = 0;
 	}
 	
 	public void anadirObjeto(GameObject ob) {
@@ -41,11 +38,7 @@ public class GameObjectList {
 	public void attack() {
 		//Hara que todos los objetos ataquen
 		for(IAttack ob: gameobjects) {			
-			for(IAttack other: gameobjects) {
-				if(ob != other) {//Si no son el mismo
-					ob.attack();
-				}
-			}
+			ob.attack();
 		}	
 	}
 	
@@ -85,6 +78,15 @@ public class GameObjectList {
 		}
 		return null;
 		
+	}
+
+	public GameObject getAttackableInLine(int posy) {
+		for (GameObject gameObject : gameobjects) {
+			if(gameObject.getposy() == posy) {
+				return gameObject;
+			}
+		}
+		return null;
 	}
 		
 }

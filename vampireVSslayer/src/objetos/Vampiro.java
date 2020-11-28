@@ -19,21 +19,21 @@ public class Vampiro extends GameObject implements IAttack{
 	
 	
 	
-	
 	/**CONSTRUCTOR
 	 * @param posx
 	 * @param posy
+	 * @param game 
 	 * @param vida
 	 * @param ciclosAvance
 	 * @param ataque
 	 */
 	
-	public Vampiro(int posx,int posy) {
-		this(posx, posy, DEFAULT_VIDA,DEFAULT_CICLOS,DEFAULT_ATAQUE);
+	public Vampiro(int posx,int posy, Game game) {
+		this(posx, posy, DEFAULT_VIDA,DEFAULT_CICLOS,DEFAULT_ATAQUE, game);
 	}
 	
-	public Vampiro(int posx, int posy, int vida, int ciclosAvance,boolean ataque) {
-		super(posx, posy, DEFAULT_VIDA);
+	public Vampiro(int posx, int posy, int vida, int ciclosAvance,boolean ataque, Game game) {
+		super(posx, posy, DEFAULT_VIDA, game);
 		//vienen de la clase Object
 		this.posx = posx;
 		this.posy = posy;
@@ -43,6 +43,7 @@ public class Vampiro extends GameObject implements IAttack{
 		//????? ciclos avance??? ****************
 		this.ciclosAvance = ciclosAvance;
 		this.ataque = ataque;
+		this.game = game;
 	}
 
 
@@ -93,18 +94,12 @@ public class Vampiro extends GameObject implements IAttack{
 			System.out.println("me muevo");
 		}
 	}
-	
-
-
-
-	
-	public boolean receiveSlayerAttack(int damage, int posy, int posx) {
-		if(this.posy==posy) {//Si estan en la misma fila
-			int vida = this.getVida();
-			vida = vida-damage;
-			this.setVida(vida);
-		}
-		return false;
+		
+	public boolean receiveSlayerAttack(int damage) {
+		int vida= this.getVida();
+		vida = vida - damage;
+		this.setVida(vida);		
+		return true;
 	}
 
 	@Override

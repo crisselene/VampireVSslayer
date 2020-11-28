@@ -83,4 +83,8 @@ public class GameObjectBoard {
 	public String toString(int x, int y) {
 		return obList.toString(x, y);
 	}
+
+	public GameObject getAttackableInLine(int posy) {
+		return obList.getAttackableInLine(posy);
+	}
 }

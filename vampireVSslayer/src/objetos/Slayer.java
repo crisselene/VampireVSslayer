@@ -1,8 +1,8 @@
 
 package objetos;
 
+import logic.Game;
 import logic.GameObject;
-import logic.GameObjectList;
 import logic.IAttack;
 
 public class Slayer extends GameObject implements IAttack{
@@ -11,19 +11,22 @@ public class Slayer extends GameObject implements IAttack{
 	private final static int ATAQUE = 1;
 	private int posx;
 	private int posy;
+	private Game game;
 	//private int vida;
 	//private GameObjectList list;
 	
 
-	public Slayer(int posx, int posy) { //Constructor solo con posx y posy
-		this(posx, posy, DEFAULT_VIDA);
+	public Slayer(int posx, int posy, Game game) { //Constructor solo con posx y posy
+		this(posx, posy, DEFAULT_VIDA, game);
 		this.posx=posx;
 		this.posy= posy;
+		this.game = game;
 	}
-	public Slayer(int posx, int posy, int vida) { //Constructor completo
-		super(posx, posy, vida);
+	public Slayer(int posx, int posy, int vida, Game game) { //Constructor completo
+		super(posx, posy, vida, game);
 		this.posx=posx;
 		this.posy= posy;
+		this.game = game;
 	}
 	
 	public int getPosx() {
@@ -49,21 +52,16 @@ public class Slayer extends GameObject implements IAttack{
 	public void attack() {
 		//Solo atacamos si el otro esta en su misma fila
 		if(isAlive()) {
-			IAttack other = game.getAttackableInPosition(this.posx, this.posy);
-			other.receiveSlayerAttack(ATAQUE, posy, posx);
-			System.out.println("He atacado");
+			IAttack other = game.getAttackableInLine(this.posy);
+			if(other != null) other.receiveSlayerAttack(ATAQUE);
 		}
 	}
 	
-	public boolean receiveVampireAttack(int harm,int posy,int posx) {
-		if(this.posy==posy) {//Si estan en la misma fila
-			if(this.posx+1 == posx) {
-				int vida= this.getVida();
-				vida = vida - harm;
-				this.setVida(vida);
-			}
-		}
-		return false;
+	public boolean receiveVampireAttack(int harm) {
+		int vida= this.getVida();
+		vida = vida - harm;
+		this.setVida(vida);		
+		return true;
 	}
 	
 	//métodos en los que los slayers no actuan:

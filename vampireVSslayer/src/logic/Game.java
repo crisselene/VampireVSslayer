@@ -94,7 +94,7 @@ public class Game implements IPrintable {
 
 	public boolean addSlayer(int x, int y) {
 		if(player.tieneMonedas()) {
-			Slayer slayer = new Slayer(x, y);
+			Slayer slayer = new Slayer(x, y, this);
 			
 			if(board.dentroTablero(y, x)) {
 				
@@ -148,7 +148,7 @@ public class Game implements IPrintable {
 	private void crearVampiro() {
 		int filaAleatoria = random.nextInt(level.getDimy());
 		int columna = (level.getDimx() - 1);
-		Vampiro v = new Vampiro(columna, filaAleatoria);
+		Vampiro v = new Vampiro(columna, filaAleatoria, this);
 		board.addVampire(v,filaAleatoria,columna, random);
 		/*boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
@@ -165,5 +165,12 @@ public class Game implements IPrintable {
 		obj = board.getAttackableInPosition(posx,  posy);
 		return obj;
 	}
+	
+	public IAttack getAttackableInLine(int posy) {
+		GameObject obj;
+		obj = board.getAttackableInLine(posy);
+		return obj;
+	}
+
 
 }

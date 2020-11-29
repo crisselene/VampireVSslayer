@@ -88,10 +88,13 @@ public class Vampiro extends GameObject implements IAttack{
 			if (isAlive () ) {
 				IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
 				if (other != null ) {
-					other.receiveVampireAttack(HARM);
-					if(this.ciclosAvance<2) {
-						ciclosAvance++;
+					boolean recibirDamage = other.receiveVampireAttack(HARM);
+					if(recibirDamage== true) {
+						if(this.ciclosAvance<2) {
+							ciclosAvance++;
+						}
 					}
+					
 			} 	
 		}
 	}

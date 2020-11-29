@@ -40,6 +40,7 @@ public class Game implements IPrintable {
 	
 	public boolean isFinished() {
 		//El return debe ser algo como vamp.llego() || vamp.noQuedan() || userExit
+		
 		return userExit || llegoFinal() || userVictory();
 	}
 	

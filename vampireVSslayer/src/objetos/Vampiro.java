@@ -107,7 +107,7 @@ public class Vampiro extends GameObject implements IAttack{
 
 	@Override
 	public boolean llegoFinal() {
-		if(posx == 0 && ciclosAvance == 1) {
+		if(posx == -1) {
 			return true;
 		}
 		return false;

@@ -46,8 +46,10 @@ public class Controller {
 		    	   		System.out.println("[ERROR]: "+ unknownCommandMsg);
 		       }
 		}
-        	if (refreshDisplay) {	
-        		 printGame();
+        	if (refreshDisplay) {
+        		int ciclosFinales = game.getCiclos() - 1;
+        		game.setCiclos(ciclosFinales);
+        		printGame();
         	}
     		System.out.println ("[Game over] " + game.getWinnerMessage());
 

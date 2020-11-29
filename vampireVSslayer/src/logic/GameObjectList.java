@@ -18,12 +18,12 @@ public class GameObjectList {
 	}
 
 	public boolean buscarObjeto(int fila, int columna) {
-		boolean ocupado = false;
+		
 		for (GameObject ob : gameobjects) {
-			if(ob.posx == columna && ob.posy == fila) ocupado = true;
-		    else ocupado=false;
+			if(ob.getposx() == columna && ob.getposy() == fila) return true;
 		}
-		return ocupado;
+		return false;
+
 	}
 	
 	public String toString(int x, int y) {

@@ -63,7 +63,7 @@ public class Game implements IPrintable {
 	
 	public String getWinnerMessage() {
 		if(userExit) {
-			return "Bye";
+			return "Nobody wins...";
 		}
 		else if (llegoFinal()) {
 			return "Los vampiros llegaron al final";
@@ -76,28 +76,22 @@ public class Game implements IPrintable {
 	}
 
 	public boolean addSlayer(int x, int y) {
-		if(player.tieneMonedas()) {
-			Slayer slayer = new Slayer(x, y, this);
+		if(board.dentroTablero(y, x)) {
 			
-			if(board.dentroTablero(y, x)) {
-				
+			
+			if(player.tieneMonedas()) {
+				Slayer slayer = new Slayer(x, y, this);
 				if(board.addSlayer(slayer, y, x)) {
 					player.restarMonedas();
 					return true;
-				}else {//Algun objeto en esa posición
-					System.out.println("Esa posicion esta ocupada");
-					return false;
 				}
-			}
-			else {//Fuera del tablero
-				System.out.println("Invalid position");
+			}else {
+				System.out.println("Not enough coins");
 				return false;
 			}
-			
-		}else {//No tiene monedas
-			System.out.println("No tienes monedas suficientes");
-			return false;
-		}		
+		}
+		System.out.println("Invalid position");
+		return false;
 	}
 		
 	@Override
@@ -105,7 +99,7 @@ public class Game implements IPrintable {
 		String info = ("Number of cycles: " + ciclos + "\n" +
 						"Coins: " + player.getMonedas() + "\n"+
 						"Remaining vampires: " + board.getVampRestantes() + "\n" +
-						"Vampires on the board: " + board.vampEnTablero());
+						"Vampires on the board: " + board.vampEnTablero() + "\n");
 		return info;
 	}
 
@@ -127,8 +121,7 @@ public class Game implements IPrintable {
 
 	private void crearVampiro() {
 		int columna = (level.getDimx() - 1);
-		int fila = board.addVampire2(columna, random.nextFloat(), random.nextInt(level.getDimy()));
-		System.out.println("..." +fila+"...");
+		int fila = board.addVampire(columna, random.nextFloat(), random.nextInt(level.getDimy()));
 		if(fila != -1) {
 			Vampiro v = new Vampiro(columna, fila, this);
 			board.addObject(v);

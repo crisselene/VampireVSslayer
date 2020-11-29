@@ -21,20 +21,6 @@ public class GameObjectBoard {
 	public void setVampRestantes(int restantes) {
 		vampRestantes = restantes;
 	}
-	
-	public void addVampire(GameObject obj,int filaAleatoria, int columna, float random) {
-		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
-		if(!ocupado) {
-			boolean crear = this.frecuenciaLimiteVamps(random);
-			boolean filaLibre = this.noHayVenLafila(filaAleatoria); //FILAAAA****
-			if(crear) {
-				if(filaLibre) {
-					this.addObject(obj);
-					vampRestantes--;
-				}
-			}
-		}
-	}
 
 	//comprueba que no haya vampiros en la fila (no puede haber dos vampiros en la misma fila)
 	private boolean noHayVenLafila(int fila) {
@@ -114,7 +100,7 @@ public class GameObjectBoard {
 		return false;
 	}
 
-	public int addVampire2(int columna, float random, int filaAleatoria) {
+	public int addVampire(int columna, float random, int filaAleatoria) {
 		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
 			boolean crear = this.frecuenciaLimiteVamps(random);
@@ -127,7 +113,7 @@ public class GameObjectBoard {
 			}
 		}
 		
-		return -1;//Cuando no se puede añadir
+		return -1;//Cuando no se puede añadir devolvemos -1
 	}
 
 }

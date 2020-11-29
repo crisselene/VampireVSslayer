@@ -6,12 +6,12 @@ public class ExitCommand extends Command {
 
 	public ExitCommand() {
 		//Deben ser static strings
-		super("exit", "e", "[E]xit", "exit game");
+		super("exit", "e", "[e]xit", "exit game");
 	}
 	
 	public boolean execute(Game game) {
 		game.doExit();
-		return true;
+		return false;
 	}
 
 	@Override

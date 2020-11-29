@@ -21,11 +21,6 @@ public class GameObjectBoard {
 		vampRestantes = restantes;
 	}
 
-	//comprueba que no haya vampiros en la fila (no puede haber dos vampiros en la misma fila)
-	private boolean noHayVenLafila(int fila) {
-		boolean filaLibre = obList.noHayVenLafila(fila);
-		return filaLibre;
-	}
 
 	public void addObject(GameObject obj) {
 		obList.anadirObjeto(obj);
@@ -106,11 +101,8 @@ public class GameObjectBoard {
 			int filaAleatoria = random.nextInt(level.getDimy());
 			boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 			if(!ocupado) {
-				boolean filaLibre = this.noHayVenLafila(filaAleatoria);
-				if(filaLibre) {
 					vampRestantes--;
 					return filaAleatoria;					
-				}
 			}
 		}
 		

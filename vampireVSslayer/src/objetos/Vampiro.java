@@ -10,10 +10,9 @@ public class Vampiro extends GameObject implements IAttack{
 	private int posy;
 	public final static int DEFAULT_VIDA = 5;
 	public final static int DEFAULT_CICLOS = 0;
-	//private int vida;
 	private int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	private Game game;
-	//el daño de los vampiros es 1
+
 	
 	
 	/**CONSTRUCTOR
@@ -30,18 +29,13 @@ public class Vampiro extends GameObject implements IAttack{
 	
 	public Vampiro(int posx, int posy, int vida, int ciclosAvance, Game game) {
 		super(posx, posy, DEFAULT_VIDA, game);
-		//vienen de la clase Object
 		this.posx = posx;
 		this.posy = posy;
-		//la vida de los vampiros siempre se incializa a 5 (se puede cambiar)
-		//this.setVida(5);
-		
-		//????? ciclos avance??? ****************
 		this.ciclosAvance = ciclosAvance;
 		this.game = game;
 	}
 
-	//getters y setters de avanzar
+
 	public int getCiclosAvance() {
 		return ciclosAvance;
 	}
@@ -50,7 +44,6 @@ public class Vampiro extends GameObject implements IAttack{
 	}
 
 
-	//Escribir el vampiro
 	public String toString() {
 		int vida = this.getVida();
 		return "V [" + vida + "]";
@@ -67,7 +60,7 @@ public class Vampiro extends GameObject implements IAttack{
 				posx--;
 				this.setPosX(posx); 
 				ciclosAvance=0;
-			}//else ataque=false;
+			}
 		}
 	}
 		
@@ -92,12 +85,10 @@ public class Vampiro extends GameObject implements IAttack{
 
 	@Override
 	public void attack() {
-		//ESTE NO, SIN PARÁMETROS
 			if (isAlive () ) {
 				IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
 				if (other != null ) {
 					other.receiveVampireAttack(HARM);
-					//si los ciclos de espera del vampiro son menos de dos, se aumentan:
 					if(this.ciclosAvance<2) {
 						ciclosAvance++;
 					}

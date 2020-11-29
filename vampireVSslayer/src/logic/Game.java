@@ -19,6 +19,14 @@ public class Game implements IPrintable {
 	private Random random;
 	
 
+	public int getCiclos() {
+		return ciclos;
+	}
+
+	public void setCiclos(int ciclos) {
+		this.ciclos = ciclos;
+	}
+
 	public Game(Long seed, Level level) {
 		printer= new GamePrinter(this,level.getDimx(),level.getDimy());
 		this.level=level;
@@ -66,9 +74,11 @@ public class Game implements IPrintable {
 			return "Nobody wins...";
 		}
 		else if (llegoFinal()) {
-			return "Los vampiros llegaron al final";
+			return "Vampires win!";
 		}
-		else return "Has matado a todos los vampiros!!!";
+		else {
+			return "Player wins";
+		}
 	}
 	
 	public void doExit() {
@@ -110,12 +120,12 @@ public class Game implements IPrintable {
 	}
 
 	public void update() {
-		ciclos ++;
 		player.ganaMonedas(random.nextFloat());
 		board.move();
 		board.attack();
 		this.crearVampiro();
 		board.removeDead();
+		ciclos++;
 		
 	}
 

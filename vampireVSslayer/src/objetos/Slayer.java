@@ -29,13 +29,6 @@ public class Slayer extends GameObject implements IAttack{
 		this.game = game;
 	}
 	
-	public int getPosx() {
-		return posx;
-	}
-	public int getPosy() {
-		return posy;
-	}
-	
 	public String toString() {
 		int vida = this.getVida();
 		return "S ["+ vida +"]";
@@ -58,7 +51,7 @@ public class Slayer extends GameObject implements IAttack{
 	
 	//métodos en los que los slayers no actuan:
 	@Override
-	public void move() { // los slayers no se mueven
+	public void move(boolean ocupado) { // los slayers no se mueven
 	}
 	@Override
 	public boolean contarVamp() {

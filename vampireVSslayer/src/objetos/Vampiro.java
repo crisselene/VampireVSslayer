@@ -51,14 +51,6 @@ public class Vampiro extends GameObject implements IAttack{
 		this.ataque = ataque;
 	}
 
-	//getter y setter pos y
-	public int getPosy() {
-		return posy;
-	}
-	public void setPosy(int posy) {
-		this.posy = posy;
-	}
-
 	//getters y setters de avanzar
 	public int getCiclosAvance() {
 		return ciclosAvance;
@@ -67,14 +59,6 @@ public class Vampiro extends GameObject implements IAttack{
 		this.ciclosAvance = ciclosAvance;
 	}
 
-	//getter y setter de vida
-	/*public int getVida() {
-		return vida;
-	}
-	public void setVida(int vida) {
-		this.vida = vida;
-	}
-*/
 
 	//Escribir el vampiro
 	public String toString() {
@@ -83,17 +67,17 @@ public class Vampiro extends GameObject implements IAttack{
 	}
 
 	@Override
-	public void move() {
+	public void move(boolean ocupado) {
 		
-		if(ciclosAvance!=1) {
+		if(ciclosAvance<1) {
 		ciclosAvance++; 
 		}
 		else {
-			if(ataque==false) {
+			if(ocupado==false) {
 				posx--;
 				this.setPosX(posx); 
 				ciclosAvance=0;
-			}else ataque=false;
+			}//else ataque=false;
 		}
 	}
 		
@@ -125,6 +109,10 @@ public class Vampiro extends GameObject implements IAttack{
 					other.receiveVampireAttack(HARM);
 					//el vampiro ha atacado
 					this.ataque=true;
+					//si los ciclos de espera del vampiro son menos de dos, se aumentan:
+					if(this.ciclosAvance<2) {
+						ciclosAvance++;
+					}
 			} 	
 		}
 	}

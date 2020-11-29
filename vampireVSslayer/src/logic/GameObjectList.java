@@ -44,7 +44,8 @@ public class GameObjectList {
 	
 	public void move() {
 		for (GameObject gameObject : gameobjects) {
-			gameObject.move();
+			boolean ocupado = buscarObjeto(gameObject.posy,gameObject.posx-1);
+			gameObject.move(ocupado);
 		}
 	}
 

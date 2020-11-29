@@ -46,7 +46,6 @@ public class Controller {
 		    	   		System.out.println("[ERROR]: "+ unknownCommandMsg);
 		       }
 		}
-	    
         	if (refreshDisplay) {	
         		 printGame();
         	}

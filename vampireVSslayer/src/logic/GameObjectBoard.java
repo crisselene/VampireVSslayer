@@ -114,4 +114,20 @@ public class GameObjectBoard {
 		return false;
 	}
 
+	public int addVampire2(int columna, float random, int filaAleatoria) {
+		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
+		if(!ocupado) {
+			boolean crear = this.frecuenciaLimiteVamps(random);
+			boolean filaLibre = this.noHayVenLafila(filaAleatoria); //FILAAAA****
+			if(crear) {
+				if(filaLibre) {
+					vampRestantes--;
+					return filaAleatoria;					
+				}
+			}
+		}
+		
+		return -1;//Cuando no se puede añadir
+	}
+
 }

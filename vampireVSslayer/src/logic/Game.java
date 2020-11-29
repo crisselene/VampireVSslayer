@@ -126,10 +126,15 @@ public class Game implements IPrintable {
 	}
 
 	private void crearVampiro() {
-		int filaAleatoria = random.nextInt(level.getDimy());
 		int columna = (level.getDimx() - 1);
-		Vampiro v = new Vampiro(columna, filaAleatoria, this);
-		board.addVampire(v,filaAleatoria,columna, random.nextFloat());
+		int fila = board.addVampire2(columna, random.nextFloat(), random.nextInt(level.getDimy()));
+		System.out.println("..." +fila+"...");
+		if(fila != -1) {
+			Vampiro v = new Vampiro(columna, fila, this);
+			board.addObject(v);
+		}
+		
+		
 	}
 
 	public IAttack getAttackableInPosition(int posx, int posy) {

@@ -121,7 +121,7 @@ public class Game implements IPrintable {
 
 	private void crearVampiro() {
 		int columna = (level.getDimx() - 1);
-		int fila = board.addVampire(columna, random.nextFloat(), random.nextInt(level.getDimy()));
+		int fila = board.addVampire(columna, random.nextDouble(), random);
 		if(fila != -1) {
 			Vampiro v = new Vampiro(columna, fila, this);
 			board.addObject(v);

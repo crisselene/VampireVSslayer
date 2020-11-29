@@ -2,7 +2,6 @@ package logic;
 
 import java.util.Random;
 
-
 public class GameObjectBoard {
 
 	private Level level;
@@ -33,7 +32,7 @@ public class GameObjectBoard {
 		
 	}
 
-	public boolean frecuenciaLimiteVamps(float random) {
+	public boolean frecuenciaLimiteVamps(double random) {
 		boolean crear=false;
 		double levelFreq = level.getVampireFrequency();
 		
@@ -99,13 +98,15 @@ public class GameObjectBoard {
 		}
 		return false;
 	}
-
-	public int addVampire(int columna, float random, int filaAleatoria) {
-		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
-		if(!ocupado) {
-			boolean crear = this.frecuenciaLimiteVamps(random);
-			boolean filaLibre = this.noHayVenLafila(filaAleatoria); //FILAAAA****
-			if(crear) {
+	
+	public int addVampire(int columna, double freq, Random random) {
+		
+		boolean crear = this.frecuenciaLimiteVamps(freq);
+		if(crear) {
+			int filaAleatoria = random.nextInt(level.getDimy());
+			boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
+			if(!ocupado) {
+				boolean filaLibre = this.noHayVenLafila(filaAleatoria);
 				if(filaLibre) {
 					vampRestantes--;
 					return filaAleatoria;					

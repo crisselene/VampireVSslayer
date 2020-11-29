@@ -8,7 +8,7 @@ public class AddCommand extends Command {
 	private int y;
 
 	public AddCommand() {
-		super("add", "a", "[A]dd", "adds a slayer");
+		super("add", "a", "[A]dd <x> <y>", "adds a slayer in position x, y");
 	}
 
 	@Override

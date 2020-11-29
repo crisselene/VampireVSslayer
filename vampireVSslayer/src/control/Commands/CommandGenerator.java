@@ -4,8 +4,8 @@ public class CommandGenerator{
 
 	private static Command[] availableCommands = {
 		
-		new HelpCommand(),
 		new AddCommand(),
+		new HelpCommand(),		
 		new ResetCommand(),
 		new ExitCommand(),
 		new UpdateCommand()
@@ -23,6 +23,7 @@ public class CommandGenerator{
 	
 	
 	public static void recorrerArrayHelp() {
+		System.out.println("Available commands:");
 		for (Command c: availableCommands) {
 			System.out.println(c.helpText());
 		}

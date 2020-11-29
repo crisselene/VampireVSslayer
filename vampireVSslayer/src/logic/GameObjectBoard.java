@@ -22,7 +22,7 @@ public class GameObjectBoard {
 		vampRestantes = restantes;
 	}
 	
-	public void addVampire(GameObject obj,int filaAleatoria, int columna, Random random) {
+	public void addVampire(GameObject obj,int filaAleatoria, int columna, float random) {
 		boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 		if(!ocupado) {
 			boolean crear = this.frecuenciaLimiteVamps(random);
@@ -47,18 +47,17 @@ public class GameObjectBoard {
 		
 	}
 
-	public boolean frecuenciaLimiteVamps(Random random) {
+	public boolean frecuenciaLimiteVamps(float random) {
 		boolean crear=false;
 		double levelFreq = level.getVampireFrequency();
-		double randomN = random.nextDouble();
 		
 		if(vampRestantes > 0) 
-			if (randomN <= levelFreq ) crear= true;
+			if (random <= levelFreq ) crear= true;
 		return crear;
 	}
 
 	public boolean addSlayer(GameObject objeto, int fila, int columna) {
-		if(!obList.buscarObjeto(fila, columna)) {//Si no hay objeto en esta columna
+		if(!obList.buscarObjeto(fila, columna)) {//Si no hay objeto
 			addObject(objeto);
 			return true;
 		}

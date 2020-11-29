@@ -1,7 +1,5 @@
 package objetos;
 
-import java.util.Random;
-
 public class Player {
 	
 	public static final int DEFAULT_MONEDAS = 50;

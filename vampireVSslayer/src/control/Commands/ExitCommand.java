@@ -6,7 +6,7 @@ public class ExitCommand extends Command {
 
 	public ExitCommand() {
 		//Deben ser static strings
-		super("exit", "e", "[E]xit", "exits the game");
+		super("exit", "e", "[E]xit", "exit game");
 	}
 	
 	public boolean execute(Game game) {

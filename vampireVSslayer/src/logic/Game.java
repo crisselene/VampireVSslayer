@@ -117,18 +117,19 @@ public class Game implements IPrintable {
 
 	public void update() {
 		ciclos ++;
+		player.ganaMonedas(random.nextFloat());
 		board.move();
 		board.attack();
 		this.crearVampiro();
 		board.removeDead();
-		player.ganaMonedas(random.nextFloat());
+		
 	}
 
 	private void crearVampiro() {
 		int filaAleatoria = random.nextInt(level.getDimy());
 		int columna = (level.getDimx() - 1);
 		Vampiro v = new Vampiro(columna, filaAleatoria, this);
-		board.addVampire(v,filaAleatoria,columna, random);
+		board.addVampire(v,filaAleatoria,columna, random.nextFloat());
 	}
 
 	public IAttack getAttackableInPosition(int posx, int posy) {

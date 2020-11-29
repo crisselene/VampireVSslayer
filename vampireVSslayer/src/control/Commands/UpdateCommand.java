@@ -5,7 +5,7 @@ import logic.Game;
 public class UpdateCommand extends Command {
 
 	public UpdateCommand() {
-		super("none", "n", "[n]one", "updates the game");
+		super("none", "n", "[n]one", "update game");
 	}
 
 	@Override
@@ -16,8 +16,9 @@ public class UpdateCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) {
-		if(commandWords[0] == "" || commandWords.length == 1)
+		if(String.valueOf(commandWords[0]).equals(""))
 		{
+			//System.out.println("..." +commandWords[0]+ "...");
 			return this;
 		}
 		return parseNoParamsCommand(commandWords);

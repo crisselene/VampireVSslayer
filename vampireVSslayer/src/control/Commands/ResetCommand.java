@@ -6,7 +6,7 @@ public class ResetCommand extends Command{
 	
 	public ResetCommand() {
 		//Deben ser static strings
-		super("reset", "r", "[R]eset", "reset the game");
+		super("reset", "r", "[R]eset", "reset game");
 	}
 	
 	public boolean execute(Game game) {

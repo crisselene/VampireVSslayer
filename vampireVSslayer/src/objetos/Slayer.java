@@ -49,6 +49,11 @@ public class Slayer extends GameObject implements IAttack{
 		return true;
 	}
 	
+	public boolean receiveDraculaAttack() {
+		this.setVida(0);
+		return true;
+	}
+	
 	//métodos en los que los slayers no actuan:
 	@Override
 	public void move(boolean ocupado) { // los slayers no se mueven

@@ -40,7 +40,7 @@ public abstract class GameObject implements IAttack{
 	}
 	
 	protected boolean isAlive() {
-		if(this.getVida()!=0) return true;
+		if(this.getVida()>0) return true;
 		else return false;
 	}
 	

@@ -1,6 +1,8 @@
 package logic;
 
 import java.util.Random;
+
+import objetos.Dracula;
 import objetos.Player;
 import objetos.Slayer;
 import objetos.Vampiro;
@@ -17,7 +19,6 @@ public class Game implements IPrintable {
 	private Player player;
 	private int ciclos;
 	private Random random;
-	
 
 	public int getCiclos() {
 		return ciclos;
@@ -124,21 +125,41 @@ public class Game implements IPrintable {
 		player.ganaMonedas(random.nextFloat());
 		board.move();
 		board.attack();
-		this.crearVampiro();
+		//this.crearVampiro();
+		this.creacionVampiros();
 		board.removeDead();
 		ciclos++;
 		
 	}
 
-	private void crearVampiro() {
+	//método que crea todos los tipos de vampiros con la misma frecuencia random
+	private void creacionVampiros() {
+		double randFreq = random.nextDouble();
+		crearVampiro(randFreq);
+		crearDracula(randFreq);
+		//TODO: anadir explosivos
+		
+	}
+
+	private void crearVampiro(double randFreq) {
 		int columna = (level.getDimx() - 1);
-		int fila = board.addVampire(columna, random.nextDouble(), random);
+		int fila = board.addVampire(columna, randFreq , random);
 		if(fila != -1) {
 			Vampiro v = new Vampiro(columna, fila, this);
 			board.addObject(v);
 		}
-		
-		
+	}
+	
+	private void crearDracula(double randFreq) {
+		int columna = (level.getDimx() - 1);
+		int fila = board.addVampire(columna, randFreq , random);
+		if(fila != -1) {
+			Dracula d = new Dracula(columna, fila, this);
+			if(!Dracula.isDraculaOnBoard()) {
+				board.addObject(d); 
+				Dracula.setDraculaOnBoard(true);
+			}
+		}
 	}
 
 	public IAttack getAttackableInPosition(int posx, int posy) {

@@ -119,4 +119,17 @@ public class GameObjectBoard {
 		return false;
 	}
 
+	public void pushVampires() {
+		obList.pushVampires();
+		
+	}
+
+	public boolean buscarObjeto(int posx, int posy) {
+		return obList.buscarObjeto(posy, posx);
+	}
+
+	public void lightVampires() {
+		obList.lightVampires();
+	}
+
 }

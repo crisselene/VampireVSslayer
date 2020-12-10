@@ -9,7 +9,9 @@ public class CommandGenerator{
 		new ResetCommand(),
 		new ExitCommand(),
 		new UpdateCommand(),
-		new AddBloodBankCommand()
+		new AddBloodBankCommand(),
+		new GarlicPushCommand(),
+		new LightFlashCommand()
 		
 	};
 	

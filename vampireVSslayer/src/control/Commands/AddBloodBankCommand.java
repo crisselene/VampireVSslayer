@@ -28,7 +28,7 @@ public class AddBloodBankCommand extends Command {
 	@Override
 	public Command parse(String[] commandWords) {
 		//Si no ha introducido caracteres
-				if(commandWords.length > 2 && isNumeric(commandWords[1])
+				if(commandWords.length > 3 && isNumeric(commandWords[1])
 				&& isNumeric(commandWords[2]) && isNumeric(commandWords[3])) {
 					
 					x= Integer.parseInt(commandWords[1]);//Lo convertimos en numero

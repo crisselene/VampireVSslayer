@@ -37,6 +37,10 @@ public class Dracula extends Vampiro implements IAttack {
 		return draculaOnBoard;
 	}
 
+	public boolean receiveLightFlash() {//Este no recibe el ataque
+		return false;		
+	}
+	
 	public static void setDraculaOnBoard(boolean draculaOnBoard) {
 		Dracula.draculaOnBoard = draculaOnBoard;
 	}

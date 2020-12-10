@@ -213,5 +213,35 @@ public class Game implements IPrintable {
 		player.reintegroBanco(ganancia);		
 	}
 
+	public boolean pushVampires(int coste) {
+		if(player.tieneMonedas(coste)) {
+			board.pushVampires();
+			return true;
+		}
+		System.out.println("Not enough coins");
+		return false;
+		
+	}
+
+	public boolean buscarObjeto(int posx, int posy) {		
+		return board.buscarObjeto(posx, posy);
+	}
+
+	public boolean estaAlFinal(int posx) {
+		if(posx == level.getDimx() - 1) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean lightVampires(int coste) {
+		if(player.tieneMonedas(coste)) {
+			board.lightVampires();
+			return true;
+		}
+		System.out.println("Not enough coins");
+		return false;
+	}
+
 
 }

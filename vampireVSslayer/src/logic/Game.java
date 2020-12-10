@@ -113,6 +113,9 @@ public class Game implements IPrintable {
 						"Coins: " + player.getMonedas() + "\n"+
 						"Remaining vampires: " + board.getVampRestantes() + "\n" +
 						"Vampires on the board: " + board.vampEnTablero() + "\n");
+						if(Dracula.isDraculaOnBoard()) {
+							info = info + ("Dracula is alive\n");
+						}
 		return info;
 	}
 

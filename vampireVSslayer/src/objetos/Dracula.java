@@ -8,12 +8,10 @@ public class Dracula extends Vampiro implements IAttack {
 	public final static int DEFAULT_VIDA = 5;
 	public final static int DEFAULT_CICLOS = 0;
 	private int ciclosAvance; 
-	private Game game;
 	public static boolean draculaOnBoard = false; 
 	
 	public Dracula(int posx, int posy, Game game) {
 		super(posx, posy, DEFAULT_VIDA, DEFAULT_CICLOS, game);
-		this.game = game;
 	}
 	
 	public String toString() {

@@ -40,7 +40,6 @@ public class Controller {
 		      Command command = CommandGenerator.parse(parameters);
 		      if (command != null) { 
 		    	  		refreshDisplay = command.execute(game);
-		    	  		//game.update();//ACTUALIZAR CREACION DE VAMPIROS******
 		       } 
 		       else {
 		    	   		System.out.println("[ERROR]: "+ unknownCommandMsg);

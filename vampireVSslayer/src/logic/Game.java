@@ -4,6 +4,7 @@ import java.util.Random;
 
 import objetos.BloodBank;
 import objetos.Dracula;
+import objetos.ExplosiveVampire;
 import objetos.Player;
 import objetos.Slayer;
 import objetos.Vampiro;
@@ -129,7 +130,6 @@ public class Game implements IPrintable {
 		player.ganaMonedas(random.nextFloat());
 		board.move();
 		board.attack();
-		//this.crearVampiro();
 		this.creacionVampiros();
 		board.removeDead();
 		ciclos++;
@@ -141,8 +141,17 @@ public class Game implements IPrintable {
 		double randFreq = random.nextDouble();
 		crearVampiro(randFreq);
 		crearDracula(randFreq);
-		//TODO: anadir explosivos
+		crearExplosivo(randFreq);
 		
+	}
+
+	private void crearExplosivo(double randFreq) {
+		int columna = (level.getDimx() - 1);
+		int fila = board.addVampire(columna, randFreq , random);
+		if(fila != -1) {
+			ExplosiveVampire ex = new ExplosiveVampire(columna, fila, this);
+			board.addObject(ex);
+		}
 	}
 
 	private void crearVampiro(double randFreq) {

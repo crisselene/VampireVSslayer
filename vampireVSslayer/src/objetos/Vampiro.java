@@ -10,7 +10,7 @@ public class Vampiro extends GameObject implements IAttack{
 	protected int posy;
 	public final static int DEFAULT_VIDA = 5;
 	public final static int DEFAULT_CICLOS = 0;
-	private int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
+	protected int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	protected Game game;
 	
 	

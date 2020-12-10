@@ -6,8 +6,7 @@ import logic.IAttack;
 public class Dracula extends Vampiro implements IAttack {
 
 	public final static int DEFAULT_VIDA = 5;
-	public final static int DEFAULT_CICLOS = 0;
-	private int ciclosAvance; 
+	public final static int DEFAULT_CICLOS = 0; 
 	public static boolean draculaOnBoard = false; 
 	
 	public Dracula(int posx, int posy, Game game) {

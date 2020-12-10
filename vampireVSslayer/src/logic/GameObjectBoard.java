@@ -2,6 +2,8 @@ package logic;
 
 import java.util.Random;
 
+import objetos.BloodBank;
+
 public class GameObjectBoard {
 
 	private Level level;
@@ -107,6 +109,14 @@ public class GameObjectBoard {
 		}
 		
 		return -1;//Cuando no se puede añadir devolvemos -1
+	}
+
+	public boolean addBank(GameObject objeto, int y, int x) {
+		if(!obList.buscarObjeto(y, x)) {//Si no hay objeto
+			addObject(objeto);
+			return true;
+		}
+		return false;
 	}
 
 }

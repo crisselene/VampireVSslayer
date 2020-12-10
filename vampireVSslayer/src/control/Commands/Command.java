@@ -28,10 +28,10 @@ public abstract class Command {
 		        this.name.equalsIgnoreCase(name);
 	  }
 	  
-	  protected Command parseParamsCommand(String[] words) {
+	  protected Command parseParamsCommand(String[] words, int args) {
 			
 			if (matchCommandName(words[0])) {
-				if (words.length != 3) {
+				if (words.length != args) {
 					System.err.println(incorrectNumberOfArgsMsg);
 					return null;
 				}

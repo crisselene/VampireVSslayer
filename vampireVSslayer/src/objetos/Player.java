@@ -3,7 +3,6 @@ package objetos;
 public class Player {
 	
 	public static final int DEFAULT_MONEDAS = 50;
-	public static final int COSTE_SLAYER = 50;
 	private int monedas;
 	
 	public Player() {
@@ -23,13 +22,17 @@ public class Player {
 		}
 	}
 
-	public boolean tieneMonedas() {
-		if (monedas >= 50) return true;
+	public void restarMonedas(int monedas2) {
+		monedas = monedas - monedas2;
+		
+	}
+
+	public boolean tieneMonedas(int monedas) {
+		if(this.monedas == monedas) return true;
 		return false;
 	}
 
-	public void restarMonedas() {
-		monedas = monedas - COSTE_SLAYER;
-		
+	public void reintegroBanco(int ganancia) {
+		monedas = monedas + ganancia;		
 	}
 }

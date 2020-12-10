@@ -2,6 +2,7 @@ package logic;
 
 import java.util.Random;
 
+import objetos.BloodBank;
 import objetos.Dracula;
 import objetos.Player;
 import objetos.Slayer;
@@ -87,14 +88,14 @@ public class Game implements IPrintable {
 		userExit = true;
 	}
 
-	public boolean addSlayer(int x, int y) {
+	public boolean addSlayer(int x, int y, int monedas) {
 		if(board.dentroTablero(y, x)) {
 			
 			
-			if(player.tieneMonedas()) {
+			if(player.tieneMonedas(monedas)) {
 				Slayer slayer = new Slayer(x, y, this);
 				if(board.addSlayer(slayer, y, x)) {
-					player.restarMonedas();
+					player.restarMonedas(monedas);
 					return true;
 				}
 			}else {
@@ -172,6 +173,32 @@ public class Game implements IPrintable {
 		GameObject obj;
 		obj = board.getAttackableInLine(posy);
 		return obj;
+	}
+
+	public boolean addBank(int x, int y, int z) {
+		
+		if(board.dentroTablero(y, x)) {			
+			
+			if(player.tieneMonedas(z)) {
+				
+				BloodBank bank = new BloodBank(x, y, z, this);
+				if(board.addBank(bank, y, x)) {
+					player.restarMonedas(z);
+					return true;
+				}
+			}else {
+				System.out.println("Not enough coins");
+				return false;
+			}
+		}
+		System.out.println("Invalid position");
+		return false;
+		
+	}
+
+	public void reintegroBanco(int ganancia) {
+		//Añade las monedas del banco
+		player.reintegroBanco(ganancia);		
 	}
 
 

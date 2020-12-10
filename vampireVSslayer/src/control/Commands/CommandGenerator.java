@@ -8,7 +8,9 @@ public class CommandGenerator{
 		new HelpCommand(),		
 		new ResetCommand(),
 		new ExitCommand(),
-		new UpdateCommand()
+		new UpdateCommand(),
+		new AddBloodBankCommand()
+		
 	};
 	
 	public static Command parse(String[ ] commandWords) {

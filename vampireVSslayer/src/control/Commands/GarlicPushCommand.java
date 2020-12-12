@@ -7,7 +7,7 @@ public class GarlicPushCommand extends Command {
 	private static final String NAME = "garlic";
 	private static final String SHORTCUT = "g";
 	private static final String DETAILS = "[g]arlic";
-	private static final String HELP = "push the vampires 1 position";
+	private static final String HELP = "pushes back vampires";
 	
 	public GarlicPushCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);

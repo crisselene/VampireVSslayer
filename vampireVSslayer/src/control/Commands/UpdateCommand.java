@@ -6,8 +6,8 @@ public class UpdateCommand extends Command {
 	
 	private static final String NAME = "none";
 	private static final String SHORTCUT = "n";
-	private static final String DETAILS = "[n]one";
-	private static final String HELP = "update game";
+	private static final String DETAILS = "[n]one | []";
+	private static final String HELP = "update";
 
 	public UpdateCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);

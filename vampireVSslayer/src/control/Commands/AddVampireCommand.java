@@ -6,8 +6,8 @@ public class AddVampireCommand extends Command {
 
 	private static final String NAME = "vampire";
 	private static final String SHORTCUT = "v";
-	private static final String DETAILS = "[v]ampire [<TYPE>] <x> <y>";
-	private static final String HELP = "add vampire TYPE position x y";
+	private static final String DETAILS = "[v]ampire [<type>] <x> <y>. Type = {\"\"|\"D\"|\"E\"}";
+	private static final String HELP = "add a vampire in position x, y ";
 	private static final int ARGS = 3;
 	private static final int ARGSTYPE = 4;
 	private int x;

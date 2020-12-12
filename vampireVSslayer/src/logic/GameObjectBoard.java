@@ -116,4 +116,11 @@ public class GameObjectBoard {
 		obList.lightVampires();
 	}
 
+	public void reducirVampiros() {
+		int vamp = this.getVampRestantes();
+		vamp--;
+		this.setVampRestantes(vamp);
+		
+	}
+
 }

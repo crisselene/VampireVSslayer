@@ -17,6 +17,8 @@ public class Game implements IPrintable {
 	private static final int COSTE_GARLIC = 10;
 	private static final int COSTE_LIGHT = 50;
 	private static final int SUPER_MONEDAS = 1000;
+	private static final String INVALID_POSITION= "[ERROR]: Invalid position";
+	private static final String NOT_COINS= "[ERROR]: Not enough coins";
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
@@ -104,11 +106,11 @@ public class Game implements IPrintable {
 					return true;
 				}
 			}else {
-				System.out.println("Not enough coins");
+				System.out.println(NOT_COINS);
 				return false;
 			}
 		}
-		System.out.println("Invalid position");
+		System.out.println(INVALID_POSITION);
 		return false;
 	}
 
@@ -195,20 +197,25 @@ public class Game implements IPrintable {
 
 		if(board.dentroTablero(y, x)) {
 
-			if(player.tieneMonedas(z)) {				
-				if(board.buscarObjeto(x, y)) {
+			if(!board.buscarObjeto(x, y)) {
+				if(player.tieneMonedas(z)) {				
 					BloodBank bank = new BloodBank(x, y, z, this);
 					board.addObject(bank);
 					player.restarMonedas(z);
 					return true;
+				}else {
+					System.out.println(NOT_COINS);
+					return false;
 				}
 			}else {
-				System.out.println("Not enough coins");
+				System.out.println(INVALID_POSITION);
 				return false;
 			}
+		}else{
+			System.out.println(INVALID_POSITION);
+			return false;
 		}
-		System.out.println("Invalid position");
-		return false;
+		
 
 	}
 
@@ -222,7 +229,7 @@ public class Game implements IPrintable {
 			board.pushVampires();
 			return true;
 		}
-		System.out.println("Not enough coins");
+		System.out.println(NOT_COINS);
 		return false;
 
 	}
@@ -243,7 +250,7 @@ public class Game implements IPrintable {
 			board.lightVampires();
 			return true;
 		}
-		System.out.println("Not enough coins");
+		System.out.println(NOT_COINS);
 		return false;
 	}
 
@@ -254,35 +261,46 @@ public class Game implements IPrintable {
 
 	public boolean addVampire(int x, int y, String type) {
 
-		if(board.dentroTablero(y, x)) {
-			if(!board.buscarObjeto(x, y)){
-				if(type.equals("d")) {
-					Dracula dracula = new Dracula(x, y, this);
-					board.addObject(dracula);
-				}
-				else if(type.equals("e")) {
-					ExplosiveVampire ev = new ExplosiveVampire(x, y, this);
-					board.addObject(ev);
+		//if(board.getVampRestantes() == 3) {//************
+			if(board.dentroTablero(y, x)) {
+				if(!board.buscarObjeto(x, y)){
+					if(type!=null) {
+						if(type.equals("d")) {
+							if(Dracula.draculaOnBoard==false) {
+								Dracula dracula = new Dracula(x, y, this);
+								board.addObject(dracula);
+								Dracula.draculaOnBoard = true;
+							}else {
+								System.out.println("[ERROR]: Dracula is alive");
+								return false;
+							}
+						}
+						else if(type.equals("e")) {
+							ExplosiveVampire ev = new ExplosiveVampire(x, y, this);
+							board.addObject(ev);
+						}
+						else {
+							Vampiro vampire = new Vampiro(x,y,this);
+							board.addObject(vampire);
+						}
+					}else {
+						Vampiro vampire = new Vampiro(x,y,this);
+						board.addObject(vampire);
+					}
+					board.reducirVampiros();
+					return true;//Porque en todos los casos se habra añadido el vampiro
 				}
 				else {
-					Vampiro vampire = new Vampiro(x,y,this);
-					board.addObject(vampire);
+					System.out.println("Other object in this position");//esto deebería dar uknow command
+					return false;
 				}
-				return true;//Porque en todos los casos se habra añadido el vampiro
+	
 			}
 			else {
-				System.out.println("Other object in this position");
-				return false;
+			System.out.println(INVALID_POSITION);
+			return false;
 			}
-
-		}
-		else {
-		System.out.println("Invalid position");
-		return false;
-		}
-
+		//} System.out.println("[ERROR]: No more remainning vampires left");
+		//return false;
 	}
-
-
-
 }

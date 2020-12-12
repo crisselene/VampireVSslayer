@@ -7,7 +7,7 @@ public class LightFlashCommand extends Command {
 	private static final String NAME = "light";
 	private static final String SHORTCUT = "l";
 	private static final String DETAILS = "[l]ight";
-	private static final String HELP = "light the vampires";
+	private static final String HELP = "kills all the vampires";
 	
 	public LightFlashCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);

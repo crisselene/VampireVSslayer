@@ -7,7 +7,7 @@ public class SuperCoinsCommand extends Command {
 	private static final String NAME = "coins";
 	private static final String SHORTCUT = "c";
 	private static final String DETAILS = "[c]oins";
-	private static final String HELP = "give you 1000 coins";
+	private static final String HELP = "add 1000 coins";
 	
 	public SuperCoinsCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);

@@ -32,7 +32,7 @@ public class GameObjectList {
 				return ob.toString();
 			}
 		}
-		return " ";
+		return "";
 	}
 
 	public void attack() {

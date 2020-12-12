@@ -37,7 +37,7 @@ public class AddCommand extends Command {
 			//Retornamos dependiendo de los argumentos que habia en el parse
 			return parseParamsCommand(commandWords, ARGS);
 		}
-		else return parseNoParamsCommand(commandWords);
+		else return null;
 		
 	}
 

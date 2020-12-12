@@ -9,8 +9,8 @@ public abstract class Command {
 	  private final String details; 
 	  private final String help;
 
-	  protected static final String incorrectNumberOfArgsMsg = "Incorrect number of arguments";
-	  protected static final String incorrectArgsMsg = "Incorrect arguments format";
+	//  protected static final String incorrectNumberOfArgsMsg = "Incorrect number of arguments";
+	 // protected static final String incorrectArgsMsg = "Incorrect arguments format";
 	  
 	  public Command(String name,  String shortcut, String details, String help){    
 	    this.name = name;
@@ -32,7 +32,7 @@ public abstract class Command {
 			
 			if (matchCommandName(words[0])) {
 				if (words.length != args) {
-					System.err.println(incorrectNumberOfArgsMsg);
+					//System.err.println(incorrectNumberOfArgsMsg);
 					return null;
 				}
 				return this;
@@ -45,7 +45,7 @@ public abstract class Command {
 	
 			if (matchCommandName(words[0])) {
 				if (words.length != 1) {
-					System.err.println(incorrectArgsMsg);
+					//System.err.println(incorrectArgsMsg);
 					return null;
 				}
 				return this;

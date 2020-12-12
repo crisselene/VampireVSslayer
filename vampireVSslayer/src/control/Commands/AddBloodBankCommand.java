@@ -4,13 +4,17 @@ import logic.Game;
 
 public class AddBloodBankCommand extends Command {
 	
+	private static final String NAME = "bank";
+	private static final String SHORTCUT = "b";
+	private static final String DETAILS = "[b]ank <x> <y> <z>";
+	private static final String HELP = "add a blood bank";
 	private static final int ARGS=4;
 	private int x;
 	private int y;
 	private int z;
 
 	public AddBloodBankCommand() {
-		super("bank", "b", "[b]ank <x> <y> <z>", "add a blood bank");
+		super(NAME, SHORTCUT, DETAILS, HELP);
 		// TODO Auto-generated constructor stub
 	}
 

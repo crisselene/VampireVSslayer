@@ -4,15 +4,15 @@ import logic.Game;
 
 public class HelpCommand extends Command {
 
-	private static String name = "help";
-	private static String shortcut = "h";
-	private static String details = "[h]elp";
-	private static String help = "show this help";
+	private static final String NAME = "help";
+	private static final String SHORTCUT = "h";
+	private static final String DETAILS = "[h]elp";
+	private static final String HELP = "show this help";
 	
 	
 	
 	public HelpCommand() {
-		super(name, shortcut, details, help);
+		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 	
 	@Override

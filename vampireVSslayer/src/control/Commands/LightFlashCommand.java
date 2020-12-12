@@ -4,8 +4,13 @@ import logic.Game;
 
 public class LightFlashCommand extends Command {
 	
+	private static final String NAME = "light";
+	private static final String SHORTCUT = "l";
+	private static final String DETAILS = "[l]ight";
+	private static final String HELP = "light the vampires";
+	
 	public LightFlashCommand() {
-		super("light", "l", "[l]ight", "light the vampires");
+		super(NAME, SHORTCUT, DETAILS, HELP);
 		// TODO Auto-generated constructor stub
 	}
 

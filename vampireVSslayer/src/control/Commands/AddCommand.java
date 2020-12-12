@@ -4,14 +4,16 @@ import logic.Game;
 
 public class AddCommand extends Command {
 	
+	private static final String NAME = "add";
+	private static final String SHORTCUT = "a";
+	private static final String DETAILS = "[a]dd <x> <y>";
+	private static final String HELP = "add a slayer in position x, y";
 	private static final int ARGS=3;
 	private int x;
-	private int y;
-	
-	
+	private int y;	
 
 	public AddCommand() {
-		super("add", "a", "[a]dd <x> <y>", "add a slayer in position x, y");
+		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 
 	@Override

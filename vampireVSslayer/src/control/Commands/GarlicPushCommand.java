@@ -4,8 +4,13 @@ import logic.Game;
 
 public class GarlicPushCommand extends Command {
 	
+	private static final String NAME = "garlic";
+	private static final String SHORTCUT = "g";
+	private static final String DETAILS = "[g]arlic";
+	private static final String HELP = "push the vampires 1 position";
+	
 	public GarlicPushCommand() {
-		super("garlic", "g", "[g]arlic", "push the vampires 1 position");
+		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 
 	@Override

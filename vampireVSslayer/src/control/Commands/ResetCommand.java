@@ -4,9 +4,13 @@ import logic.Game;
 
 public class ResetCommand extends Command{
 	
+	private static final String NAME = "reset";
+	private static final String SHORTCUT = "r";
+	private static final String DETAILS = "[r]eset";
+	private static final String HELP = "reset game";
+	
 	public ResetCommand() {
-		//Deben ser static strings
-		super("reset", "r", "[r]eset", "reset game");
+		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 	
 	public boolean execute(Game game) {

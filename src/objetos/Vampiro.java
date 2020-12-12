@@ -69,6 +69,27 @@ public class Vampiro extends GameObject implements IAttack{
 		this.setVida(vida);		
 		return true;
 	}
+	
+	public  boolean receiveGarlicPush() {
+		//Si tiene alguien detras no retrocede y si esta al final muere
+		if(game.estaAlFinal(posx)) {
+			this.setVida(0);
+			return true;
+		}
+		else if(!game.buscarObjeto(posx+1, posy)) {
+			posx++;
+			ciclosAvance = 0;
+			this.setPosX(posx);
+			return true;
+		}
+		return false;		
+	}
+	
+	public boolean receiveLightFlash() {
+		//Fulmina a los vampiros
+		this.setVida(0);
+		return true;		
+	}
 
 	@Override
 	public boolean contarVamp() {

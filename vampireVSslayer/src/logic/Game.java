@@ -12,7 +12,7 @@ import view.GamePrinter;
 import view.IPrintable;
 
 public class Game implements IPrintable {
-	
+
 	private static final int COSTE_SLAYER = 50;
 	private static final int COSTE_GARLIC = 10;
 	private static final int COSTE_LIGHT = 50;
@@ -44,18 +44,18 @@ public class Game implements IPrintable {
 		board = new GameObjectBoard(level);
 		random = new Random(seed);
 	}
-	
+
 	public boolean isFinished() {
 		//El return debe ser algo como vamp.llego() || vamp.noQuedan() || userExit
-		
+
 		return userExit || llegoFinal() || userVictory();
 	}
-	
-	private boolean userVictory() {		
+
+	private boolean userVictory() {
 		return board.userVictory();
 	}
 
-	private boolean llegoFinal() {		
+	private boolean llegoFinal() {
 		return board.llegoFinal();
 	}
 
@@ -72,11 +72,11 @@ public class Game implements IPrintable {
 	public int getLevelDimY() {
 		return level.getDimy();
 	}
-	
+
 	public long getSeed() {
 		return seed;
 	}
-	
+
 	public String getWinnerMessage() {
 		if(userExit) {
 			return "Nobody wins...";
@@ -88,14 +88,14 @@ public class Game implements IPrintable {
 			return "Player wins";
 		}
 	}
-	
+
 	public void doExit() {
 		userExit = true;
 	}
 
 	public boolean addSlayer(int x, int y) {
-		if(board.dentroTablero(y, x)) {	
-			
+		if(board.dentroTablero(y, x)) {
+
 			if(player.tieneMonedas(COSTE_SLAYER)) {
 				if(!board.buscarObjeto(x, y)) {
 					Slayer slayer = new Slayer(x, y, this);
@@ -111,7 +111,7 @@ public class Game implements IPrintable {
 		System.out.println("Invalid position");
 		return false;
 	}
-		
+
 	@Override
 	public String getInfo() {
 		String info = ("Number of cycles: " + ciclos + "\n" +
@@ -137,7 +137,7 @@ public class Game implements IPrintable {
 		this.creacionVampiros();
 		board.removeDead();
 		ciclos++;
-		
+
 	}
 
 	//método que crea todos los tipos de vampiros con la misma frecuencia random
@@ -146,7 +146,7 @@ public class Game implements IPrintable {
 		crearVampiro(randFreq);
 		crearDracula(randFreq);
 		crearExplosivo(randFreq);
-		
+
 	}
 
 	private void crearExplosivo(double randFreq) {
@@ -166,14 +166,14 @@ public class Game implements IPrintable {
 			board.addObject(v);
 		}
 	}
-	
+
 	private void crearDracula(double randFreq) {
 		int columna = (level.getDimx() - 1);
 		int fila = board.addVampire(columna, randFreq , random);
 		if(fila != -1) {
 			Dracula d = new Dracula(columna, fila, this);
 			if(!Dracula.isDraculaOnBoard()) {
-				board.addObject(d); 
+				board.addObject(d);
 				Dracula.setDraculaOnBoard(true);
 			}
 		}
@@ -184,7 +184,7 @@ public class Game implements IPrintable {
 		obj = board.getAttackableInPosition(posx,  posy);
 		return obj;
 	}
-	
+
 	public IAttack getAttackableInLine(int posy) {
 		GameObject obj;
 		obj = board.getAttackableInLine(posy);
@@ -192,11 +192,11 @@ public class Game implements IPrintable {
 	}
 
 	public boolean addBank(int x, int y, int z) {
-		
-		if(board.dentroTablero(y, x)) {			
-			
+
+		if(board.dentroTablero(y, x)) {
+
 			if(player.tieneMonedas(z)) {
-				
+
 				BloodBank bank = new BloodBank(x, y, z, this);
 				if(board.addBank(bank, y, x)) {
 					player.restarMonedas(z);
@@ -209,12 +209,12 @@ public class Game implements IPrintable {
 		}
 		System.out.println("Invalid position");
 		return false;
-		
+
 	}
 
 	public void reintegroBanco(int ganancia) {
 		//Añade las monedas del banco
-		player.reintegroBanco(ganancia);		
+		player.reintegroBanco(ganancia);
 	}
 
 	public boolean pushVampires() {
@@ -224,10 +224,10 @@ public class Game implements IPrintable {
 		}
 		System.out.println("Not enough coins");
 		return false;
-		
+
 	}
 
-	public boolean buscarObjeto(int posx, int posy) {		
+	public boolean buscarObjeto(int posx, int posy) {
 		return board.buscarObjeto(posx, posy);
 	}
 
@@ -253,16 +253,16 @@ public class Game implements IPrintable {
 	}
 
 	public boolean addVampire(int x, int y, String type) {
-		
-		if(board.dentroTablero(y, x)) {					
+
+		if(board.dentroTablero(y, x)) {
 			if(!board.buscarObjeto(x, y)){
 				if(type.equals("d")) {
 					Dracula dracula = new Dracula(x, y, this);
-					board.addObject(dracula);			
+					board.addObject(dracula);
 				}
 				else if(type.equals("e")) {
 					ExplosiveVampire ev = new ExplosiveVampire(x, y, this);
-					board.addObject(ev);					
+					board.addObject(ev);
 				}
 				else {
 					Vampiro vampire = new Vampiro(x,y,this);
@@ -274,13 +274,13 @@ public class Game implements IPrintable {
 				System.out.println("Other object in this position");
 				return false;
 			}
-			
+
 		}
 		else {
 		System.out.println("Invalid position");
 		return false;
 		}
-		
+
 	}
 
 

@@ -11,11 +11,7 @@ public class Dracula extends Vampiro implements IAttack {
 	
 	public Dracula(int posx, int posy, Game game) {
 		super(posx, posy, DEFAULT_VIDA, DEFAULT_CICLOS, game);
-	}
-	
-	public String toString() {
-		int vida = this.getVida();
-		return "D [" + vida + "]";
+		this.letra="D ";
 	}
 	
 	@Override

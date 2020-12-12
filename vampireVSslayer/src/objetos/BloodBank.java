@@ -21,6 +21,7 @@ public class BloodBank extends GameObject implements IAttack{
 		
 	}
 	
+	@Override
 	public String toString() {
 		int banco = this.z;
 		return "B ["+ banco +"]";

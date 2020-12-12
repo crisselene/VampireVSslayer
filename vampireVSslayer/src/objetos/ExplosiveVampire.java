@@ -11,14 +11,9 @@ public class ExplosiveVampire extends Vampiro implements IAttack {
 	
 	public ExplosiveVampire(int posx, int posy, Game game) {
 		super(posx, posy, DEFAULT_VIDA , DEFAULT_CICLOS, game);	
+		this.letra = "EV ";
 	}
 	
-	public String toString() {
-		int vida = this.getVida();
-		return "EV [" + vida + "]";
-	}
-
-
 	public void explotar() {
 		for (int i = posx-1; i <= posx+1 ; i++) {
 			for (int j= posy-1; j<= posy+1 ; j++) {

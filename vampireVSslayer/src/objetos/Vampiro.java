@@ -32,6 +32,7 @@ public class Vampiro extends GameObject implements IAttack{
 		this.posy = posy;
 		this.ciclosAvance = ciclosAvance;
 		this.game = game;
+		this.letra = "V ";
 	}
 
 
@@ -40,12 +41,6 @@ public class Vampiro extends GameObject implements IAttack{
 	}
 	public void setCiclosAvance(int ciclosAvance) {
 		this.ciclosAvance = ciclosAvance;
-	}
-
-
-	public String toString() {
-		int vida = this.getVida();
-		return "V [" + vida + "]";
 	}
 
 	@Override

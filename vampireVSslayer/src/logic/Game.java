@@ -130,6 +130,7 @@ public class Game implements IPrintable {
 		board = new GameObjectBoard(level);
 		ciclos = 0;
 		player = new Player();
+		Dracula.draculaOnBoard=false;
 	}
 
 	public void update() {
@@ -261,7 +262,7 @@ public class Game implements IPrintable {
 
 	public boolean addVampire(int x, int y, String type) {
 
-		//if(board.getVampRestantes() == 3) {//************
+		if(board.getVampRestantes() > 0) {
 			if(board.dentroTablero(y, x)) {
 				if(!board.buscarObjeto(x, y)){
 					if(type!=null) {
@@ -300,7 +301,10 @@ public class Game implements IPrintable {
 			System.out.println(INVALID_POSITION);
 			return false;
 			}
-		//} System.out.println("[ERROR]: No more remainning vampires left");
-		//return false;
+		} else{
+			System.out.println("[ERROR]: No more remaining vampires left");
+			return false;
+		}
+		
 	}
 }

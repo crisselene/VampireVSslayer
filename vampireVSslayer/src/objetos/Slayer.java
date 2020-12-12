@@ -12,15 +12,13 @@ public class Slayer extends GameObject implements IAttack{
 	private int posx;
 	private int posy;
 	private Game game;
-	//private int vida;
-	//private GameObjectList list;
 	
-
 	public Slayer(int posx, int posy, Game game) { //Constructor solo con posx y posy
 		this(posx, posy, DEFAULT_VIDA, game);
 		this.posx=posx;
 		this.posy= posy;
 		this.game = game;
+		this.letra = "S ";
 	}
 	public Slayer(int posx, int posy, int vida, Game game) { //Constructor completo
 		super(posx, posy, vida, game);
@@ -29,10 +27,6 @@ public class Slayer extends GameObject implements IAttack{
 		this.game = game;
 	}
 	
-	public String toString() {
-		int vida = this.getVida();
-		return "S ["+ vida +"]";
-	}
 	@Override
 	public void attack() {
 		//Solo atacamos si el otro esta en su misma fila

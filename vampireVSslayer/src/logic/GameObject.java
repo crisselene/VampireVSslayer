@@ -7,12 +7,17 @@ public abstract class GameObject implements IAttack{
 	private int vida;
 	protected int posx;
 	protected int posy;
+	protected String letra;
 		
 	public GameObject(int posx, int posy, int vida, Game game) {
 		this.posx = posx;
 		this.posy = posy;
 		this.vida=vida;
 		this.game = game;
+	}
+	
+	public String toString() {
+		return letra + "["+ vida +"]";
 	}
 
 	protected void setVida(int vida) {

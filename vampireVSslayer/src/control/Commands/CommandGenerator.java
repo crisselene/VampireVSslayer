@@ -33,8 +33,7 @@ public class CommandGenerator{
 		for (Command c: availableCommands) {
 			System.out.println(c.helpText());
 		}
-
-
+		System.out.print("\n");
 	}
 
 

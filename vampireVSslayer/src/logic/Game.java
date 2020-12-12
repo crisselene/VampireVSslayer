@@ -19,6 +19,8 @@ public class Game implements IPrintable {
 	private static final int SUPER_MONEDAS = 1000;
 	private static final String INVALID_POSITION= "[ERROR]: Invalid position";
 	private static final String NOT_COINS= "[ERROR]: Not enough coins";
+	private static final String DRACULA_ALIVE = "[ERROR]: Dracula is alive";
+	private static final String NO_VAMP_LEFT = "[ERROR]: No more remaining vampires left";
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
@@ -272,7 +274,7 @@ public class Game implements IPrintable {
 								board.addObject(dracula);
 								Dracula.draculaOnBoard = true;
 							}else {
-								System.out.println("[ERROR]: Dracula is alive");
+								System.out.println(DRACULA_ALIVE);
 								return false;
 							}
 						}
@@ -292,7 +294,7 @@ public class Game implements IPrintable {
 					return true;//Porque en todos los casos se habra añadido el vampiro
 				}
 				else {
-					System.out.println("Other object in this position");//esto deebería dar uknow command
+					System.out.println("Other object in this position");//*****************esto deebería dar unknow command
 					return false;
 				}
 	
@@ -302,7 +304,7 @@ public class Game implements IPrintable {
 			return false;
 			}
 		} else{
-			System.out.println("[ERROR]: No more remaining vampires left");
+			System.out.println(NO_VAMP_LEFT);
 			return false;
 		}
 		

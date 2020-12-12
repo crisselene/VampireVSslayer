@@ -242,10 +242,10 @@ public class Game implements IPrintable {
 	}
 
 	public boolean estaAlFinal(int posx) {
-		if(posx == level.getDimx() - 1) {
-			return true;
-		}
-		return false;
+		//if(posx == level.getDimx() - 1) {
+			return posx == level.getDimx() - 1;
+		//}
+		//return false;
 	}
 
 	public boolean lightVampires() {

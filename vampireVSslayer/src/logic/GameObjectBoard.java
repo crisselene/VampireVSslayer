@@ -38,14 +38,6 @@ public class GameObjectBoard {
 		return crear;
 	}
 
-	public boolean addSlayer(GameObject objeto, int fila, int columna) {
-		if(!obList.buscarObjeto(fila, columna)) {//Si no hay objeto
-			addObject(objeto);
-			return true;
-		}
-		return false;
-	}
-
 	public GameObject getAttackableInPosition(int posx, int posy) {
 		GameObject object;
 		object = obList.getAttackableInPosition(posx,posy);

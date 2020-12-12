@@ -3,8 +3,6 @@ package control.Commands;
 import logic.Game;
 
 public class GarlicPushCommand extends Command {
-
-	private static final int COSTE=10;
 	
 	public GarlicPushCommand() {
 		super("garlic", "g", "[g]arlic", "push the vampires 1 position");
@@ -12,7 +10,7 @@ public class GarlicPushCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		if(game.pushVampires(COSTE)) {
+		if(game.pushVampires()) {
 			game.update();
 			return true;
 		}		

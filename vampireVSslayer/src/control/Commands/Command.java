@@ -57,4 +57,18 @@ public abstract class Command {
 	  public String helpText(){
 	    return details + ": " + help;
 	  }
+	  
+	  public boolean isNumeric(String string)
+	    {
+	    	boolean resultado;
+
+	        try {
+	            Integer.parseInt(string);
+	            resultado = true;
+	        } catch (NumberFormatException excepcion) {
+	            resultado = false;
+	        }
+	 
+	        return resultado;
+	    }
 }

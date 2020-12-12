@@ -4,9 +4,14 @@ import logic.Game;
 
 public class ExitCommand extends Command {
 
+	private static final String NAME = "exit";
+	private static final String SHORTCUT = "e";
+	private static final String DETAILS = "[e]xit";
+	private static final String HELP = "exit game";
+	
 	public ExitCommand() {
 		//Deben ser static strings
-		super("exit", "e", "[e]xit", "exit game");
+		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 	
 	public boolean execute(Game game) {

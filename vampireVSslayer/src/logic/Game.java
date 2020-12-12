@@ -13,6 +13,10 @@ import view.IPrintable;
 
 public class Game implements IPrintable {
 	
+	private static final int COSTE_SLAYER = 50;
+	private static final int COSTE_GARLIC = 10;
+	private static final int COSTE_LIGHT = 50;
+	private static final int SUPER_MONEDAS = 1000;
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
@@ -89,14 +93,14 @@ public class Game implements IPrintable {
 		userExit = true;
 	}
 
-	public boolean addSlayer(int x, int y, int monedas) {
-		if(board.dentroTablero(y, x)) {
+	public boolean addSlayer(int x, int y) {
+		if(board.dentroTablero(y, x)) {	
 			
-			
-			if(player.tieneMonedas(monedas)) {
-				Slayer slayer = new Slayer(x, y, this);
-				if(board.addSlayer(slayer, y, x)) {
-					player.restarMonedas(monedas);
+			if(player.tieneMonedas(COSTE_SLAYER)) {
+				if(!board.buscarObjeto(x, y)) {
+					Slayer slayer = new Slayer(x, y, this);
+					board.addObject(slayer);
+					player.restarMonedas(COSTE_SLAYER);
 					return true;
 				}
 			}else {
@@ -213,8 +217,8 @@ public class Game implements IPrintable {
 		player.reintegroBanco(ganancia);		
 	}
 
-	public boolean pushVampires(int coste) {
-		if(player.tieneMonedas(coste)) {
+	public boolean pushVampires() {
+		if(player.tieneMonedas(COSTE_GARLIC)) {
 			board.pushVampires();
 			return true;
 		}
@@ -234,14 +238,51 @@ public class Game implements IPrintable {
 		return false;
 	}
 
-	public boolean lightVampires(int coste) {
-		if(player.tieneMonedas(coste)) {
+	public boolean lightVampires() {
+		if(player.tieneMonedas(COSTE_LIGHT)) {
 			board.lightVampires();
 			return true;
 		}
 		System.out.println("Not enough coins");
 		return false;
 	}
+
+	public void superMonedas() {
+		player.reintegroBanco(SUPER_MONEDAS);
+		//Le hacemos el reintegro especial
+	}
+
+	public boolean addVampire(int x, int y, String type) {
+		
+		if(board.dentroTablero(y, x)) {					
+			if(!board.buscarObjeto(x, y)){
+				if(type.equals("d")) {
+					Dracula dracula = new Dracula(x, y, this);
+					board.addObject(dracula);			
+				}
+				else if(type.equals("e")) {
+					ExplosiveVampire ev = new ExplosiveVampire(x, y, this);
+					board.addObject(ev);					
+				}
+				else {
+					Vampiro vampire = new Vampiro(x,y,this);
+					board.addObject(vampire);
+				}
+				return true;//Porque en todos los casos se habra añadido el vampiro
+			}
+			else {
+				System.out.println("Other object in this position");
+				return false;
+			}
+			
+		}
+		else {
+		System.out.println("Invalid position");
+		return false;
+		}
+		
+	}
+
 
 
 }

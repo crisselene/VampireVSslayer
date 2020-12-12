@@ -39,18 +39,4 @@ public class AddBloodBankCommand extends Command {
 				}
 				else return parseNoParamsCommand(commandWords);
 	}
-
-	 public boolean isNumeric(String string)
-	    {
-	    	boolean resultado;
-
-	        try {
-	            Integer.parseInt(string);
-	            resultado = true;
-	        } catch (NumberFormatException excepcion) {
-	            resultado = false;
-	        }
-	 
-	        return resultado;
-	    }
 }

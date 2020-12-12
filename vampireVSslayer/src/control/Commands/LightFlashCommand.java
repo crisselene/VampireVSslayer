@@ -3,8 +3,6 @@ package control.Commands;
 import logic.Game;
 
 public class LightFlashCommand extends Command {
-
-	private static final int COSTE = 50;
 	
 	public LightFlashCommand() {
 		super("light", "l", "[l]ight", "light the vampires");
@@ -13,7 +11,7 @@ public class LightFlashCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		if(game.lightVampires(COSTE)) {
+		if(game.lightVampires()) {
 			game.update();
 			return true;
 		}		

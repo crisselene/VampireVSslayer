@@ -11,7 +11,9 @@ public class CommandGenerator{
 		new UpdateCommand(),
 		new AddBloodBankCommand(),
 		new GarlicPushCommand(),
-		new LightFlashCommand()
+		new LightFlashCommand(),
+		new SuperCoinsCommand(),
+		new AddVampireCommand()
 		
 	};
 	

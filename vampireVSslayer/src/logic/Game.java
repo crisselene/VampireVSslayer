@@ -195,10 +195,10 @@ public class Game implements IPrintable {
 
 		if(board.dentroTablero(y, x)) {
 
-			if(player.tieneMonedas(z)) {
-
-				BloodBank bank = new BloodBank(x, y, z, this);
-				if(board.addBank(bank, y, x)) {
+			if(player.tieneMonedas(z)) {				
+				if(board.buscarObjeto(x, y)) {
+					BloodBank bank = new BloodBank(x, y, z, this);
+					board.addObject(bank);
 					player.restarMonedas(z);
 					return true;
 				}

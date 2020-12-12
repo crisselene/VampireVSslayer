@@ -103,12 +103,17 @@ public class GameObjectBoard {
 		return -1;//Cuando no se puede añadir devolvemos -1
 	}
 
-	public boolean addBank(GameObject objeto, int y, int x) {
-		if(!obList.buscarObjeto(y, x)) {//Si no hay objeto
-			addObject(objeto);
-			return true;
-		}
-		return false;
+	public void pushVampires() {
+		obList.pushVampires();
+		
+	}
+
+	public boolean buscarObjeto(int posx, int posy) {
+		return obList.buscarObjeto(posy, posx);
+	}
+
+	public void lightVampires() {
+		obList.lightVampires();
 	}
 
 }

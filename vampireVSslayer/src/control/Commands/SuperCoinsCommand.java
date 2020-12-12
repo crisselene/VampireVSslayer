@@ -17,7 +17,7 @@ public class SuperCoinsCommand extends Command {
 	@Override
 	public boolean execute(Game game) {
 		game.superMonedas();
-		return false;
+		return true;
 	}
 
 	@Override

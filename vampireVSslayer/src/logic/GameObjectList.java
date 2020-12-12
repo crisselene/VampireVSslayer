@@ -112,5 +112,19 @@ public class GameObjectList {
 		}
 		return false;
 	}
+	
+	public void pushVampires() {
+		for(GameObject objeto : gameobjects) {
+			objeto.receiveGarlicPush();
+		}
+		
+	}
+
+	public void lightVampires() {
+		for(GameObject objeto : gameobjects) {
+			objeto.receiveLightFlash();
+		}
+		
+	}
 		
 }

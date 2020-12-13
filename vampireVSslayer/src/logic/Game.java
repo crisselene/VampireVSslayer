@@ -50,8 +50,6 @@ public class Game implements IPrintable {
 	}
 
 	public boolean isFinished() {
-		//El return debe ser algo como vamp.llego() || vamp.noQuedan() || userExit
-
 		return userExit || llegoFinal() || userVictory();
 	}
 
@@ -121,7 +119,9 @@ public class Game implements IPrintable {
 						"Coins: " + player.getMonedas() + "\n"+
 						"Remaining vampires: " + board.getVampRestantes() + "\n" +
 						"Vampires on the board: " + board.vampEnTablero() + "\n");
-						if(board.draculaOnBoard()) {
+		//draculaOnBoard es una variable static a la que se puede 
+		//acceder desde game sin romper encapsulamiento
+						if(Dracula.draculaOnBoard) {
 							info = info + ("Dracula is alive\n");
 						}
 		return info;
@@ -131,6 +131,7 @@ public class Game implements IPrintable {
 		board = new GameObjectBoard(level);
 		ciclos = 0;
 		player = new Player();
+		Dracula.draculaOnBoard=false;
 	}
 
 	public void update() {
@@ -146,7 +147,7 @@ public class Game implements IPrintable {
 	//método que crea todos los tipos de vampiros con la misma frecuencia random
 	private void creacionVampiros() {	
 		if(board.getVampRestantes() > 0) crearVampiro();
-		if(board.getVampRestantes() > 0 && !board.draculaOnBoard()) crearDracula();		
+		if(board.getVampRestantes() > 0 && !Dracula.draculaOnBoard) crearDracula();		
 		if(board.getVampRestantes() > 0) crearExplosivo();	
 	}
 
@@ -175,7 +176,7 @@ public class Game implements IPrintable {
 		if(fila != -1) {			
 			Dracula d = new Dracula(columna, fila, this);
 			board.addObject(d);
-			setDraculaOnBoard(true);			
+			Dracula.draculaOnBoard=true;		
 		}
 		
 	}
@@ -239,10 +240,7 @@ public class Game implements IPrintable {
 	}
 
 	public boolean estaAlFinal(int posx) {
-		//if(posx == level.getDimx() - 1) {
 			return posx == level.getDimx() - 1;
-		//}
-		//return false;
 	}
 
 	public boolean lightVampires() {
@@ -267,10 +265,10 @@ public class Game implements IPrintable {
 				if(!board.buscarObjeto(x, y)){
 					if(type!=null) {
 						if(type.equals("d")) {
-							if(board.draculaOnBoard()==false) {
+							if(Dracula.draculaOnBoard==false) {
 								Dracula dracula = new Dracula(x, y, this);
 								board.addObject(dracula);
-								setDraculaOnBoard(true);
+								Dracula.draculaOnBoard=true;
 							}else {
 								System.out.println(DRACULA_ALIVE);
 								return false;
@@ -292,7 +290,6 @@ public class Game implements IPrintable {
 					return true;//Porque en todos los casos se habra añadido el vampiro
 				}
 				else {
-					System.out.println("Other object in this position");//*****************esto deebería dar unknow command
 					return false;
 				}
 	
@@ -305,10 +302,5 @@ public class Game implements IPrintable {
 			System.out.println(NO_VAMP_LEFT);
 			return false;
 		}
-		
-	}
-	
-	public void setDraculaOnBoard(boolean set) {
-		board.setDraculaOnBoard(set);
 	}
 }

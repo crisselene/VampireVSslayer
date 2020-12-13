@@ -17,13 +17,11 @@ public class AddVampireCommand extends Command {
 	public AddVampireCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 		type = null;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean execute(Game game) {		
-		if(game.addVampire(x, y, type)) return true;
-		else return false;			
+		return(game.addVampire(x, y, type));			
 	}
 
 	@Override

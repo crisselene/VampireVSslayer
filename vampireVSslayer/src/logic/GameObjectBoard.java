@@ -2,20 +2,17 @@ package logic;
 
 import java.util.Random;
 
-import objetos.BloodBank;
-
 public class GameObjectBoard {
 
 	private Level level;
 	private GameObjectList obList;
 	private int vampRestantes;
-	private boolean draculaOnBoard;
 
 	public GameObjectBoard(Level level) {
 		this.level = level; 
 		obList = new GameObjectList();
 		vampRestantes = level.numberOfVampires();
-		draculaOnBoard = false;
+
 	}
 	
 	public int getVampRestantes() {
@@ -48,9 +45,8 @@ public class GameObjectBoard {
 	}
 
 	public boolean dentroTablero(int fila, int columna) {
-		if(fila < level.getDimy() && columna < level.getDimx() - 1 &&
-				fila >= 0 && columna >= 0) return true;
-		return false;
+		return(fila < level.getDimy() && columna < level.getDimx() - 1 &&
+				fila >= 0 && columna >= 0); 
 	}
 
 	public void attack() {
@@ -84,10 +80,7 @@ public class GameObjectBoard {
 	}
 
 	public boolean userVictory() {
-		if(vampRestantes == 0 && vampEnTablero() == 0) {
-			return true;
-		}
-		return false;
+		return (vampRestantes == 0 && vampEnTablero() == 0);
 	}
 	
 	public int addVampire(int columna, double freq, Random random) {
@@ -125,14 +118,6 @@ public class GameObjectBoard {
 		
 	}
 	
-	public boolean draculaOnBoard() {
-		
-		return draculaOnBoard;
-	}
-
-	public void setDraculaOnBoard(boolean set) {
-		draculaOnBoard = set;		
-	}
 
 
 }

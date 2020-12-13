@@ -28,8 +28,7 @@ public class Player {
 	}
 
 	public boolean tieneMonedas(int monedas) {
-		if(this.monedas >= monedas) return true;
-		return false;
+		return(this.monedas >= monedas);
 	}
 
 	public void reintegroBanco(int ganancia) {

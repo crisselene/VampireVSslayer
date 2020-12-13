@@ -32,7 +32,6 @@ public abstract class Command {
 			
 			if (matchCommandName(words[0])) {
 				if (words.length != args) {
-					//System.err.println(incorrectNumberOfArgsMsg);
 					return null;
 				}
 				return this;
@@ -45,7 +44,6 @@ public abstract class Command {
 	
 			if (matchCommandName(words[0])) {
 				if (words.length != 1) {
-					//System.err.println(incorrectArgsMsg);
 					return null;
 				}
 				return this;

@@ -7,6 +7,7 @@ public class Dracula extends Vampiro implements IAttack {
 
 	public final static int DEFAULT_VIDA = 5;
 	public final static int DEFAULT_CICLOS = 0; 
+	public static boolean draculaOnBoard = false;
 	
 	public Dracula(int posx, int posy, Game game) {
 		super(posx, posy, DEFAULT_VIDA, DEFAULT_CICLOS, game);
@@ -18,12 +19,7 @@ public class Dracula extends Vampiro implements IAttack {
 		if(isAlive()) {
 			IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
 			if (other != null ) {
-				boolean recibirDamage = other.receiveDraculaAttack();
-				if(recibirDamage== true) {
-					if(this.ciclosAvance<2) {
-						//ciclosAvance++;
-					}
-				}	
+				other.receiveDraculaAttack();
 			} 	
 		}
 	}
@@ -34,7 +30,7 @@ public class Dracula extends Vampiro implements IAttack {
 		this.setVida(vida);	
 		//En caso de que muera el dracula puede resucitar
 		if(!isAlive()) {
-			game.setDraculaOnBoard(false);
+			draculaOnBoard=false;
 		}
 		return true;
 	}
@@ -43,7 +39,7 @@ public class Dracula extends Vampiro implements IAttack {
 		//Si tiene alguien detras no retrocede y si esta al final muere
 		if(game.estaAlFinal(posx)) {
 			this.setVida(0);
-			game.setDraculaOnBoard(false);
+			draculaOnBoard=false;
 			return true;
 		}
 		else if(!game.buscarObjeto(posx+1, posy)) {

@@ -11,7 +11,6 @@ public class SuperCoinsCommand extends Command {
 	
 	public SuperCoinsCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

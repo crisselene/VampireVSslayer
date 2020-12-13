@@ -24,7 +24,6 @@ public class AddCommand extends Command {
 			game.update();
 			return true;
 		}
-		
 		return false;
 	}
 

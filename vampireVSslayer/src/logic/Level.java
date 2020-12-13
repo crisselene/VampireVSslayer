@@ -16,14 +16,11 @@ public enum Level {
 		this.dim_x = dim_x;
 		this.dim_y = dim_y;
 	}
-
-	
-
-	// get numbers of vampires  
+ 
 	public int numberOfVampires() {
 			return numberOfVampires;
 		}
-	// get vampire frequency 
+
     public double getVampireFrequency() {
 		return vampireFrequency;
 	}

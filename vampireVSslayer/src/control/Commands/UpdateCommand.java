@@ -23,7 +23,6 @@ public class UpdateCommand extends Command {
 	public Command parse(String[] commandWords) {
 		if(String.valueOf(commandWords[0]).equals(""))
 		{
-			//System.out.println("..." +commandWords[0]+ "...");
 			return this;
 		}
 		return parseNoParamsCommand(commandWords);

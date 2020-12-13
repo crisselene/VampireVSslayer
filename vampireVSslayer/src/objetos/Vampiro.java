@@ -97,9 +97,7 @@ public class Vampiro extends GameObject implements IAttack{
 
 	@Override
 	public boolean noHayVenLafila(boolean crear, int fila) {
-		//if (this.posy==fila)
 		 return this.posy == fila;
-		//else return true;
 		
 	}
 

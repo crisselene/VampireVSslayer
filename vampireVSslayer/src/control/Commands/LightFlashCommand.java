@@ -11,7 +11,6 @@ public class LightFlashCommand extends Command {
 	
 	public LightFlashCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

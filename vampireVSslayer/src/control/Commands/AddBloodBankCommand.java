@@ -15,7 +15,6 @@ public class AddBloodBankCommand extends Command {
 
 	public AddBloodBankCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

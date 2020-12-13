@@ -77,7 +77,11 @@ public class Vampiro extends GameObject implements IAttack{
 			this.setPosX(posx);
 			return true;
 		}
-		return false;		
+		else {
+			ciclosAvance=0;
+			return true;	
+		}
+			
 	}
 	
 	public boolean receiveLightFlash() {

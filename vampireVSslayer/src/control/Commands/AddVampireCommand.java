@@ -41,7 +41,7 @@ public class AddVampireCommand extends Command {
 			y= Integer.parseInt(commandWords[2]);
 			return parseParamsCommand(commandWords, ARGS);
 		}
-		else return parseNoParamsCommand(commandWords);
+		else return null;
 		
 	}
 

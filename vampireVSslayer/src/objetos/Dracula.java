@@ -7,7 +7,6 @@ public class Dracula extends Vampiro implements IAttack {
 
 	public final static int DEFAULT_VIDA = 5;
 	public final static int DEFAULT_CICLOS = 0; 
-	public static boolean draculaOnBoard = false; 
 	
 	public Dracula(int posx, int posy, Game game) {
 		super(posx, posy, DEFAULT_VIDA, DEFAULT_CICLOS, game);
@@ -22,23 +21,42 @@ public class Dracula extends Vampiro implements IAttack {
 				boolean recibirDamage = other.receiveDraculaAttack();
 				if(recibirDamage== true) {
 					if(this.ciclosAvance<2) {
-						ciclosAvance++;
+						//ciclosAvance++;
 					}
 				}	
 			} 	
 		}
 	}
-
-	public static boolean isDraculaOnBoard() {
-		return draculaOnBoard;
+	
+	public boolean receiveSlayerAttack(int damage) {
+		int vida= this.getVida();
+		vida = vida - damage;
+		this.setVida(vida);	
+		//En caso de que muera el dracula puede resucitar
+		if(!isAlive()) {
+			game.setDraculaOnBoard(false);
+		}
+		return true;
+	}
+	
+	public  boolean receiveGarlicPush() {
+		//Si tiene alguien detras no retrocede y si esta al final muere
+		if(game.estaAlFinal(posx)) {
+			this.setVida(0);
+			game.setDraculaOnBoard(false);
+			return true;
+		}
+		else if(!game.buscarObjeto(posx+1, posy)) {
+			posx++;
+			ciclosAvance = 0;
+			this.setPosX(posx);
+			return true;
+		}
+		return false;		
 	}
 	
 	public boolean receiveLightFlash() {//Este no recibe el ataque
 		return false;		
-	}
-
-	public static void setDraculaOnBoard(boolean draculaOnBoard) {
-		Dracula.draculaOnBoard = draculaOnBoard;
 	}
 	
 	

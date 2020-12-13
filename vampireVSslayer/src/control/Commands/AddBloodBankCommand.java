@@ -32,15 +32,15 @@ public class AddBloodBankCommand extends Command {
 	@Override
 	public Command parse(String[] commandWords) {
 		//Si no ha introducido caracteres
-				if(commandWords.length > 3 && isNumeric(commandWords[1])
-				&& isNumeric(commandWords[2]) && isNumeric(commandWords[3])) {
-					
-					x= Integer.parseInt(commandWords[1]);//Lo convertimos en numero
-					y= Integer.parseInt(commandWords[2]);
-					z= Integer.parseInt(commandWords[3]);
-					//Retornamos dependiendo de los argumentos que habia en el parse
-					return parseParamsCommand(commandWords, ARGS);
-				}
-				else return parseNoParamsCommand(commandWords);
+		if(commandWords.length > 3 && isNumeric(commandWords[1])
+		&& isNumeric(commandWords[2]) && isNumeric(commandWords[3])) {
+				
+			x= Integer.parseInt(commandWords[1]);//Lo convertimos en numero
+			y= Integer.parseInt(commandWords[2]);
+			z= Integer.parseInt(commandWords[3]);
+			//Retornamos dependiendo de los argumentos que habia en el parse
+			return parseParamsCommand(commandWords, ARGS);
+		}
+		else return null;
 	}
 }

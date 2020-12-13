@@ -98,15 +98,14 @@ public class Game implements IPrintable {
 	}
 
 	public boolean addSlayer(int x, int y) {
-		if(board.dentroTablero(y, x)) {
+		if(board.dentroTablero(y, x) && !board.buscarObjeto(x, y)) {
 
-			if(player.tieneMonedas(COSTE_SLAYER)) {
-				if(!board.buscarObjeto(x, y)) {
-					Slayer slayer = new Slayer(x, y, this);
-					board.addObject(slayer);
-					player.restarMonedas(COSTE_SLAYER);
-					return true;
-				}
+			if(player.tieneMonedas(COSTE_SLAYER)) {				
+				Slayer slayer = new Slayer(x, y, this);
+				board.addObject(slayer);
+				player.restarMonedas(COSTE_SLAYER);
+				return true;
+				
 			}else {
 				System.out.println(NOT_COINS);
 				return false;
@@ -122,7 +121,7 @@ public class Game implements IPrintable {
 						"Coins: " + player.getMonedas() + "\n"+
 						"Remaining vampires: " + board.getVampRestantes() + "\n" +
 						"Vampires on the board: " + board.vampEnTablero() + "\n");
-						if(Dracula.isDraculaOnBoard()) {
+						if(board.draculaOnBoard()) {
 							info = info + ("Dracula is alive\n");
 						}
 		return info;
@@ -132,7 +131,6 @@ public class Game implements IPrintable {
 		board = new GameObjectBoard(level);
 		ciclos = 0;
 		player = new Player();
-		Dracula.draculaOnBoard=false;
 	}
 
 	public void update() {
@@ -146,42 +144,40 @@ public class Game implements IPrintable {
 	}
 
 	//método que crea todos los tipos de vampiros con la misma frecuencia random
-	private void creacionVampiros() {
-		double randFreq = random.nextDouble();
-		crearVampiro(randFreq);
-		crearDracula(randFreq);
-		crearExplosivo(randFreq);
-
+	private void creacionVampiros() {	
+		if(board.getVampRestantes() > 0) crearVampiro();
+		if(board.getVampRestantes() > 0 && !board.draculaOnBoard()) crearDracula();		
+		if(board.getVampRestantes() > 0) crearExplosivo();	
 	}
 
-	private void crearExplosivo(double randFreq) {
+	private void crearExplosivo() {
 		int columna = (level.getDimx() - 1);
-		int fila = board.addVampire(columna, randFreq , random);
+		int fila = board.addVampire(columna, random.nextDouble() , random);
 		if(fila != -1) {
 			ExplosiveVampire ex = new ExplosiveVampire(columna, fila, this);
 			board.addObject(ex);
 		}
 	}
 
-	private void crearVampiro(double randFreq) {
+	private void crearVampiro() {
 		int columna = (level.getDimx() - 1);
-		int fila = board.addVampire(columna, randFreq , random);
+		int fila = board.addVampire(columna, random.nextDouble() , random);
 		if(fila != -1) {
 			Vampiro v = new Vampiro(columna, fila, this);
 			board.addObject(v);
 		}
 	}
 
-	private void crearDracula(double randFreq) {
+	private void crearDracula() {
+		
 		int columna = (level.getDimx() - 1);
-		int fila = board.addVampire(columna, randFreq , random);
-		if(fila != -1) {
+		int fila = board.addVampire(columna, random.nextDouble() , random);
+		if(fila != -1) {			
 			Dracula d = new Dracula(columna, fila, this);
-			if(!Dracula.isDraculaOnBoard()) {
-				board.addObject(d);
-				Dracula.setDraculaOnBoard(true);
-			}
+			board.addObject(d);
+			setDraculaOnBoard(true);			
 		}
+		
 	}
 
 	public IAttack getAttackableInPosition(int posx, int posy) {
@@ -230,6 +226,7 @@ public class Game implements IPrintable {
 	public boolean pushVampires() {
 		if(player.tieneMonedas(COSTE_GARLIC)) {
 			board.pushVampires();
+			player.restarMonedas(COSTE_GARLIC);
 			return true;
 		}
 		System.out.println(NOT_COINS);
@@ -251,6 +248,7 @@ public class Game implements IPrintable {
 	public boolean lightVampires() {
 		if(player.tieneMonedas(COSTE_LIGHT)) {
 			board.lightVampires();
+			player.restarMonedas(COSTE_LIGHT);
 			return true;
 		}
 		System.out.println(NOT_COINS);
@@ -269,10 +267,10 @@ public class Game implements IPrintable {
 				if(!board.buscarObjeto(x, y)){
 					if(type!=null) {
 						if(type.equals("d")) {
-							if(Dracula.draculaOnBoard==false) {
+							if(board.draculaOnBoard()==false) {
 								Dracula dracula = new Dracula(x, y, this);
 								board.addObject(dracula);
-								Dracula.draculaOnBoard = true;
+								setDraculaOnBoard(true);
 							}else {
 								System.out.println(DRACULA_ALIVE);
 								return false;
@@ -308,5 +306,9 @@ public class Game implements IPrintable {
 			return false;
 		}
 		
+	}
+	
+	public void setDraculaOnBoard(boolean set) {
+		board.setDraculaOnBoard(set);
 	}
 }

@@ -9,11 +9,13 @@ public class GameObjectBoard {
 	private Level level;
 	private GameObjectList obList;
 	private int vampRestantes;
+	private boolean draculaOnBoard;
 
 	public GameObjectBoard(Level level) {
 		this.level = level; 
 		obList = new GameObjectList();
 		vampRestantes = level.numberOfVampires();
+		draculaOnBoard = false;
 	}
 	
 	public int getVampRestantes() {
@@ -122,5 +124,15 @@ public class GameObjectBoard {
 		this.setVampRestantes(vamp);
 		
 	}
+	
+	public boolean draculaOnBoard() {
+		
+		return draculaOnBoard;
+	}
+
+	public void setDraculaOnBoard(boolean set) {
+		draculaOnBoard = set;		
+	}
+
 
 }

@@ -49,7 +49,7 @@ public class GameObjectList {
 		}
 	}
 
-	public int contarVamp() {
+	/*public int contarVamp() {
 		int contV=0;
 		boolean cont = false;
 		for (GameObject gameObject : gameobjects) {
@@ -57,7 +57,7 @@ public class GameObjectList {
 			if(cont) contV++; cont=false;
 		}
 		return contV;
-	}
+	}*/
 
 	public boolean noHayVenLafila(int fila) {
 		boolean filaLibre = true;

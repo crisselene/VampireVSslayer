@@ -35,7 +35,6 @@ public class Vampiro extends GameObject implements IAttack{
 		this.letra = "V ";
 	}
 
-
 	public int getCiclosAvance() {
 		return ciclosAvance;
 	}
@@ -61,14 +60,17 @@ public class Vampiro extends GameObject implements IAttack{
 	public boolean receiveSlayerAttack(int damage) {
 		int vida= this.getVida();
 		vida = vida - damage;
-		this.setVida(vida);		
+		this.setVida(vida);	
+		if(!isAlive()) {
+			this.morir();
+		}
 		return true;
 	}
 	
 	public  boolean receiveGarlicPush() {
 		//Si tiene alguien detras no retrocede y si esta al final muere
 		if(game.estaAlFinal(posx)) {
-			this.setVida(0);
+			this.morir();
 			return true;
 		}
 		else if(!game.buscarObjeto(posx+1, posy)) {
@@ -84,16 +86,23 @@ public class Vampiro extends GameObject implements IAttack{
 			
 	}
 	
+	
+
 	public boolean receiveLightFlash() {
 		//Fulmina a los vampiros
-		this.setVida(0);
+		this.morir();
 		return true;		
 	}
 
-	@Override
-	public boolean contarVamp() {
-		return true;
+	protected void morir() { //vida a 0 y vampirosEnTablero--
+		this.setVida(0);
+		game.reducirVampirosTablero();
 	}
+	
+//	@Override
+//	public boolean contarVamp() {
+//		return true;
+//	}
 
 	@Override
 	public boolean noHayVenLafila(boolean crear, int fila) {

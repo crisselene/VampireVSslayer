@@ -6,7 +6,8 @@ public class GameObjectBoard {
 
 	private Level level;
 	private GameObjectList obList;
-	private int vampRestantes;
+	private int vampRestantes; 
+	private int vampEnTablero = 0; //variable gestion de vampiros en tablero
 
 	public GameObjectBoard(Level level) {
 		this.level = level; 
@@ -21,7 +22,13 @@ public class GameObjectBoard {
 	public void setVampRestantes(int restantes) {
 		vampRestantes = restantes;
 	}
+	public int getVampEnTablero() {
+		return vampEnTablero;
+	}
 
+	public void setVampEnTablero(int vampEnTablero) {
+		this.vampEnTablero = vampEnTablero;
+	}
 
 	public void addObject(GameObject obj) {
 		obList.anadirObjeto(obj);
@@ -71,16 +78,16 @@ public class GameObjectBoard {
 		obList.removeDead();		
 	}
 	
-	public int vampEnTablero() {
-		return obList.contarVamp();
-	}
+//	public int vampEnTablero() {
+//		return obList.contarVamp();
+//	}
 
 	public boolean llegoFinal() {
 		return obList.llegoFinal();
 	}
 
 	public boolean userVictory() {
-		return (vampRestantes == 0 && vampEnTablero() == 0);
+		return (vampRestantes == 0 && vampEnTablero == 0);
 	}
 	
 	public int addVampire(int columna, double freq, Random random) {
@@ -90,7 +97,9 @@ public class GameObjectBoard {
 			int filaAleatoria = random.nextInt(level.getDimy());
 			boolean ocupado = obList.buscarObjeto(filaAleatoria, columna);
 			if(!ocupado) {
-					vampRestantes--;
+					//vampRestantes--;
+					this.reducirVampirosRestantes();
+					this.aumentarVampirosTablero();
 					return filaAleatoria;					
 			}
 		}
@@ -111,12 +120,28 @@ public class GameObjectBoard {
 		obList.lightVampires();
 	}
 
-	public void reducirVampiros() {
+	public void reducirVampirosRestantes() {
 		int vamp = this.getVampRestantes();
 		vamp--;
 		this.setVampRestantes(vamp);
 		
 	}
+
+	public void aumentarVampirosTablero() {
+		int vampT = this.getVampEnTablero();
+		vampT++;
+		this.setVampEnTablero(vampT);
+		
+	}
+
+	public void reducirVampirosTablero() {
+		int vampT = this.getVampEnTablero();
+		vampT--;
+		this.setVampEnTablero(vampT);
+		
+	}
+
+	
 	
 
 

@@ -52,11 +52,7 @@ public class Slayer extends GameObject implements IAttack{
 	@Override
 	public void move(boolean ocupado) { // los slayers no se mueven
 	}
-	@Override
-	public boolean contarVamp() {
-		// no se cuenta porque no es vampiro
-		return false;
-	}
+	
 	@Override
 	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}
 	@Override

@@ -31,6 +31,7 @@ public class Dracula extends Vampiro implements IAttack {
 		//En caso de que muera el dracula puede resucitar
 		if(!isAlive()) {
 			draculaOnBoard=false;
+			this.morir();
 		}
 		return true;
 	}

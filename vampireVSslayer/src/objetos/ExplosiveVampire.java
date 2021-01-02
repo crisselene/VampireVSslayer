@@ -24,7 +24,8 @@ public class ExplosiveVampire extends Vampiro implements IAttack {
 					}
 				}
 			}	
-		} 	
+		} 
+		this.morir();
 	}
 	
 	@Override

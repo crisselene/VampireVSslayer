@@ -29,6 +29,7 @@ public class Game implements IPrintable {
 	private Player player;
 	private int ciclos;
 	private Random random;
+	
 
 	public int getCiclos() {
 		return ciclos;
@@ -118,7 +119,7 @@ public class Game implements IPrintable {
 		String info = ("Number of cycles: " + ciclos + "\n" +
 						"Coins: " + player.getMonedas() + "\n"+
 						"Remaining vampires: " + board.getVampRestantes() + "\n" +
-						"Vampires on the board: " + board.vampEnTablero() + "\n");
+						"Vampires on the board: " + board.getVampEnTablero() + "\n");
 		//draculaOnBoard es una variable static a la que se puede 
 		//acceder desde game sin romper encapsulamiento
 						if(Dracula.draculaOnBoard) {
@@ -165,7 +166,7 @@ public class Game implements IPrintable {
 		int fila = board.addVampire(columna, random.nextDouble() , random);
 		if(fila != -1) {
 			Vampiro v = new Vampiro(columna, fila, this);
-			board.addObject(v);
+			board.addObject(v); 
 		}
 	}
 
@@ -176,7 +177,7 @@ public class Game implements IPrintable {
 		if(fila != -1) {			
 			Dracula d = new Dracula(columna, fila, this);
 			board.addObject(d);
-			Dracula.draculaOnBoard=true;		
+			Dracula.draculaOnBoard=true;
 		}
 		
 	}
@@ -258,6 +259,8 @@ public class Game implements IPrintable {
 		//Le hacemos el reintegro especial
 	}
 
+	
+	//add vampire de comando AddVampireCommand
 	public boolean addVampire(int x, int y, String type) {
 
 		if(board.getVampRestantes() > 0) {
@@ -286,7 +289,8 @@ public class Game implements IPrintable {
 						Vampiro vampire = new Vampiro(x,y,this);
 						board.addObject(vampire);
 					}
-					board.reducirVampiros();
+					board.reducirVampirosRestantes();
+					board.aumentarVampirosTablero();
 					return true;//Porque en todos los casos se habra añadido el vampiro
 				}
 				else {
@@ -302,5 +306,10 @@ public class Game implements IPrintable {
 			System.out.println(NO_VAMP_LEFT);
 			return false;
 		}
+	}
+
+	public void reducirVampirosTablero() {
+		board.reducirVampirosTablero();
+		
 	}
 }

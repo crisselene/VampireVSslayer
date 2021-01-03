@@ -79,19 +79,19 @@ public class GameObjectList {
 		return null;
 		
 	}
-
-	public GameObject getAttackableInLine(int posy) {
-		for (GameObject gameObject : gameobjects) {
-			if(gameObject.getposy() == posy) {
-				//da igual el ataque que haga, es solo para ver si le puede atacar 
-				if(gameObject.receiveSlayerAttack(0)==true) {
-					return gameObject;
-				}
-				
-			}
-		}
-		return null;
-	}
+//
+//	public GameObject getAttackableInLine(int posy) {
+//		for (GameObject gameObject : gameobjects) {
+//			if(gameObject.getposy() == posy) {
+//				//da igual el ataque que haga, es solo para ver si le puede atacar 
+//				if(gameObject.receiveSlayerAttack(0)==true) {
+//					return gameObject;
+//				}
+//				
+//			}
+//		}
+//		return null;
+//	}
 
 	public void removeDead() {
 		for(int i = 0; i < gameobjects.size() ; i++) {//recorrera todos los gameobjects
@@ -104,14 +104,14 @@ public class GameObjectList {
 		
 	}
 
-	public boolean llegoFinal() {
-		for(GameObject object: gameobjects) {
-			if(object.llegoFinal()) {
-				return true;
-			}
-		}
-		return false;
-	}
+//	public boolean llegoFinal() {
+//		for(GameObject object: gameobjects) {
+//			if(object.llegoFinal()) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 	
 	public void pushVampires() {
 		for(GameObject objeto : gameobjects) {

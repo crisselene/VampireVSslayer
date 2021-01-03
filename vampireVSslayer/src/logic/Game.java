@@ -59,7 +59,7 @@ public class Game implements IPrintable {
 	}
 
 	private boolean llegoFinal() {
-		return board.llegoFinal();
+		return Vampiro.llegoFinal;
 	}
 
 	public String toString() {
@@ -188,11 +188,11 @@ public class Game implements IPrintable {
 		return obj;
 	}
 
-	public IAttack getAttackableInLine(int posy) {
-		GameObject obj;
-		obj = board.getAttackableInLine(posy);
-		return obj;
-	}
+//	public IAttack getAttackableInLine(int posy) {
+//		GameObject obj;
+//		obj = board.getAttackableInLine(posy);
+//		return obj;
+//	}
 
 	public boolean addBank(int x, int y, int z) {
 

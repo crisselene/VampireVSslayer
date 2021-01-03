@@ -70,9 +70,9 @@ public class GameObjectBoard {
 		return obList.toString(x, y);
 	}
 
-	public GameObject getAttackableInLine(int posy) {
-		return obList.getAttackableInLine(posy);
-	}
+//	public GameObject getAttackableInLine(int posy) {
+//		return obList.getAttackableInLine(posy);
+//	}
 
 	public void removeDead() {
 		obList.removeDead();		
@@ -82,9 +82,9 @@ public class GameObjectBoard {
 //		return obList.contarVamp();
 //	}
 
-	public boolean llegoFinal() {
-		return obList.llegoFinal();
-	}
+//	public boolean llegoFinal() {
+//		return obList.llegoFinal();
+//	}
 
 	public boolean userVictory() {
 		return (vampRestantes == 0 && vampEnTablero == 0);

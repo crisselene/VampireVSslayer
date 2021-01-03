@@ -27,12 +27,28 @@ public class Slayer extends GameObject implements IAttack{
 		this.game = game;
 	}
 	
+//	@Override
+//	public void attack() {
+//		//Solo atacamos si el otro esta en su misma fila
+//		if(isAlive()) {
+//			IAttack other = game.getAttackableInLine(this.posy);
+//			if(other != null) other.receiveSlayerAttack(ATAQUE);
+//		}
+//	}
 	@Override
 	public void attack() {
 		//Solo atacamos si el otro esta en su misma fila
 		if(isAlive()) {
-			IAttack other = game.getAttackableInLine(this.posy);
-			if(other != null) other.receiveSlayerAttack(ATAQUE);
+			//desde la posición del slayer en adelante miramos si hay un atacable
+			for (int i = this.posx+1; i <= game.getLevelDimX() ; i++) {
+				IAttack other = game.getAttackableInPosition(i, this.posy);
+				if(other != null) {
+					other.receiveSlayerAttack(ATAQUE); 
+					i=game.getLevelDimX()+1;//acabamos el bucle
+				}
+			}
+			
+			
 		}
 	}
 	
@@ -55,8 +71,8 @@ public class Slayer extends GameObject implements IAttack{
 	
 	@Override
 	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}
-	@Override
-	public boolean llegoFinal() {return false;}
-	
+//	@Override
+//	public boolean llegoFinal() {return false;}
+//	
 	
 }

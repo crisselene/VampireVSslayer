@@ -12,6 +12,7 @@ public class Vampiro extends GameObject implements IAttack{
 	public final static int DEFAULT_CICLOS = 0;
 	protected int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	protected Game game;
+	public static boolean llegoFinal = false;
 	
 	
 	/**CONSTRUCTOR
@@ -41,6 +42,10 @@ public class Vampiro extends GameObject implements IAttack{
 	public void setCiclosAvance(int ciclosAvance) {
 		this.ciclosAvance = ciclosAvance;
 	}
+	
+	public static void setLlegoFinal(boolean llegoFinal) {
+		Vampiro.llegoFinal = llegoFinal;
+	}
 
 	@Override
 	public void move(boolean ocupado) {
@@ -53,6 +58,7 @@ public class Vampiro extends GameObject implements IAttack{
 				posx--;
 				this.setPosX(posx); 
 				ciclosAvance=0;
+				if(posx==-1) setLlegoFinal(true);
 			}
 		}
 	}
@@ -126,14 +132,14 @@ public class Vampiro extends GameObject implements IAttack{
 		}
 	}
 
-	@Override
-	public boolean llegoFinal() {
-		//if(posx == -1) {
-			//return true;
-		//}
-		//return false;
-		return posx==-1;
-	}
+//	@Override
+//	public boolean llegoFinal() {
+//		//if(posx == -1) {
+//			//return true;
+//		//}
+//		//return false;
+//		return posx==-1;
+//	}
 
 	
 }

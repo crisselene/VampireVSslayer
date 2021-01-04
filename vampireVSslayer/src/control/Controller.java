@@ -1,10 +1,10 @@
 package control;
 
 import java.util.Scanner;
-
 import control.Commands.Command;
 import control.Commands.CommandGenerator;
 import logic.Game;
+import logic.Exceptions.GameException;
 
 public class Controller {
 	
@@ -37,13 +37,13 @@ public class Controller {
 			  String s = scanner.nextLine();
 			  String[] parameters = s.toLowerCase().trim().split(" ");
 			  System.out.println("[DEBUG] Executing: " + s);
-		      Command command = CommandGenerator.parse(parameters);
-		      if (command != null) { 
-		    	  		refreshDisplay = command.execute(game);
-		       } 
-		       else {
-		    	   		System.out.println("[ERROR]: "+ unknownCommandMsg);
-		       }
+			  try {
+				  Command command = CommandGenerator.parse(parameters);
+				  refreshDisplay = command.execute(game);
+			  }
+			  catch (GameException ex) {
+				  System.out.format(ex.getMessage() + " %n %n");
+			}				  
 		}
         	if (refreshDisplay) {
         		int ciclosFinales = game.getCiclos() - 1;

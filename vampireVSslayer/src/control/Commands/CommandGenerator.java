@@ -20,14 +20,21 @@ public class CommandGenerator{
 	};
 
 	public static Command parse(String[] commandWords) throws CommandParseException {
+//		for (Command c: availableCommands) {
+//			Command parsedCommand = c.parse(commandWords);
+//			if(parsedCommand != null)
+//				return parsedCommand;
+//		}
+		//return null; //quiere decir que el comando es invalido ------
+		
 		for (Command c: availableCommands) {
 			Command parsedCommand = c.parse(commandWords);
-			if(parsedCommand != null)
+			if(parsedCommand != null) {
 				return parsedCommand;
+			}
+				
 		}
-
-		throw new CommandParseException("[ERROR]: " /*+ unknownCommandMsg*/);//**********
-		//return null; //quiere decir que el comando es invalido ------
+		throw new CommandParseException("[ERROR]: "  /*+unknownCommandMsg*/);//***********ese mensaje esta en el controler?¿*****
 	}
 
 

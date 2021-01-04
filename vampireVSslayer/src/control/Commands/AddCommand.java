@@ -1,6 +1,7 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandParseException;
 
 public class AddCommand extends Command {
 	
@@ -28,7 +29,7 @@ public class AddCommand extends Command {
 	}
 
 	@Override
-	public Command parse(String[] commandWords){
+	public Command parse(String[] commandWords) throws NumberFormatException, CommandParseException{
 		
 		if(commandWords.length > 2) {
 			//Si no ha introducido caracteres
@@ -38,8 +39,8 @@ public class AddCommand extends Command {
 				//Retornamos dependiendo de los argumentos que habia en el parse
 				return parseParamsCommand(commandWords, ARGS);
 			}
-			//else throw new NumberFormatException("[ERROR] '" + commandWords[1] + "' || '" + commandWords[2]
-												//+ "' is not a number");
+			else throw new NumberFormatException("[ERROR] '" + commandWords[1] + "' || '" + commandWords[2]
+												+ "' is not a number");
 		}
 		return null;
 	}

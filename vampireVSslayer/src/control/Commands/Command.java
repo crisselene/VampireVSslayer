@@ -25,18 +25,18 @@ public abstract class Command {
 	  
 	 public abstract boolean execute(Game game);
 	  
-	 public abstract Command parse(String[] commandWords);
+	 public abstract Command parse(String[] commandWords) throws NumberFormatException, CommandParseException;
 	  
 	 protected boolean matchCommandName(String name) {
 		    return this.shortcut.equalsIgnoreCase(name) || 
 		        this.name.equalsIgnoreCase(name);
 	  }
 	  
-	 protected Command parseParamsCommand(String[] words, int args) {
+	 protected Command parseParamsCommand(String[] words, int args) throws CommandParseException{
 			
 			if (matchCommandName(words[0])) {
 				if (words.length != args) {
-					return null;
+					throw new CommandParseException("[ERROR]: Command "+ name + " :" + incArgsMsg);
 				}
 				return this;
 			}

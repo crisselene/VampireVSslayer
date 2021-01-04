@@ -12,7 +12,7 @@ public class Vampiro extends GameObject implements IAttack{
 	public final static int DEFAULT_CICLOS = 0;
 	protected int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	protected Game game;
-	public static boolean llegoFinal = false;
+	public static boolean llegoPrincipio = false;
 	
 	
 	/**CONSTRUCTOR
@@ -43,9 +43,9 @@ public class Vampiro extends GameObject implements IAttack{
 		this.ciclosAvance = ciclosAvance;
 	}
 	
-	public static void setLlegoFinal(boolean llegoFinal) {
-		Vampiro.llegoFinal = llegoFinal;
-	}
+//	public static void setLlegoFinal(boolean llegoFinal) {
+//		Vampiro.llegoFinal = llegoFinal;
+//	}
 
 	@Override
 	public void move(boolean ocupado) {
@@ -58,7 +58,7 @@ public class Vampiro extends GameObject implements IAttack{
 				posx--;
 				this.setPosX(posx); 
 				ciclosAvance=0;
-				if(posx==-1) setLlegoFinal(true);
+				if(posx==-1) Vampiro.llegoPrincipio=true;
 			}
 		}
 	}
@@ -75,7 +75,8 @@ public class Vampiro extends GameObject implements IAttack{
 	
 	public  boolean receiveGarlicPush() {
 		//Si tiene alguien detras no retrocede y si esta al final muere
-		if(game.estaAlFinal(posx)) {
+		//if(game.estaAlFinal(posx)) { //***********************************ESTE MÉTODO ES NECESARIO??*********************
+		if(game.getLevelDimX()-1 == posx) {
 			this.morir();
 			return true;
 		}

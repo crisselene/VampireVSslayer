@@ -12,6 +12,7 @@ public class Dracula extends Vampiro implements IAttack {
 	public Dracula(int posx, int posy, Game game) {
 		super(posx, posy, DEFAULT_VIDA, DEFAULT_CICLOS, game);
 		this.letra="D ";
+		Dracula.draculaOnBoard=true;
 	}
 	
 	@Override
@@ -38,8 +39,9 @@ public class Dracula extends Vampiro implements IAttack {
 	
 	public  boolean receiveGarlicPush() {
 		//Si tiene alguien detras no retrocede y si esta al final muere
-		if(game.estaAlFinal(posx)) {
-			this.setVida(0);
+		//if(game.estaAlFinal(posx)) { *****************************************+NECESARIO??************ 
+		if(game.getLevelDimX()-1 == posx) {	
+			this.morir();
 			draculaOnBoard=false;
 			return true;
 		}

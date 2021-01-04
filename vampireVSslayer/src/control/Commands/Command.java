@@ -1,6 +1,7 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandExecuteException;
 import logic.Exceptions.CommandParseException;
 //import logic.Exceptions.NumberFormatException;
 
@@ -23,9 +24,9 @@ public abstract class Command {
 	    this.help = help;
 	  }
 	  
-	 public abstract boolean execute(Game game);
+	 public abstract boolean execute(Game game) throws CommandExecuteException;
 	  
-	 public abstract Command parse(String[] commandWords) throws NumberFormatException, CommandParseException;
+	 public abstract Command parse(String[] commandWords) throws /*NumberFormatException,*/ CommandParseException;
 	  
 	 protected boolean matchCommandName(String name) {
 		    return this.shortcut.equalsIgnoreCase(name) || 

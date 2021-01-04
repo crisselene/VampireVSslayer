@@ -121,23 +121,26 @@ public class GameObjectBoard {
 	}
 
 	public void reducirVampirosRestantes() {
-		int vamp = this.getVampRestantes();
-		vamp--;
-		this.setVampRestantes(vamp);
+		vampRestantes--;
+//		int vamp = this.getVampRestantes();
+//		vamp--;
+//		this.setVampRestantes(vamp);
 		
 	}
 
 	public void aumentarVampirosTablero() {
-		int vampT = this.getVampEnTablero();
-		vampT++;
-		this.setVampEnTablero(vampT);
+		vampEnTablero++;
+//		int vampT = this.getVampEnTablero();
+//		vampT++;
+//		this.setVampEnTablero(vampT);
 		
 	}
 
 	public void reducirVampirosTablero() {
-		int vampT = this.getVampEnTablero();
-		vampT--;
-		this.setVampEnTablero(vampT);
+		vampEnTablero--;
+//		int vampT = this.getVampEnTablero();
+//		vampT--;
+//		this.setVampEnTablero(vampT);
 		
 	}
 

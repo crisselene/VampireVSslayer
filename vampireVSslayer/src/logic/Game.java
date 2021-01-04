@@ -59,7 +59,7 @@ public class Game implements IPrintable {
 	}
 
 	private boolean llegoFinal() {
-		return Vampiro.llegoFinal;
+		return Vampiro.llegoPrincipio;
 	}
 
 	public String toString() {
@@ -177,7 +177,7 @@ public class Game implements IPrintable {
 		if(fila != -1) {			
 			Dracula d = new Dracula(columna, fila, this);
 			board.addObject(d);
-			Dracula.draculaOnBoard=true;
+			//Dracula.draculaOnBoard=true;
 		}
 		
 	}
@@ -240,9 +240,9 @@ public class Game implements IPrintable {
 		return board.buscarObjeto(posx, posy);
 	}
 
-	public boolean estaAlFinal(int posx) {
-			return posx == level.getDimx() - 1;
-	}
+//	public boolean estaAlFinal(int posx) {
+//			return posx == level.getDimx() - 1; **********************SE NECESITA? ******************+++
+//	}
 
 	public boolean lightVampires() {
 		if(player.tieneMonedas(COSTE_LIGHT)) {

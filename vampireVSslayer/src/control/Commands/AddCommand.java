@@ -1,6 +1,7 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandExecuteException;
 import logic.Exceptions.CommandParseException;
 
 public class AddCommand extends Command {
@@ -18,9 +19,16 @@ public class AddCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game) throws CommandExecuteException{
 		// Añadiriamos slayer, pero tenemos que crear las nuevas listas
-		boolean creado = game.addSlayer(x, y);
+		boolean creado;
+		try {
+			creado = game.addSlayer(x,y);
+		}
+		catch(CommandExecuteException ex){
+			creado = false;
+			throw ex;
+		}
 		if(creado) {
 			game.update();
 			return true;
@@ -42,7 +50,7 @@ public class AddCommand extends Command {
 			else throw new NumberFormatException("[ERROR] '" + commandWords[1] + "' || '" + commandWords[2]
 												+ "' is not a number");
 		}
-		return null;
+		else throw new CommandParseException("[ERROR]: Command "+ name + " :" + getArgsMsg());
 	}
 
 }

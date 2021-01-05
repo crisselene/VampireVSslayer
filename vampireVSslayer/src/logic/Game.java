@@ -2,6 +2,8 @@ package logic;
 
 import java.util.Random;
 
+import logic.Exceptions.NotEnoughCoinsException;
+import logic.Exceptions.UnvalidPositionException;
 import objetos.BloodBank;
 import objetos.Dracula;
 import objetos.ExplosiveVampire;
@@ -96,7 +98,7 @@ public class Game implements IPrintable {
 		userExit = true;
 	}
 
-	public boolean addSlayer(int x, int y) {
+	public boolean addSlayer(int x, int y) throws UnvalidPositionException, NotEnoughCoinsException{
 		if(board.dentroTablero(y, x) && !board.buscarObjeto(x, y)) {
 
 			if(player.tieneMonedas(COSTE_SLAYER)) {				
@@ -105,13 +107,9 @@ public class Game implements IPrintable {
 				player.restarMonedas(COSTE_SLAYER);
 				return true;
 				
-			}else {
-				System.out.println(NOT_COINS);
-				return false;
-			}
+			}else throw new NotEnoughCoinsException(NOT_COINS);
 		}
-		System.out.println(INVALID_POSITION);
-		return false;
+		throw new UnvalidPositionException(INVALID_POSITION);
 	}
 
 	@Override

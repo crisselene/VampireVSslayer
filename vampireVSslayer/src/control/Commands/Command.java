@@ -72,4 +72,8 @@ public abstract class Command {
 	 
 	        return resultado;
 	    }
+	  
+	  public String getArgsMsg() {
+		  return incArgsMsg;
+	  }
 }

@@ -1,6 +1,7 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandParseException;
 
 public class ResetCommand extends Command{
 	
@@ -19,7 +20,7 @@ public class ResetCommand extends Command{
 	}
 
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		return parseNoParamsCommand(commandWords);
 	}
 

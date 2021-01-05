@@ -1,6 +1,7 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandParseException;
 
 public class UpdateCommand extends Command {
 	
@@ -20,7 +21,7 @@ public class UpdateCommand extends Command {
 	}
 
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		if(String.valueOf(commandWords[0]).equals(""))
 		{
 			return this;

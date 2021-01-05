@@ -52,7 +52,7 @@ public class GameObjectBoard {
 	}
 
 	public boolean dentroTablero(int fila, int columna) {
-		return(fila < level.getDimy() && columna < level.getDimx() - 1 &&
+		return(fila < level.getDimy() && columna < level.getDimx() &&
 				fila >= 0 && columna >= 0); 
 	}
 

@@ -4,7 +4,7 @@ import control.Controller;
 import logic.Game;
 
 public class BuffyVampireSlayer {
-	public static final String version = "2.0";
+	public static final String version = "3.0";
     public static final String usageMsg = "Usage: Vampire slayer <level> [seed]";
     public static final String welcomeMsg = String.format("Buffy the Vampire Slayer " + version + "%n");
     public static final String levelInfoMsg = "Level must be one of: " + Level.all(", ");
@@ -12,9 +12,9 @@ public class BuffyVampireSlayer {
     public static final String seedInfoMsg = "Random generator initialized with seed: ";
 
 	public static void main(String[] args) {
-		if (args.length < 1 || args.length > 2)
+		if (args.length < 1 || args.length > 2) {
 			System.out.print(usageMsg);
-		else {
+		}else {
 			Level level = Level.parse(args[0]);
 			if(level == null) {
 				 System.out.println(usageMsg);
@@ -33,8 +33,8 @@ public class BuffyVampireSlayer {
 			    		
 					Controller controller = new Controller(new Game(seed, level), new Scanner(System.in));
 					controller.run();
-				}
-				catch (NumberFormatException nfe) {
+				
+				}catch (NumberFormatException nfe) {
                     System.out.println(usageMsg + ": " + seedIsNumberMsg);
                 }
 			}

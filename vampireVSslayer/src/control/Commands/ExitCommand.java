@@ -1,6 +1,7 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandParseException;
 
 public class ExitCommand extends Command {
 
@@ -20,7 +21,7 @@ public class ExitCommand extends Command {
 	}
 
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		return parseNoParamsCommand(commandWords);
 	}
 

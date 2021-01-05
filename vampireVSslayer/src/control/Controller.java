@@ -10,7 +10,6 @@ import logic.Exceptions.GameException;
 public class Controller {
 
 	public final String prompt = "Command > ";
-	public static final String unknownCommandMsg = "Unknown command";
 
 	private Game game;
 	private Scanner scanner;
@@ -44,7 +43,7 @@ public class Controller {
 				Command command = CommandGenerator.parse(parameters);
 				refreshDisplay = command.execute(game);
 			} catch (GameException ex) {
-				System.out.format(ex.getMessage() + " %n %n");
+				System.out.format(ex.getMessage() + "%n %n");
 			}
 		}
 		if (refreshDisplay) {

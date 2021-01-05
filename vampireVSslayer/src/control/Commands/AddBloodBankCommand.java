@@ -1,13 +1,14 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandParseException;
 
 public class AddBloodBankCommand extends Command {
 	
 	private static final String NAME = "bank";
 	private static final String SHORTCUT = "b";
 	private static final String DETAILS = "[b]ank <x> <y> <z>";
-	private static final String HELP = "add a blood bank with cost z in position x, y.";
+	private static final String HELP = "add a blood bank with cost z in position x, y";
 	private static final int ARGS=4;
 	private int x;
 	private int y;
@@ -29,7 +30,7 @@ public class AddBloodBankCommand extends Command {
 	}
 
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		//Si no ha introducido caracteres
 		if(commandWords.length > 3 && isNumeric(commandWords[1])
 		&& isNumeric(commandWords[2]) && isNumeric(commandWords[3])) {

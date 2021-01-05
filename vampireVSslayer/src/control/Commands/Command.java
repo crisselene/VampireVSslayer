@@ -8,7 +8,7 @@ import logic.Exceptions.CommandParseException;
 
 public abstract class Command {
 	
-	private static final String incArgsMsg = "has an incorrect num of arguments";
+	private static final String incArgsMsg = "Incorrect number of arguments";
 	protected final String name;
 	protected final String shortcut;
 	private final String details; 
@@ -26,7 +26,7 @@ public abstract class Command {
 	  
 	 public abstract boolean execute(Game game) throws CommandExecuteException;
 	  
-	 public abstract Command parse(String[] commandWords) throws /*NumberFormatException,*/ CommandParseException;
+	 public abstract Command parse(String[] commandWords) throws NumberFormatException, CommandParseException;
 	  
 	 protected boolean matchCommandName(String name) {
 		    return this.shortcut.equalsIgnoreCase(name) || 
@@ -61,10 +61,8 @@ public abstract class Command {
 	    return details + ": " + help;
 	  }
 	  
-	  public boolean isNumeric(String string)
-	    {
+	  public boolean isNumeric(String string) {
 	    	boolean resultado;
-
 	        try {
 	            Integer.parseInt(string);
 	            resultado = true;

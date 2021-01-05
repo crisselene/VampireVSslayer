@@ -50,14 +50,12 @@ public class Vampiro extends GameObject implements IAttack{
 	@Override
 	public void move(boolean ocupado) {
 		
-		if(ciclosAvance<1) {
-		ciclosAvance++; 
-		}
+		if(ciclosAvance<1) ciclosAvance++; 
 		else {
 			if(ocupado==false) {
 				posx--;
 				this.setPosX(posx); 
-				ciclosAvance=0;
+				this.setCiclosAvance(0);
 				if(posx==-1) Vampiro.llegoPrincipio=true;
 			}
 		}
@@ -123,11 +121,13 @@ public class Vampiro extends GameObject implements IAttack{
 				IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
 				if (other != null ) {
 					boolean recibirDamage = other.receiveVampireAttack(HARM);
-					if(recibirDamage== true) {
-						if(this.ciclosAvance<2) {
-							ciclosAvance++;
-						}
-					}
+					//if(recibirDamage== true) { ********************************************CAMBIO EN ATAQUE
+//						if(this.ciclosAvance<1) {
+//							System.out.println("en ataque mis ciclos son " +ciclosAvance );
+//							ciclosAvance++;
+//							System.out.println("en ataque se cambian  " +ciclosAvance );
+//						}
+					//}
 					
 			} 	
 		}

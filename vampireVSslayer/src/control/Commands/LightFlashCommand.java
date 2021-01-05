@@ -1,6 +1,7 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandParseException;
 
 public class LightFlashCommand extends Command {
 	
@@ -23,7 +24,7 @@ public class LightFlashCommand extends Command {
 	}
 
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		return parseNoParamsCommand(commandWords);
 	}
 

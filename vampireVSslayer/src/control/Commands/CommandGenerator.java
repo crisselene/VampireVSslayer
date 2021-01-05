@@ -1,9 +1,12 @@
 package control.Commands;
 
+import javax.activation.CommandMap;
+
 import logic.Exceptions.CommandParseException;
 
 public class CommandGenerator{
 
+	public static final String unknownCommandMsg = "Unknown command";
 	private static Command[] availableCommands = {
 
 		new AddCommand(),
@@ -20,22 +23,36 @@ public class CommandGenerator{
 	};
 
 	public static Command parse(String[] commandWords) throws CommandParseException {
-//		for (Command c: availableCommands) {
-//			Command parsedCommand = c.parse(commandWords);
-//			if(parsedCommand != null)
-//				return parsedCommand;
-//		}
-		//return null; //quiere decir que el comando es invalido ------
-		
-		for (Command c: availableCommands) {
-			Command parsedCommand = c.parse(commandWords);
-			if(parsedCommand != null) {
-				return parsedCommand;
+		try {
+			for (Command c: availableCommands) {
+				Command parsedCommand = c.parse(commandWords);
+				if(parsedCommand != null)
+					return parsedCommand;
 			}
-				
+		}catch(NumberFormatException num) {
+		System.out.println("num mal");
+		}catch(CommandParseException comm) {
+			throw new CommandParseException(comm.getMessage());
 		}
-		throw new CommandParseException("[ERROR]: "  /*+unknownCommandMsg*/);//***********ese mensaje esta en el controler?¿*****
-	}
+		throw new CommandParseException("[ERROR]: "  +unknownCommandMsg);//***********ese mensaje va en el controler?¿*****
+		
+		}	
+		//return null;
+		
+//		try {
+//			for (Command c: availableCommands) {
+//				Command parsedCommand = c.parse(commandWords);
+//					if(parsedCommand != null) {
+//						return parsedCommand;
+//					}
+//			}
+//		}catch(NumberFormatException num) {
+//			System.out.println(num.getMessage());
+//			throw new CommandParseException("[ERROR] '" + commandWords[1] + "' || '" + commandWords[2]
+//					+ "' is not a number");
+//		}
+//		
+		//throw new CommandParseException("[ERROR]: "  +unknownCommandMsg);//***********ese mensaje va en el controler?¿*****
 
 
 	public static void recorrerArrayHelp() {

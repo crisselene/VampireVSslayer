@@ -2,6 +2,7 @@ package logic;
 
 import java.util.Random;
 
+import logic.Exceptions.CommandExecuteException;
 import objetos.BloodBank;
 import objetos.Dracula;
 import objetos.ExplosiveVampire;
@@ -261,10 +262,10 @@ public class Game implements IPrintable {
 
 	
 	//add vampire de comando AddVampireCommand
-	public boolean addVampire(int x, int y, String type) {
+	public boolean addVampire(int x, int y, String type) throws CommandExecuteException {
 
 		if(board.getVampRestantes() > 0) {
-			if(board.dentroTablero(y, x)) {
+			if(board.dentroTablero(y, x)) {//****************+
 				if(!board.buscarObjeto(x, y)){
 					if(type!=null) {
 						if(type.equals("d")) {
@@ -281,10 +282,10 @@ public class Game implements IPrintable {
 							ExplosiveVampire ev = new ExplosiveVampire(x, y, this);
 							board.addObject(ev);
 						}
-						else {
+						else if(type.equals("")){
 							Vampiro vampire = new Vampiro(x,y,this);
 							board.addObject(vampire);
-						}
+	/***********/					}else throw new CommandExecuteException("[ERROR]: Unvalid type: [v]ampire [<type>] <x> <y>. Type = {\"\"|\"D\"|\"E\"}");
 					}else {
 						Vampiro vampire = new Vampiro(x,y,this);
 						board.addObject(vampire);

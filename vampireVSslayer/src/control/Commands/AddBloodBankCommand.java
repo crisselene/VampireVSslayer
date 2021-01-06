@@ -1,7 +1,9 @@
 package control.Commands;
 
 import logic.Game;
+import logic.Exceptions.CommandExecuteException;
 import logic.Exceptions.CommandParseException;
+import logic.Exceptions.NotEnoughCoinsException;
 
 public class AddBloodBankCommand extends Command {
 	
@@ -19,12 +21,19 @@ public class AddBloodBankCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
-		boolean creado = game.addBank(x, y, z);
-		if(creado) {
-			game.update();
-			return true;
+	public boolean execute(Game game) throws CommandExecuteException {
+		boolean creado;
+		try {
+			creado = game.addBank(x, y, z);
+			if(creado) {
+				game.update();
+				return true;
+			}
+		} catch (CommandExecuteException e) {
+			System.out.println("[ERROR]: " + e.getMessage());
+			throw new CommandExecuteException("fallo en el bank");
 		}
+		
 		
 		return false;
 	}

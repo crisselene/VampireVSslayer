@@ -28,7 +28,8 @@ public class AddCommand extends Command {
 		}
 		catch(CommandExecuteException ex){
 			creado = false;
-			throw ex;
+			System.out.println(ex.getMessage());//unvalid position
+			throw new CommandExecuteException("[ERROR]: Failed to add slayer");
 		}
 		if(creado) {
 			game.update();

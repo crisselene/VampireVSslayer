@@ -51,7 +51,7 @@ public abstract class Command {
 				if (words.length != 1) {
 					throw new CommandParseException("[ERROR]: Command "+ name + " :" + incArgsMsg);					
 				}
-				return this;
+				else return this;
 			}
 			
 			return null;

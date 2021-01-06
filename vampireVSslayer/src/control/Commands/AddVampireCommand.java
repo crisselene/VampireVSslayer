@@ -24,7 +24,7 @@ public class AddVampireCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {		
-		return(game.addVampire(x, y, type));			
+		return(game.tryAddVampire(x, y, type));			
 	}
 
 	@Override

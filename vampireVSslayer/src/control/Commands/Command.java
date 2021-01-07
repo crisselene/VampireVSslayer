@@ -37,19 +37,20 @@ public abstract class Command {
 			
 			if (matchCommandName(words[0])) {
 				if (words.length != args) {
-					throw new CommandParseException("[ERROR]: Command "+ name + " :" + incArgsMsg);
+					throw new CommandParseException(name + " :" + incArgsMsg);
 				}
 				return this;
 			}
 			
-			return null;
+			throw new CommandParseException(name + " :" + incArgsMsg);
+
 	  }
 	  
 	  protected Command parseNoParamsCommand(String[] words) throws CommandParseException{
 	
 			if (matchCommandName(words[0])) {
 				if (words.length != 1) {
-					throw new CommandParseException("[ERROR]: Command "+ name + " :" + incArgsMsg);					
+					throw new CommandParseException(name + " :" + incArgsMsg);					
 				}
 				else return this;
 			}

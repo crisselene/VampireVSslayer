@@ -30,9 +30,9 @@ public class CommandGenerator{
 					return parsedCommand;
 			}
 		}catch(NumberFormatException num) {
-		System.out.println("num mal");
+		System.out.println("num mal");//***************************************************++
 		}catch(CommandParseException comm) {
-			throw new CommandParseException(comm.getMessage());
+			throw new CommandParseException("[ERROR]: Command " + comm.getMessage());
 		}
 		throw new CommandParseException("[ERROR]: "  +unknownCommandMsg);//***********ese mensaje va en el controler?¿*****
 		

@@ -7,5 +7,16 @@ public class NotEnoughCoinsException extends CommandExecuteException {
 	public NotEnoughCoinsException(String msg) {
 		super(msg);
 	}
+	public NotEnoughCoinsException(String msg,Throwable cause) {
+		super(msg,cause);
+	}
+	public NotEnoughCoinsException() {
+		super();
+	}
+	
+	public NotEnoughCoinsException(Throwable cause) {
+		super(cause);
+	}
+
 
 }

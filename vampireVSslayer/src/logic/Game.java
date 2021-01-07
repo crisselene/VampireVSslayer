@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import logic.Exceptions.CommandExecuteException;
+import logic.Exceptions.CommandParseException;
 import logic.Exceptions.DraculaIsAliveException;
 import logic.Exceptions.NoMoreVampiresException;
 import logic.Exceptions.NotEnoughCoinsException;
@@ -25,10 +26,11 @@ public class Game implements IPrintable {
 	private static final int COSTE_GARLIC = 10;
 	private static final int COSTE_LIGHT = 50;
 	private static final int SUPER_MONEDAS = 1000;
-	private static final String INVALID_POSITION= "[ERROR]: Unvalid position";
-	private static final String NOT_COINS= "[ERROR]: Defender cost is 50: Not enough coins";
-	private static final String DRACULA_ALIVE = "[ERROR]: Dracula is alive";
-	private static final String NO_VAMP_LEFT = "[ERROR]: No more remaining vampires left";
+	private static final String INVALID_POSITION= "Unvalid position";
+	private static final String NOT_COINS= "Defender cost is 50: Not enough coins";
+	private static final String DRACULA_ALIVE = "Dracula is already on board";
+	private static final String NO_VAMP_LEFT = "No more remaining vampires left";
+	private static final String ERROR = "[ERROR]: ";
 	private long seed;
 	private Level level;
 	private GamePrinter printer;
@@ -116,7 +118,7 @@ public class Game implements IPrintable {
 				
 			}else throw new NotEnoughCoinsException(NOT_COINS);
 		}
-		throw new UnvalidPositionException("[ERROR]: Position (" + x + ", "+ y + "): "+ INVALID_POSITION);
+		throw new UnvalidPositionException("Position (" + x + ", "+ y + "): "+ INVALID_POSITION);
 	}
 
 	@Override
@@ -182,7 +184,6 @@ public class Game implements IPrintable {
 		if(fila != -1) {			
 			Dracula d = new Dracula(columna, fila, this);
 			board.addObject(d);
-			//Dracula.draculaOnBoard=true;
 		}
 		
 	}
@@ -193,13 +194,7 @@ public class Game implements IPrintable {
 		return obj;
 	}
 
-//	public IAttack getAttackableInLine(int posy) {
-//		GameObject obj;
-//		obj = board.getAttackableInLine(posy);
-//		return obj;
-//	}
-
-	public boolean addBank(int x, int y, int z) throws NotEnoughCoinsException {
+	public boolean addBank(int x, int y, int z) throws CommandExecuteException {
 
 		if(board.dentroTablero(y, x)) {
 
@@ -210,22 +205,19 @@ public class Game implements IPrintable {
 					player.restarMonedas(z);
 					return true;
 				}else {
-					throw new NotEnoughCoinsException("[ERROR]: no hay monedas suficientes");
+					throw new NotEnoughCoinsException("no hay monedas suficientes");
 				}
 			}else {
-				System.out.println(INVALID_POSITION);
-				return false;
+				throw new UnvalidPositionException("Unvalid position");
 			}
 		}else{
-			System.out.println(INVALID_POSITION);
-			return false;
+			throw new UnvalidPositionException("Unvalid position");
 		}
 		
 
 	}
 
 	public void reintegroBanco(int ganancia) {
-		//Añade las monedas del banco
 		player.reintegroBanco(ganancia);
 	}
 
@@ -235,9 +227,7 @@ public class Game implements IPrintable {
 			player.restarMonedas(COSTE_GARLIC);
 			return true;
 		}
-		throw new NotEnoughCoinsException("[ERROR]: no hay monedas suficientes, coste: " + COSTE_GARLIC);
-//		System.out.println(NOT_COINS);
-//		return false;
+		throw new NotEnoughCoinsException(ERROR +"no hay monedas suficientes, coste: " + COSTE_GARLIC);
 
 	}
 
@@ -245,31 +235,24 @@ public class Game implements IPrintable {
 		return board.buscarObjeto(posx, posy);
 	}
 
-//	public boolean estaAlFinal(int posx) {
-//			return posx == level.getDimx() - 1; **********************SE NECESITA? ******************+++
-//	}
-
 	public boolean lightVampires() throws NotEnoughCoinsException {
 		if(player.tieneMonedas(COSTE_LIGHT)) {
 			board.lightVampires();
 			player.restarMonedas(COSTE_LIGHT);
 			return true;
 		}
-		throw new NotEnoughCoinsException("[ERROR]: no hay monedas suficientes, coste: " + COSTE_LIGHT);
-//		System.out.println(NOT_COINS);
-//		return false;
+		throw new NotEnoughCoinsException(ERROR + "no hay monedas suficientes, coste: " + COSTE_LIGHT);
 	}
 
 	public void superMonedas() {
 		player.reintegroBanco(SUPER_MONEDAS);
-		//Le hacemos el reintegro especial
 	}
 
 	
 	//add vampire de comando AddVampireCommand
-	public boolean tryAddVampire(int x, int y, String type) throws CommandExecuteException {
+	public boolean tryAddVampire(int x, int y, String type) throws CommandExecuteException, CommandParseException {
 		if (board.getVampRestantes() > 0) {
-			if (board.dentroTablero(y, x)) {// ****************+
+			if (board.dentroTablero(y, x)) {
 				if (!board.buscarObjeto(x, y)) {
 					if (type != null) {
 						if (type.equals("d")) {
@@ -278,19 +261,15 @@ public class Game implements IPrintable {
 								board.addObject(dracula);
 								Dracula.draculaOnBoard = true;
 							} else
-								throw new DraculaIsAliveException("[ERROR]: Dracula está vivo");
-							// System.out.println(DRACULA_ALIVE);
-							// return false;
+								throw new DraculaIsAliveException(ERROR + DRACULA_ALIVE);
 						} else if (type.equals("e")) {
 							ExplosiveVampire ev = new ExplosiveVampire(x, y, this);
 							board.addObject(ev);
 						} else if (type.equals("")) {
 							Vampiro vampire = new Vampiro(x, y, this);
 							board.addObject(vampire);
-							/***********/
 						} else
-							throw new CommandExecuteException(
-									"[ERROR]: Unvalid type: [v]ampire [<type>] <x> <y>. Type = {\"\"|\"D\"|\"E\"}");
+							throw new CommandParseException();
 					} else {
 						Vampiro vampire = new Vampiro(x, y, this);
 						board.addObject(vampire);
@@ -299,13 +278,13 @@ public class Game implements IPrintable {
 					board.aumentarVampirosTablero();
 					return true;// Porque en todos los casos se habra añadido el vampiro
 				} else {
-					throw new UnvalidPositionException("Unvalid position");
+					throw new UnvalidPositionException(ERROR +"Position ("+x+","+y+"): Unvalid position");
 				}
 			} else {
-				throw new UnvalidPositionException("Unvalid position");
+				throw new UnvalidPositionException(ERROR +"Position ("+x+","+y+"): Unvalid position");
 			}
 		} else {
-			throw new NoMoreVampiresException("[ERROR] No se pueden anadir mas vampiros");
+			throw new NoMoreVampiresException(ERROR +NO_VAMP_LEFT);
 		}
 	}
 
@@ -325,17 +304,23 @@ public class Game implements IPrintable {
 		return serialize + board.serializeList();
 	}
 
-	public void save(String fileName) {
-		try {
-			FileWriter save = new FileWriter(fileName);
-			BufferedWriter bf = new BufferedWriter(save);
+	public void save(String fileName) throws IOException {
+		//try-with-resources
+		try (BufferedWriter bf = new BufferedWriter(new FileWriter(fileName))) {
 			String serialize = this.serialize();
 			bf.write(serialize);
 			bf.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Fallo");
 		}
+//		try {
+//			FileWriter save = new FileWriter(fileName);
+//			BufferedWriter bf = new BufferedWriter(save);
+//			String serialize = this.serialize();
+//			bf.write(serialize);
+//			bf.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			System.out.println("Fallo");
+//		}
 		
 	}
 }

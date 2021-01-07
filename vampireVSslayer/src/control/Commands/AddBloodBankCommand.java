@@ -33,8 +33,6 @@ public class AddBloodBankCommand extends Command {
 			System.out.println("[ERROR]: " + e.getMessage());
 			throw new CommandExecuteException("fallo en el bank");
 		}
-		
-		
 		return false;
 	}
 

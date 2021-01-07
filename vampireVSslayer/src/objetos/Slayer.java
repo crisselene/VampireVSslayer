@@ -26,29 +26,18 @@ public class Slayer extends GameObject implements IAttack{
 		this.posy= posy;
 		this.game = game;
 	}
-	
-//	@Override
-//	public void attack() {
-//		//Solo atacamos si el otro esta en su misma fila
-//		if(isAlive()) {
-//			IAttack other = game.getAttackableInLine(this.posy);
-//			if(other != null) other.receiveSlayerAttack(ATAQUE);
-//		}
-//	}
 	@Override
 	public void attack() {
-		//Solo atacamos si el otro esta en su misma fila
-		if(isAlive()) {
-			//desde la posición del slayer en adelante miramos si hay un atacable
-			for (int i = this.posx+1; i <= game.getLevelDimX() ; i++) {
+		// Solo atacamos si el otro esta en su misma fila
+		if (isAlive()) {
+			// desde la posición del slayer en adelante miramos si hay un atacable
+			for (int i = this.posx + 1; i <= game.getLevelDimX(); i++) {
 				IAttack other = game.getAttackableInPosition(i, this.posy);
-				if(other != null) {
-					other.receiveSlayerAttack(ATAQUE); 
-					i=game.getLevelDimX()+1;//acabamos el bucle
+				if (other != null) {
+					other.receiveSlayerAttack(ATAQUE);
+					break;
 				}
 			}
-			
-			
 		}
 	}
 	
@@ -64,16 +53,13 @@ public class Slayer extends GameObject implements IAttack{
 		return true;
 	}
 	
-	//métodos en los que los slayers no actuan:
 	@Override
 	public void move(boolean ocupado) { // los slayers no se mueven
 	}
 	
 	@Override
 	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}
-//	@Override
-//	public boolean llegoFinal() {return false;}
-//	
+
 	@Override
 	public String serialize(String serialize) {		
 		return serialize + "S;" + posx + ";" + posy + ";" + getVida();

@@ -7,5 +7,16 @@ public class NoMoreVampiresException extends CommandExecuteException {
 	public NoMoreVampiresException(String msg) {
 		super(msg);
 	}
+	
+	public NoMoreVampiresException(String msg,Throwable cause) {
+		super(msg,cause);
+	}
+	public NoMoreVampiresException() {
+		super();
+	}
+	
+	public NoMoreVampiresException(Throwable cause) {
+		super(cause);
+	}
 
 }

@@ -28,7 +28,7 @@ public class AddCommand extends Command {
 		}
 		catch(CommandExecuteException ex){
 			creado = false;
-			System.out.println(ex.getMessage());//unvalid position
+			System.out.println("[ERROR]: "+ ex.getMessage());//unvalid position
 			throw new CommandExecuteException("[ERROR]: Failed to add slayer");
 		}
 		if(creado) {
@@ -55,7 +55,7 @@ public class AddCommand extends Command {
 				} catch (NumberFormatException num) {
 					System.out.println(num.getMessage());
 					throw new CommandParseException(
-							"[ERROR] '" + commandWords[1] + "' || '" + commandWords[2] + "' is not a number");
+							"[ERROR]: '" + commandWords[1] + "' || '" + commandWords[2] + "' is not a number");
 				}
 			}
 		return null;

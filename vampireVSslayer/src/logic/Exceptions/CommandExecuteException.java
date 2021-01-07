@@ -12,5 +12,11 @@ public class CommandExecuteException extends GameException {
 	public CommandExecuteException(String msg,Throwable cause) {
 		super(msg,cause);
 	}
-
+	public CommandExecuteException() {
+		super();
+	}
+	
+	public CommandExecuteException(Throwable cause) {
+		super(cause);
+	}
 }

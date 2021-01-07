@@ -7,4 +7,14 @@ public class NumberFormatException extends CommandParseException {
 	public NumberFormatException(String msg) {
 		super(msg);
 	}
+	public NumberFormatException(String msg,Throwable cause) {
+		super(msg,cause);
+	}
+	public NumberFormatException() {
+		super();
+	}
+	
+	public NumberFormatException(Throwable cause) {
+		super(cause);
+	}
 }

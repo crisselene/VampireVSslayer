@@ -65,5 +65,7 @@ public abstract class GameObject implements IAttack{
 	public abstract boolean noHayVenLafila(boolean crear, int fila);
 	//public abstract boolean llegoFinal();
 
+	public abstract String serialize(String serialize);
+
 	
 }

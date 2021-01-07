@@ -74,5 +74,9 @@ public class Slayer extends GameObject implements IAttack{
 //	@Override
 //	public boolean llegoFinal() {return false;}
 //	
+	@Override
+	public String serialize(String serialize) {		
+		return serialize + "S;" + posx + ";" + posy + ";" + getVida();
+	}
 	
 }

@@ -58,6 +58,11 @@ public class Dracula extends Vampiro implements IAttack {
 		return false;		
 	}
 	
+	@Override
+	public String serialize(String serialize) {
+		return serialize + "D;" + posx + ";" + posy + ";" + getVida() + ";" + ciclosAvance;	
+	}
+	
 	
 	
 

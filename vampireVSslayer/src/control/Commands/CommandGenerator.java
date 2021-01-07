@@ -1,7 +1,5 @@
 package control.Commands;
 
-import javax.activation.CommandMap;
-
 import logic.Exceptions.CommandParseException;
 
 public class CommandGenerator{
@@ -18,7 +16,9 @@ public class CommandGenerator{
 		new LightFlashCommand(),
 		new AddBloodBankCommand(),
 		new SuperCoinsCommand(),
-		new AddVampireCommand()
+		new AddVampireCommand(),
+		//new SerializeCommand(),
+		new SaveCommand()
 
 	};
 

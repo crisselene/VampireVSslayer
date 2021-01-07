@@ -133,6 +133,11 @@ public class Vampiro extends GameObject implements IAttack{
 		}
 	}
 
+	@Override
+	public String serialize(String serialize) {
+		return serialize + "V;" + posx + ";" + posy + ";" + getVida() + ";" + ciclosAvance;	
+	}
+
 //	@Override
 //	public boolean llegoFinal() {
 //		//if(posx == -1) {

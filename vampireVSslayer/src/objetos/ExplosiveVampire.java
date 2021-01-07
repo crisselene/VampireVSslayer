@@ -39,4 +39,9 @@ public class ExplosiveVampire extends Vampiro implements IAttack {
 		return true;
 		
 	}
+	
+	@Override
+	public String serialize(String serialize) {
+		return serialize + "EV;" + posx + ";" + posy + ";" + getVida() + ";" + ciclosAvance;	
+	}
 }

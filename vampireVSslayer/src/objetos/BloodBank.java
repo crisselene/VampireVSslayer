@@ -53,6 +53,11 @@ public class BloodBank extends GameObject implements IAttack{
 	@Override
 	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}//No es un vampiro	
 
+	@Override
+	public String serialize(String serialize) {		
+		return serialize + "B;" + posx + ";" + posy + ";" + getVida() + ";" + z;				
+	}
+
 //	@Override
 //	public boolean llegoFinal() {return false;} //No es un vampiro	
 

@@ -126,5 +126,13 @@ public class GameObjectList {
 		}
 		
 	}
+
+	public String serialize() {
+		String serialize = "";
+		for(GameObject objeto : gameobjects) {
+			serialize = objeto.serialize(serialize) + "\n";
+		}
+		return serialize;
+	}
 		
 }

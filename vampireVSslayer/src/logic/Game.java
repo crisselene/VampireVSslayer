@@ -1,5 +1,8 @@
 package logic;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 import logic.Exceptions.CommandExecuteException;
@@ -34,6 +37,7 @@ public class Game implements IPrintable {
 	private Player player;
 	private int ciclos;
 	private Random random;
+	private String serialize;
 	
 
 	public int getCiclos() {
@@ -308,5 +312,30 @@ public class Game implements IPrintable {
 	public void reducirVampirosTablero() {
 		board.reducirVampirosTablero();
 
+	}
+
+	public String serialize() {
+		serialize = "Cycles: " + ciclos + "\n" + 
+					"Coins: " + player.getMonedas() + "\n" +
+					"Level: " + level.name() + "\n" +
+					"Remaining Vampires: " + board.getVampRestantes() + "\n" +
+					"Vampires on Board: " + board.getVampEnTablero() + "\n" + "\n" +
+					"Game Object List: \n";
+		
+		return serialize + board.serializeList();
+	}
+
+	public void save(String fileName) {
+		try {
+			FileWriter save = new FileWriter(fileName);
+			BufferedWriter bf = new BufferedWriter(save);
+			String serialize = this.serialize();
+			bf.write(serialize);
+			bf.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Fallo");
+		}
+		
 	}
 }

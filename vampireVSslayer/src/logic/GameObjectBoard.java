@@ -144,6 +144,10 @@ public class GameObjectBoard {
 		
 	}
 
+	public String serializeList() {
+		return obList.serialize();
+	}
+
 	
 	
 

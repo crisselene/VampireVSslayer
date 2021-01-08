@@ -50,7 +50,7 @@ public class AddCommand extends Command {
 						// Retornamos dependiendo de los argumentos que habia en el parse
 						return parseParamsCommand(commandWords, ARGS);
 					}else {
-						throw new CommandParseException("[ERROR]: " + msgUnvalidAdd);
+						throw new CommandParseException(msgUnvalidAdd);
 					}
 				} catch (NumberFormatException num) {
 					System.out.println(num.getMessage());

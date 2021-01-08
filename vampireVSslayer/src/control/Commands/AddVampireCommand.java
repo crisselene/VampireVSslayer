@@ -49,7 +49,8 @@ public class AddVampireCommand extends Command {
 				y= Integer.parseInt(commandWords[2]);
 				return parseParamsCommand(commandWords, ARGS);
 			}else throw new CommandParseException("[ERROR]: " + msgUnvalidType + DETAILS);
-		}else return null;
+		}
+		return null;
 
 	}
 

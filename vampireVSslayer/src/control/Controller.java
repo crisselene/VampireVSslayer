@@ -51,7 +51,7 @@ public class Controller {
 			game.setCiclos(ciclosFinales);
 			printGame();
 		}
-		System.out.println("[Game over] " + game.getWinnerMessage());
+		System.out.println("[GAME OVER] " + game.getWinnerMessage());
 
 	}
 

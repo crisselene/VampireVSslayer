@@ -32,12 +32,11 @@ public class SaveCommand extends Command {
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
 		//if(commandWords.length > 1)
-		if(commandWords.length == 1)
+		if(commandWords.length > 1)
 		{
-			fileName= commandWords[0] + ".dat";
-			return parseParamsCommand(commandWords, ARGS);
+			fileName= commandWords[1] + ".dat";			
 		}
-		else throw new CommandParseException();
+		return parseParamsCommand(commandWords, ARGS);
 		
 	}
 

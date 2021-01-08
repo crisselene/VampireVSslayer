@@ -16,10 +16,9 @@ public class CommandGenerator{
 		new LightFlashCommand(),
 		new AddBloodBankCommand(),
 		new SuperCoinsCommand(),
-		new AddVampireCommand(),
-		//new SerializeCommand(),
-		new SaveCommand()
-
+		new AddVampireCommand(),		
+		new SaveCommand(),
+		new SerializeCommand()
 	};
 
 	public static Command parse(String[] commandWords) throws CommandParseException {
@@ -32,7 +31,7 @@ public class CommandGenerator{
 		}catch(NumberFormatException num) {
 		System.out.println("num mal");//***************************************************++
 		}catch(CommandParseException comm) {
-			throw new CommandParseException("[ERROR]: Command " + comm.getMessage());
+			throw new CommandParseException("[ERROR]: " + comm.getMessage());
 		}
 		throw new CommandParseException("[ERROR]: "  +unknownCommandMsg);//***********ese mensaje va en el controler?¿*****
 		

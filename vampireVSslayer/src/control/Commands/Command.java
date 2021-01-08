@@ -37,12 +37,12 @@ public abstract class Command {
 			
 			if (matchCommandName(words[0])) {
 				if (words.length != args) {
-					throw new CommandParseException(name + " :" + incArgsMsg);
+					throw new CommandParseException("Command " + name + " :" + incArgsMsg);
 				}
 				return this;
 			}
 			
-			throw new CommandParseException(name + " :" + incArgsMsg);
+			return null;
 
 	  }
 	  
@@ -50,7 +50,7 @@ public abstract class Command {
 	
 			if (matchCommandName(words[0])) {
 				if (words.length != 1) {
-					throw new CommandParseException(name + " :" + incArgsMsg);					
+					throw new CommandParseException("Command " + name + " :" + incArgsMsg);					
 				}
 				else return this;
 			}

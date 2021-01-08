@@ -26,6 +26,7 @@ public class SaveCommand extends Command {
 		} catch (IOException e) {
 			throw new CommandExecuteException("fallo al guardar el fichero");
 		}
+		System.out.println("Game successfully saved to file "+fileName+".");
 		return false;
 	}
 

@@ -26,9 +26,8 @@ public class AddVampireCommand extends Command {
 	public boolean execute(Game game) throws CommandExecuteException {		
 		try {
 			return(game.tryAddVampire(x, y, type));
-		} catch (CommandParseException e) {
-			System.out.println(e.getMessage());
-			throw new CommandExecuteException("[ERROR]: Unvalid type: " + DETAILS);
+		} catch (CommandParseException cpe) {
+			throw new CommandExecuteException("[ERROR]: "+cpe.getMessage()+": " + DETAILS);
 		} catch (CommandExecuteException ex) {
 			System.out.println(ex.getMessage());
 			throw new CommandExecuteException("[ERROR]: Failed to add this vampire");

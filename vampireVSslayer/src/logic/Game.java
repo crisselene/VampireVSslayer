@@ -269,7 +269,7 @@ public class Game implements IPrintable {
 							Vampiro vampire = new Vampiro(x, y, this);
 							board.addObject(vampire);
 						} else
-							throw new CommandParseException();
+							throw new CommandParseException("Unvalid type");
 					} else {
 						Vampiro vampire = new Vampiro(x, y, this);
 						board.addObject(vampire);

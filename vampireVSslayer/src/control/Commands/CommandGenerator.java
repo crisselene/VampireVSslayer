@@ -29,7 +29,7 @@ public class CommandGenerator{
 					return parsedCommand;
 			}
 		}catch(NumberFormatException num) {
-		System.out.println("num mal");//***************************************************++
+			throw new CommandParseException("[ERROR]: " + num.getMessage());
 		}catch(CommandParseException comm) {
 			throw new CommandParseException("[ERROR]: " + comm.getMessage());
 		}

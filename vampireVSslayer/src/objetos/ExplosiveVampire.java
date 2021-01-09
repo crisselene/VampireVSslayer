@@ -30,14 +30,18 @@ public class ExplosiveVampire extends Vampiro implements IAttack {
 	
 	@Override
 	public boolean receiveSlayerAttack(int damage) {
-		int vida= this.getVida();
-		vida = vida - damage;
-		this.setVida(vida);	
-		if(vida <= 0) {
-			this.explotar();
+		if(!isAlive()) {
+			return false;
 		}
-		return true;
-		
+		else {
+			int vida= this.getVida();
+			vida = vida - damage;
+			this.setVida(vida);	
+			if(vida <= 0) {
+				this.explotar();
+			}
+			return true;
+		}		
 	}
 	
 	@Override

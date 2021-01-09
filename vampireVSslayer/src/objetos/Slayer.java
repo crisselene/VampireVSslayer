@@ -34,8 +34,9 @@ public class Slayer extends GameObject implements IAttack{
 			for (int i = this.posx + 1; i <= game.getLevelDimX(); i++) {
 				IAttack other = game.getAttackableInPosition(i, this.posy);
 				if (other != null) {
-					other.receiveSlayerAttack(ATAQUE);
-					break;
+					if(other.receiveSlayerAttack(ATAQUE)) {
+						break;
+					}					
 				}
 			}
 		}

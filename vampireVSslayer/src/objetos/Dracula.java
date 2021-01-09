@@ -26,15 +26,21 @@ public class Dracula extends Vampiro implements IAttack {
 	}
 	
 	public boolean receiveSlayerAttack(int damage) {
-		int vida= this.getVida();
-		vida = vida - damage;
-		this.setVida(vida);	
-		//En caso de que muera el dracula puede resucitar
 		if(!isAlive()) {
-			draculaOnBoard=false;
-			this.morir();
+			return false;
 		}
-		return true;
+		else {
+			int vida= this.getVida();
+			vida = vida - damage;
+			this.setVida(vida);	
+			//En caso de que muera el dracula puede resucitar
+			if(!isAlive()) {
+				draculaOnBoard=false;
+				this.morir();
+			}
+			return true;
+		}
+		
 	}
 	
 	public  boolean receiveGarlicPush() {

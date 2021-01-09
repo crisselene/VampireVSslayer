@@ -62,13 +62,18 @@ public class Vampiro extends GameObject implements IAttack{
 	}
 		
 	public boolean receiveSlayerAttack(int damage) {
-		int vida= this.getVida();
-		vida = vida - damage;
-		this.setVida(vida);	
 		if(!isAlive()) {
-			this.morir();
+			return false;
 		}
-		return true;
+		else {
+			int vida= this.getVida();
+			vida = vida - damage;
+			this.setVida(vida);	
+			if(!isAlive()) {
+				this.morir();
+			}
+			return true;
+		}		
 	}
 	
 	public  boolean receiveGarlicPush() {

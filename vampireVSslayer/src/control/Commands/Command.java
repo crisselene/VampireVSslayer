@@ -37,7 +37,7 @@ public abstract class Command {
 			
 			if (matchCommandName(words[0])) {
 				if (words.length != args) {
-					throw new CommandParseException("Command " + name + " :" + incArgsMsg);
+					throw new CommandParseException("Incorrect number of arguments for " + name + " command: " + details);	
 				}
 				return this;
 			}

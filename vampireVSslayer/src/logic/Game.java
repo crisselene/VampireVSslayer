@@ -26,8 +26,8 @@ public class Game implements IPrintable {
 	private static final int COSTE_GARLIC = 10;
 	private static final int COSTE_LIGHT = 50;
 	private static final int SUPER_MONEDAS = 1000;
-	private static final String INVALID_POSITION= "Unvalid position";
-	private static final String NOT_COINS= "Defender cost is 50: Not enough coins";
+	private static final String UNVALID_POSITION= "Unvalid position";
+	private static final String NOT_COINS= "Not enough coins";
 	private static final String DRACULA_ALIVE = "Dracula is already on board";
 	private static final String NO_VAMP_LEFT = "No more remaining vampires left";
 	private static final String ERROR = "[ERROR]: ";
@@ -116,9 +116,9 @@ public class Game implements IPrintable {
 				player.restarMonedas(COSTE_SLAYER);
 				return true;
 				
-			}else throw new NotEnoughCoinsException(NOT_COINS);
+			}else throw new NotEnoughCoinsException("Defender cost is "+COSTE_SLAYER+": "+NOT_COINS);
 		}
-		throw new UnvalidPositionException("Position (" + x + ", "+ y + "): "+ INVALID_POSITION);
+		throw new UnvalidPositionException("Position (" + x + ", "+ y + "): "+ UNVALID_POSITION);
 	}
 
 	@Override
@@ -205,13 +205,13 @@ public class Game implements IPrintable {
 					player.restarMonedas(z);
 					return true;
 				}else {
-					throw new NotEnoughCoinsException("no hay monedas suficientes");
+					throw new NotEnoughCoinsException(NOT_COINS);
 				}
 			}else {
-				throw new UnvalidPositionException("Unvalid position");
+				throw new UnvalidPositionException(UNVALID_POSITION);
 			}
 		}else{
-			throw new UnvalidPositionException("Unvalid position");
+			throw new UnvalidPositionException(UNVALID_POSITION);
 		}
 		
 
@@ -227,8 +227,7 @@ public class Game implements IPrintable {
 			player.restarMonedas(COSTE_GARLIC);
 			return true;
 		}
-		throw new NotEnoughCoinsException(ERROR +"no hay monedas suficientes, coste: " + COSTE_GARLIC);
-
+		throw new NotEnoughCoinsException("Garlic Push cost is " + COSTE_GARLIC+": "+NOT_COINS);
 	}
 
 	public boolean buscarObjeto(int posx, int posy) {
@@ -241,7 +240,7 @@ public class Game implements IPrintable {
 			player.restarMonedas(COSTE_LIGHT);
 			return true;
 		}
-		throw new NotEnoughCoinsException(ERROR + "no hay monedas suficientes, coste: " + COSTE_LIGHT);
+		throw new NotEnoughCoinsException("Light Flash cost is "+COSTE_LIGHT+": "+NOT_COINS);
 	}
 
 	public void superMonedas() {
@@ -265,7 +264,7 @@ public class Game implements IPrintable {
 						} else if (type.equals("e")) {
 							ExplosiveVampire ev = new ExplosiveVampire(x, y, this);
 							board.addObject(ev);
-						} else if (type.equals("")) {
+						} else if (type.equals("v")) {
 							Vampiro vampire = new Vampiro(x, y, this);
 							board.addObject(vampire);
 						} else
@@ -278,10 +277,10 @@ public class Game implements IPrintable {
 					board.aumentarVampirosTablero();
 					return true;// Porque en todos los casos se habra añadido el vampiro
 				} else {
-					throw new UnvalidPositionException(ERROR +"Position ("+x+","+y+"): Unvalid position");
+					throw new UnvalidPositionException(ERROR +"Position ("+x+", "+y+"): Unvalid position");
 				}
 			} else {
-				throw new UnvalidPositionException(ERROR +"Position ("+x+","+y+"): Unvalid position");
+				throw new UnvalidPositionException(ERROR +"Position ("+x+", "+y+"): Unvalid position");
 			}
 		} else {
 			throw new NoMoreVampiresException(ERROR +NO_VAMP_LEFT);

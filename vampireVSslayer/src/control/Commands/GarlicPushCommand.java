@@ -24,8 +24,8 @@ public class GarlicPushCommand extends Command {
 				return true;
 			}
 		} catch (NotEnoughCoinsException e) {
-			System.out.println(e.getMessage());
-			throw new CommandExecuteException("fallo al pushear los vampiros");
+			System.out.println("[ERROR]: "+e.getMessage());
+			throw new CommandExecuteException("[ERROR]: Failed to garlic push");
 		}		
 		return false;
 	}

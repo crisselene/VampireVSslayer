@@ -24,8 +24,8 @@ public class LightFlashCommand extends Command {
 				return true;
 			}
 		} catch (NotEnoughCoinsException e) {
-			System.out.println(e.getMessage());
-			throw new CommandExecuteException("fallo en el light");
+			System.out.println("[ERROR]: "+ e.getMessage());
+			throw new CommandExecuteException("[ERROR]: Failed to light flash");
 		}		
 		return false;
 	}

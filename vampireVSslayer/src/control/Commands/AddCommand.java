@@ -6,7 +6,7 @@ import logic.Exceptions.CommandParseException;
 
 public class AddCommand extends Command {
 	
-	String msgUnvalidAdd = "Incorrect number of arguments for add command: ";
+	String msgUnvalidArg = "Unvalid argument for add slayer command, number expected: ";
 	private static final String NAME = "add";
 	private static final String SHORTCUT = "a";
 	private static final String DETAILS = "[a]dd <x> <y>";
@@ -40,22 +40,43 @@ public class AddCommand extends Command {
 	
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-			
+		
 		if (commandWords.length > 2) {
-				// Si no ha introducido caracteres
-					if (isNumeric(commandWords[1]) && isNumeric(commandWords[2])) {
-						x = Integer.parseInt(commandWords[1]);// Lo convertimos en numero
-						y = Integer.parseInt(commandWords[2]);
-						// Retornamos dependiendo de los argumentos que habia en el parse
-						return parseParamsCommand(commandWords, ARGS);
-					}else {
-						
-						return parseNoParamsCommand(commandWords);
-						//throw new NumberFormatException(msgUnvalidAdd+DETAILS);
-					}
+			// Si no ha introducido caracteres
+			if (parseParamsCommand(commandWords, ARGS) != null) {
+				try {
+					// if (isNumeric(commandWords[1]) && isNumeric(commandWords[2])) {
+					x = Integer.parseInt(commandWords[1]);// Lo convertimos en numero
+					y = Integer.parseInt(commandWords[2]);
+					// Retornamos dependiendo de los argumentos que habia en el parse
+					return parseParamsCommand(commandWords, ARGS);
+					// } else {
+					// throw new CommandParseException("[ERROR]: " + msgUnvalidAdd);
+					// }
+				} catch (NumberFormatException num) {
+					throw new CommandParseException(
+							msgUnvalidArg + DETAILS);
+				}
+			}
 		}
 		return null;
-
 	}
-
 }
+//		if (commandWords.length > 2) {
+//				// Si no ha introducido caracteres
+//					if (isNumeric(commandWords[1]) && isNumeric(commandWords[2])) {
+//						x = Integer.parseInt(commandWords[1]);// Lo convertimos en numero
+//						y = Integer.parseInt(commandWords[2]);
+//						// Retornamos dependiendo de los argumentos que habia en el parse
+//						return parseParamsCommand(commandWords, ARGS);
+//					}else {
+//						
+//						return parseNoParamsCommand(commandWords);
+//						//throw new NumberFormatException(msgUnvalidAdd+DETAILS);
+//					}
+//		}
+//		return null;
+//
+//	}
+
+

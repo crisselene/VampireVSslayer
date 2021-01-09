@@ -15,7 +15,7 @@ public class AddVampireCommand extends Command {
 	private int x;
 	private int y;
 	private String type;
-	String msgUnvalidType= "Unvalid type: ";
+	String msgUnvalidArg= "Unvalid argument for add vampire command, number expected: ";
 	
 	public AddVampireCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
@@ -36,21 +36,46 @@ public class AddVampireCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-		if(commandWords.length > 2) {
-			if(commandWords.length > 3 && isNumeric(commandWords[2]) && isNumeric(commandWords[3]) && !isNumeric(commandWords[1])) {
-				type = commandWords[1];
-				x= Integer.parseInt(commandWords[2]);//Lo convertimos en numero
-				y= Integer.parseInt(commandWords[3]);
-				//Retornamos dependiendo de los argumentos que habia en el parse
-				return parseParamsCommand(commandWords, ARGSTYPE);
-			}else if( isNumeric(commandWords[1]) && isNumeric(commandWords[2]) ) {
-				x= Integer.parseInt(commandWords[1]);//Lo convertimos en numero
-				y= Integer.parseInt(commandWords[2]);
-				return parseParamsCommand(commandWords, ARGS);
-			}else throw new CommandParseException("[ERROR]: " + msgUnvalidType + DETAILS);
+
+		if (commandWords.length > 2) {
+			try {
+				if (commandWords.length > 3) { // && isNumeric(commandWords[2]) && isNumeric(commandWords[3]) &&
+												// !isNumeric(commandWords[1])) {
+					type = commandWords[1];
+					x = Integer.parseInt(commandWords[2]);// Lo convertimos en numero
+					y = Integer.parseInt(commandWords[3]);
+					// Retornamos dependiendo de los argumentos que habia en el parse
+					return parseParamsCommand(commandWords, ARGSTYPE);
+				} else {// if( isNumeric(commandWords[1]) && isNumeric(commandWords[2]) ) {
+					type = commandWords[0];
+					x = Integer.parseInt(commandWords[1]);// Lo convertimos en numero
+					y = Integer.parseInt(commandWords[2]);
+					return parseParamsCommand(commandWords, ARGS);
+				} // else throw new CommandParseException("[ERROR]: " + msgUnvalidType + DETAILS);
+			} catch (NumberFormatException num) {
+				throw new CommandParseException(msgUnvalidArg + DETAILS);
+			}
+
 		}
 		return null;
-
 	}
 
 }
+//		if(commandWords.length > 2) {
+//			if(commandWords.length > 3 && isNumeric(commandWords[2]) && isNumeric(commandWords[3]) && !isNumeric(commandWords[1])) {
+//				type = commandWords[1];
+//				x= Integer.parseInt(commandWords[2]);//Lo convertimos en numero
+//				y= Integer.parseInt(commandWords[3]);
+//				//Retornamos dependiendo de los argumentos que habia en el parse
+//				return parseParamsCommand(commandWords, ARGSTYPE);
+//			}else if( isNumeric(commandWords[1]) && isNumeric(commandWords[2]) ) {
+//				x= Integer.parseInt(commandWords[1]);//Lo convertimos en numero
+//				y= Integer.parseInt(commandWords[2]);
+//				return parseParamsCommand(commandWords, ARGS);
+//			}else throw new CommandParseException("[ERROR]: " + msgUnvalidType + DETAILS);
+//		}
+//		return null;
+//
+//	}
+
+//}

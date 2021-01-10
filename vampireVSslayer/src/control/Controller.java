@@ -20,9 +20,6 @@ public class Controller {
 	}
 
 	public void printGame() {
-		// Descomentar lo de abajo cuando tengamos bien implementado el board, para no
-		// tener que cambiarlo cada dos por tres
-		// System.out.println(game.infoPartida());
 		System.out.println(game);
 	}
     

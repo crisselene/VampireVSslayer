@@ -80,9 +80,11 @@ public class Game implements IPrintable {
 	public String getPositionToString(int x, int y) {
 		return board.toString(x, y);
 	}
+
 	public int getLevelDimX() {
 		return level.getDimx();
 	}
+
 	public int getLevelDimY() {
 		return level.getDimy();
 	}
@@ -309,17 +311,6 @@ public class Game implements IPrintable {
 			String serialize = this.serialize();
 			bf.write(serialize);
 			bf.close();
-		}
-//		try {
-//			FileWriter save = new FileWriter(fileName);
-//			BufferedWriter bf = new BufferedWriter(save);
-//			String serialize = this.serialize();
-//			bf.write(serialize);
-//			bf.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			System.out.println("Fallo");
-//		}
-		
+		}	
 	}
 }

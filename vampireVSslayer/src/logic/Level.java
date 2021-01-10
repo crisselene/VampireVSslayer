@@ -38,8 +38,7 @@ public enum Level {
             allLevels += level.name() + separator;
         return allLevels.substring(0, allLevels.length() - separator.length());
     }
-  
-    
+   
     public int getDimx(){
     	return dim_x;
     }

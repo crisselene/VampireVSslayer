@@ -45,7 +45,6 @@ public class Dracula extends Vampiro implements IAttack {
 	
 	public  boolean receiveGarlicPush() {
 		//Si tiene alguien detras no retrocede y si esta al final muere
-		//if(game.estaAlFinal(posx)) { *****************************************+NECESARIO??************ 
 		if(game.getLevelDimX()-1 == posx) {	
 			this.morir();
 			draculaOnBoard=false;
@@ -63,7 +62,7 @@ public class Dracula extends Vampiro implements IAttack {
 		}	
 	}
 	
-	public boolean receiveLightFlash() {//Este no recibe el ataque
+	public boolean receiveLightFlash() {//Dracula no recibe el ataque
 		return false;		
 	}
 	

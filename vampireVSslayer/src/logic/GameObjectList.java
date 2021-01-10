@@ -36,7 +36,6 @@ public class GameObjectList {
 	}
 
 	public void attack() {
-		//Hara que todos los objetos ataquen
 		for(IAttack ob: gameobjects) {			
 			ob.attack();
 		}	
@@ -49,27 +48,6 @@ public class GameObjectList {
 		}
 	}
 
-	/*public int contarVamp() {
-		int contV=0;
-		boolean cont = false;
-		for (GameObject gameObject : gameobjects) {
-			cont = gameObject.contarVamp();
-			if(cont) contV++; cont=false;
-		}
-		return contV;
-	}*/
-
-	public boolean noHayVenLafila(int fila) {
-		boolean filaLibre = true;
-		for (GameObject gameObject : gameobjects) {
-			 filaLibre = gameObject.noHayVenLafila(filaLibre,fila);
-			 if(!filaLibre) {
-				 return filaLibre;
-			 }
-		}
-		return filaLibre;
-	}
-
 	public GameObject getAttackableInPosition(int posx, int posy) {
 		for (GameObject gameObject : gameobjects) {
 			if(gameObject.getposx()==posx && gameObject.getposy()== posy) {
@@ -79,22 +57,9 @@ public class GameObjectList {
 		return null;
 		
 	}
-//
-//	public GameObject getAttackableInLine(int posy) {
-//		for (GameObject gameObject : gameobjects) {
-//			if(gameObject.getposy() == posy) {
-//				//da igual el ataque que haga, es solo para ver si le puede atacar 
-//				if(gameObject.receiveSlayerAttack(0)==true) {
-//					return gameObject;
-//				}
-//				
-//			}
-//		}
-//		return null;
-//	}
 
 	public void removeDead() {
-		for(int i = 0; i < gameobjects.size() ; i++) {//recorrera todos los gameobjects
+		for(int i = 0; i < gameobjects.size() ; i++) {
 			GameObject aux = gameobjects.get(i);
 			if(!aux.isAlive()) {
 				gameobjects.remove(i);
@@ -104,15 +69,6 @@ public class GameObjectList {
 		
 	}
 
-//	public boolean llegoFinal() {
-//		for(GameObject object: gameobjects) {
-//			if(object.llegoFinal()) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
 	public void pushVampires() {
 		for(GameObject objeto : gameobjects) {
 			objeto.receiveGarlicPush();

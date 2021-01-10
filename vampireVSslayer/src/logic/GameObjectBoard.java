@@ -70,21 +70,9 @@ public class GameObjectBoard {
 		return obList.toString(x, y);
 	}
 
-//	public GameObject getAttackableInLine(int posy) {
-//		return obList.getAttackableInLine(posy);
-//	}
-
 	public void removeDead() {
 		obList.removeDead();		
 	}
-	
-//	public int vampEnTablero() {
-//		return obList.contarVamp();
-//	}
-
-//	public boolean llegoFinal() {
-//		return obList.llegoFinal();
-//	}
 
 	public boolean userVictory() {
 		return (vampRestantes == 0 && vampEnTablero == 0);
@@ -102,8 +90,7 @@ public class GameObjectBoard {
 					this.aumentarVampirosTablero();
 					return filaAleatoria;					
 			}
-		}
-		
+		}	
 		return -1;//Cuando no se puede añadir devolvemos -1
 	}
 
@@ -121,27 +108,15 @@ public class GameObjectBoard {
 	}
 
 	public void reducirVampirosRestantes() {
-		vampRestantes--;
-//		int vamp = this.getVampRestantes();
-//		vamp--;
-//		this.setVampRestantes(vamp);
-		
+		vampRestantes--;	
 	}
 
 	public void aumentarVampirosTablero() {
 		vampEnTablero++;
-//		int vampT = this.getVampEnTablero();
-//		vampT++;
-//		this.setVampEnTablero(vampT);
-		
 	}
 
 	public void reducirVampirosTablero() {
 		vampEnTablero--;
-//		int vampT = this.getVampEnTablero();
-//		vampT--;
-//		this.setVampEnTablero(vampT);
-		
 	}
 
 	public String serializeList() {

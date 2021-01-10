@@ -44,21 +44,15 @@ public class BloodBank extends GameObject implements IAttack{
 	@Override
 	public void move(boolean ocupado) {
 		//Usamos el move para usar el banco, pero sin utilizar la variable ocupado que es la usada para los vampiros
-		if(isAlive()) {//Si esta vivo
+		if(isAlive()) {
 			int ganancia = (int) (z * 0.1);
 			game.reintegroBanco(ganancia);
 		}
 	}
 
 	@Override
-	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}//No es un vampiro	
-
-	@Override
 	public String serialize(String serialize) {		
 		return serialize + "B;" + posx + ";" + posy + ";" + getVida() + ";" + z;				
 	}
-
-//	@Override
-//	public boolean llegoFinal() {return false;} //No es un vampiro	
 
 }

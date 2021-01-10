@@ -1,13 +1,15 @@
 package logic;
 
 public abstract class GameObject implements IAttack{
-//tendrá los atributos y métodos básicos para controlar la posición en el tablero y una referencia a la clase Game.
+
 	protected Game game;
 	protected GameObjectList list;
 	private int vida;
 	protected int posx;
 	protected int posy;
 	protected String letra;
+	//constante de cuanto daño hace el objeto(hasta ahora es 1 para ambos)
+	protected static int HARM = 1;
 		
 	public GameObject(int posx, int posy, int vida, Game game) {
 		this.posx = posx;
@@ -49,10 +51,6 @@ public abstract class GameObject implements IAttack{
 		else return false;
 	}
 	
-
-	//constante de cuanto daño hace el objeto(hasta ahora es 1 para ambos)
-	protected static int HARM = 1;
-
 	public boolean coincidesPosiciones(int x, int y) {
 		if (posx == x && posy == y) {
 			return true;
@@ -61,9 +59,6 @@ public abstract class GameObject implements IAttack{
 	}
 	
 	public abstract void move(boolean ocupado);
-	//public abstract boolean contarVamp();
-	public abstract boolean noHayVenLafila(boolean crear, int fila);
-	//public abstract boolean llegoFinal();
 
 	public abstract String serialize(String serialize);
 

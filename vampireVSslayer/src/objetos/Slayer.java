@@ -57,9 +57,6 @@ public class Slayer extends GameObject implements IAttack{
 	@Override
 	public void move(boolean ocupado) { // los slayers no se mueven
 	}
-	
-	@Override
-	public boolean noHayVenLafila(boolean filaLibre,int fila) {return filaLibre;}
 
 	@Override
 	public String serialize(String serialize) {		

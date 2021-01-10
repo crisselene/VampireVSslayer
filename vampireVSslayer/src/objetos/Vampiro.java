@@ -9,7 +9,7 @@ public class Vampiro extends GameObject implements IAttack{
 	protected int posx;
 	protected int posy;
 	public final static int DEFAULT_VIDA = 5;
-	public final static int DEFAULT_CICLOS = 0;
+	public final static int DEFAULT_CICLOS = 1;
 	protected int ciclosAvance; //variable que guarda la cantidad de ciclos hasta que el vampiro avance
 	protected Game game;
 	public static boolean llegoPrincipio = false;
@@ -50,14 +50,15 @@ public class Vampiro extends GameObject implements IAttack{
 	@Override
 	public void move(boolean ocupado) {
 		
-		if(ciclosAvance<1) ciclosAvance++; 
+		if(ciclosAvance>0) ciclosAvance--; 
 		else {
 			if(ocupado==false) {
 				posx--;
 				this.setPosX(posx); 
-				this.setCiclosAvance(0);
+				this.setCiclosAvance(DEFAULT_CICLOS);
 				if(posx==-1) Vampiro.llegoPrincipio=true;
 			}
+			else ciclosAvance--;				
 		}
 	}
 		
@@ -85,12 +86,12 @@ public class Vampiro extends GameObject implements IAttack{
 		}
 		else if(!game.buscarObjeto(posx+1, posy)) {
 			posx++;
-			ciclosAvance = 0;
+			ciclosAvance = DEFAULT_CICLOS;
 			this.setPosX(posx);
 			return true;
 		}
 		else {
-			ciclosAvance=0;
+			ciclosAvance=DEFAULT_CICLOS;
 			return true;	
 		}
 			
@@ -108,11 +109,6 @@ public class Vampiro extends GameObject implements IAttack{
 		this.setVida(0);
 		game.reducirVampirosTablero();
 	}
-	
-//	@Override
-//	public boolean contarVamp() {
-//		return true;
-//	}
 
 	@Override
 	public boolean noHayVenLafila(boolean crear, int fila) {
@@ -125,15 +121,7 @@ public class Vampiro extends GameObject implements IAttack{
 			if (isAlive () ) {
 				IAttack other = game.getAttackableInPosition(this.posx-1, this.posy);
 				if (other != null ) {
-					boolean recibirDamage = other.receiveVampireAttack(HARM);
-					//if(recibirDamage== true) { ********************************************CAMBIO EN ATAQUE
-//						if(this.ciclosAvance<1) {
-//							System.out.println("en ataque mis ciclos son " +ciclosAvance );
-//							ciclosAvance++;
-//							System.out.println("en ataque se cambian  " +ciclosAvance );
-//						}
-					//}
-					
+					boolean recibirDamage = other.receiveVampireAttack(HARM);					
 			} 	
 		}
 	}
@@ -143,14 +131,6 @@ public class Vampiro extends GameObject implements IAttack{
 		return serialize + "V;" + posx + ";" + posy + ";" + getVida() + ";" + ciclosAvance;	
 	}
 
-//	@Override
-//	public boolean llegoFinal() {
-//		//if(posx == -1) {
-//			//return true;
-//		//}
-//		//return false;
-//		return posx==-1;
-//	}
 
 	
 }

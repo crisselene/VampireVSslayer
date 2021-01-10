@@ -6,7 +6,7 @@ import logic.IAttack;
 public class Dracula extends Vampiro implements IAttack {
 
 	public final static int DEFAULT_VIDA = 5;
-	public final static int DEFAULT_CICLOS = 0; 
+	public final static int DEFAULT_CICLOS = 1; 
 	public static boolean draculaOnBoard = false;
 	
 	public Dracula(int posx, int posy, Game game) {
@@ -53,11 +53,14 @@ public class Dracula extends Vampiro implements IAttack {
 		}
 		else if(!game.buscarObjeto(posx+1, posy)) {
 			posx++;
-			ciclosAvance = 0;
+			ciclosAvance = DEFAULT_CICLOS;
 			this.setPosX(posx);
 			return true;
 		}
-		return false;		
+		else {
+			ciclosAvance=DEFAULT_CICLOS;
+			return true;	
+		}	
 	}
 	
 	public boolean receiveLightFlash() {//Este no recibe el ataque

@@ -300,7 +300,7 @@ public class Game implements IPrintable {
 					"Vampires on Board: " + board.getVampEnTablero() + "\n" + "\n" +
 					"Game Object List: \n";
 		
-		return serialize + board.serializeList();
+		return serialize + board.serializeList() +"\n";
 	}
 
 	public void save(String fileName) throws IOException {

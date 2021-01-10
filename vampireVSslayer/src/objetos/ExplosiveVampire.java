@@ -6,7 +6,7 @@ import logic.IAttack;
 public class ExplosiveVampire extends Vampiro implements IAttack {
 
 	public final static int DEFAULT_VIDA = 5;
-	public final static int DEFAULT_CICLOS = 0;
+	public final static int DEFAULT_CICLOS = 1;
 	private final static int ATAQUE = 1;
 	
 	public ExplosiveVampire(int posx, int posy, Game game) {

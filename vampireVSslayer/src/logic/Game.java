@@ -305,12 +305,14 @@ public class Game implements IPrintable {
 		return serialize + board.serializeList() +"\n";
 	}
 
-	public void save(String fileName) throws IOException {
+	public void save(BufferedWriter bf) throws IOException {
 		//try-with-resources
-		try (BufferedWriter bf = new BufferedWriter(new FileWriter(fileName))) {
+		try {
 			String serialize = this.serialize();
 			bf.write(serialize);
 			bf.close();
-		}	
+		}catch (IOException e){
+			throw e;
+		}
 	}
 }

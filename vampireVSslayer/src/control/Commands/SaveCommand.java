@@ -1,5 +1,7 @@
 package control.Commands;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import logic.Game;
@@ -21,8 +23,8 @@ public class SaveCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {
-		try {
-			game.save(fileName);
+		try (BufferedWriter bf = new BufferedWriter(new FileWriter(fileName))) {
+			game.save(bf);
 		} catch (IOException e) {
 			throw new CommandExecuteException("fallo al guardar el fichero");
 		}

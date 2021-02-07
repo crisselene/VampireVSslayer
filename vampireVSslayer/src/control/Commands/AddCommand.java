@@ -45,14 +45,12 @@ public class AddCommand extends Command {
 			// Si no ha introducido caracteres
 			if (parseParamsCommand(commandWords, ARGS) != null) {
 				try {
-					// if (isNumeric(commandWords[1]) && isNumeric(commandWords[2])) {
+					
 					x = Integer.parseInt(commandWords[1]);// Lo convertimos en numero
 					y = Integer.parseInt(commandWords[2]);
-					// Retornamos dependiendo de los argumentos que habia en el parse
+					
 					return parseParamsCommand(commandWords, ARGS);
-					// } else {
-					// throw new CommandParseException("[ERROR]: " + msgUnvalidAdd);
-					// }
+					
 				} catch (NumberFormatException num) {
 					throw new CommandParseException(
 							msgUnvalidArg + DETAILS);
@@ -62,21 +60,6 @@ public class AddCommand extends Command {
 		return null;
 	}
 }
-//		if (commandWords.length > 2) {
-//				// Si no ha introducido caracteres
-//					if (isNumeric(commandWords[1]) && isNumeric(commandWords[2])) {
-//						x = Integer.parseInt(commandWords[1]);// Lo convertimos en numero
-//						y = Integer.parseInt(commandWords[2]);
-//						// Retornamos dependiendo de los argumentos que habia en el parse
-//						return parseParamsCommand(commandWords, ARGS);
-//					}else {
-//						
-//						return parseNoParamsCommand(commandWords);
-//						//throw new NumberFormatException(msgUnvalidAdd+DETAILS);
-//					}
-//		}
-//		return null;
-//
-//	}
+
 
 

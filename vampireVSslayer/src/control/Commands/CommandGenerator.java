@@ -36,22 +36,7 @@ public class CommandGenerator{
 		throw new CommandParseException("[ERROR]: "  +unknownCommandMsg);//***********ese mensaje va en el controler?¿*****
 		
 		}	
-		//return null;
 		
-//		try {
-//			for (Command c: availableCommands) {
-//				Command parsedCommand = c.parse(commandWords);
-//					if(parsedCommand != null) {
-//						return parsedCommand;
-//					}
-//			}
-//		}catch(NumberFormatException num) {
-//			System.out.println(num.getMessage());
-//			throw new CommandParseException("[ERROR] '" + commandWords[1] + "' || '" + commandWords[2]
-//					+ "' is not a number");
-//		}
-//		
-		//throw new CommandParseException("[ERROR]: "  +unknownCommandMsg);//***********ese mensaje va en el controler?¿*****
 
 
 	public static void recorrerArrayHelp() {

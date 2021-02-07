@@ -1,0 +1,11 @@
+Cycles: 5
+Coins: 100
+Level: INSANE
+Remaining Vampires: 7
+Vampires on Board: 3
+
+Game Object List: 
+V;2;1;5;1
+EV;3;5;5;1
+D;4;3;5;0
+
